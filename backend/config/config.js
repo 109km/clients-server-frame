@@ -1,0 +1,7 @@
+const CONFIG = {};
+
+CONFIG.BACKEND_DOMAIN = 'localhost:7001';
+CONFIG.BACKEND_URL = 'http://' + CONFIG.BACKEND_DOMAIN;
+CONFIG.OPEN_BACKEND_REQUEST = true;
+
+export default CONFIG;
