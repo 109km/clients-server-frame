@@ -38,7 +38,7 @@ module.exports = appInfo => {
     host: 'localhost',
     port: '3306',
     username: 'root',
-    password: 's09070825!',
+    password: 'root',
   };
 
   config.proxyworker = {
