@@ -11,3 +11,16 @@ exports.security = {
   domainWhiteList: [ 'http://localhost:8000' ],
 };
 
+exports.graphql = {
+  enable: true,
+  package: 'egg-graphql',
+};
+
+exports.sequelize = {
+  enable: true,
+  package: 'egg-sequelize',
+};
+
+exports.validate = {
+  package: 'egg-validate',
+};
