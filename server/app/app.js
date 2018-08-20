@@ -1,3 +1,5 @@
 module.exports = app => {
-  console.log('Started');
+  app.beforeStart(async () => {
+    await app.model.sync();
+  });
 }

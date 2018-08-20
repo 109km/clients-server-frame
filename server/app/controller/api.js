@@ -11,6 +11,31 @@ class ApiController extends Controller {
   async currentUser() {
     this.ctx.body = {"name":"momo.zxy","avatar":"https://gw.alipayobjects.com/zos/rmsportal/UjusLxePxWGkttaqqmUI.png","userid":"00000001","notifyCount":12};
   }
+  
+  async register() {
+    const createRule = {
+      name: {
+        type: 'string',
+      },
+      password: {
+        type: 'string',
+      },
+    };
+  
+    // 校验参数
+    this.ctx.validate(createRule);
+    const user = await this.ctx.model.User.create(this.ctx.request.body);
+    this.ctx.body = {
+      code: 0,
+      message: 'success',
+      data: {
+        user: {
+          name: user.name,
+        },
+      },
+    };
+  }
+
   async tags() {
     this.ctx.body = mockjs.mock({
       'list|100' : [{'name':'@city', 'value|1-100':150, 'type|0-2':1}]

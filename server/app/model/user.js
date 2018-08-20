@@ -4,8 +4,12 @@ module.exports = app => {
   } = app.Sequelize;
 
   const User = app.model.define('user', {
-    id: STRING,
-    name: STRING
+    id: {
+      type: STRING,
+      primaryKey: true
+    },
+    name: STRING,
+    password: STRING
   });
   
   return User;

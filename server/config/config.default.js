@@ -7,7 +7,9 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1510107722425_684';
 
   // add your config here
-  config.middleware = [];
+  config.middleware = [
+    'graphql'
+  ];
 
   config.cors = {
     origin: 'http://localhost:8000',
@@ -29,6 +31,24 @@ module.exports = appInfo => {
     // 开发工具 graphiQL 路由前的拦截器，建议用于做权限操作(如只提供开发者使用)
     onPreGraphiQL: function*(ctx) {},
   };
-  
+
+  config.sequelize = {
+    dialect: 'mysql',
+    database: 'graphql',
+    host: 'localhost',
+    port: '3306',
+    username: 'root',
+    password: 's09070825!',
+  };
+
+  config.proxyworker = {
+    port: 10086,
+  }
+
+  config.security = {
+    csrf: {
+      ignore: () => true,
+    }
+  }
   return config;
 };
