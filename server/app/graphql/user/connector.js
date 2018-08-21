@@ -21,5 +21,12 @@ class UserConnector {
   fetchById(id) {
     return this.loader.load(id);
   }
+  fetchAll(){
+    const users = this.ctx.app.model.User.findAll({
+      attributes: ['name'],
+      limit: 10,
+    }).then(us => us.map(u => u.toJSON()));
+    return users;
+  }
 }
 module.exports = UserConnector; 
