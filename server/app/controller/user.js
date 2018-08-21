@@ -3,6 +3,17 @@
 const Controller = require('egg').Controller;
 
 class UserController extends Controller {
+
+  async signup() {
+    this.ctx.body = '注册';
+  }
+
+  async signin() {
+    this.ctx.body = `${this.ctx.query.name}登录`;
+    
+  }
+
+  // 新增用户接口
   async create() {
     const {
       ctx
@@ -12,9 +23,11 @@ class UserController extends Controller {
         type: 'string'
       },
       password: {
-        type: 'string'
+        type: 'password',
+        compare: 're-password'
       },
     };
+
     // 校验参数
     ctx.validate(createRule);
 
@@ -23,6 +36,11 @@ class UserController extends Controller {
       code: 0,
       message: 'success',
     };
+  }
+
+  // 用户登录接口
+  async login() {
+
   }
 }
 
