@@ -4,43 +4,65 @@ const Controller = require('egg').Controller;
 
 class UserController extends Controller {
 
-  async signup() {
-    this.ctx.body = '注册';
+  // GET ， 展示页面
+  async signup(ctx) {
+    await ctx.render('signup', ctx);
+  }
+  // GET ， 展示页面
+  async signin(ctx) {
+    await ctx.render('signin', ctx);
+  }
+  // POST 用户注册
+  async doSignup(ctx) {
+    const userData = {
+      name: ctx.request.body.name,
+      password: ctx.request.body.password,
+      're-password': ctx.request.body['re-password']
+    }
+    const res = await ctx.service.user.create(userData);
+
+    if (res.code === 0) {
+      ctx.redirect('/');
+    } else {
+      ctx.body = res.message;
+    }
+
+  }
+  // POST 用户登录
+  async doSignin(ctx) {
+
+    const userData = {
+      name: ctx.request.body.name,
+      password: ctx.request.body.password
+    }
+
+    const res = await ctx.service.user.findOne(userData);
+
+    if (res.code === 0) {
+      ctx.session.user = user;
+      ctx.redirect('/');
+    } else {
+      ctx.body = {
+        code: 10000,
+        message: '用户不存在',
+      };
+    }
+
   }
 
-  async signin() {
-    this.ctx.body = `${this.ctx.query.name}登录`;
-    
+  // GET 登出
+  async signout(ctx) {
+
   }
 
   // 新增用户接口
-  async create() {
-    const {
-      ctx
-    } = this;
-    const createRule = {
-      name: {
-        type: 'string'
-      },
-      password: {
-        type: 'password',
-        compare: 're-password'
-      },
-    };
-
-    // 校验参数
-    ctx.validate(createRule);
-
-    await ctx.model.User.create(ctx.request.body);
-    ctx.body = {
-      code: 0,
-      message: 'success',
-    };
-  }
-
-  // 用户登录接口
-  async login() {
-
+  async create(ctx) {
+    const userData = {
+      name: ctx.request.body.name,
+      password: ctx.request.body.password
+    }
+    const res = await ctx.service.user.create(userData);
+    ctx.body = res;
   }
 }
 

@@ -12,6 +12,7 @@
     "egg-security": "^2.0.0",
     "egg-sequelize": "^4.0.7",
     "egg-validate": "^1.1.1",
+    "egg-view-nunjucks": "^2.2.0",
     "mysql2": "^1.6.1",
     "stream-wormhole": "^1.1.0"
   },
