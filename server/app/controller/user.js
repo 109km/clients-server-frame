@@ -22,7 +22,7 @@ class UserController extends Controller {
     const res = await ctx.service.user.create(userData);
 
     if (res.code === 0) {
-      ctx.redirect('/');
+      ctx.redirect('/user/signin');
     } else {
       ctx.body = res.message;
     }
@@ -39,9 +39,9 @@ class UserController extends Controller {
     const res = await ctx.service.user.findOne(userData);
 
     if (res.code === 0) {
-     
       ctx.session.user = res.data.user;
-      await app.redis.setex(sessionid, 3600 * 24, res.data.user);
+      ctx.session.sessionid = sessionid;
+      await this.app.redis.setex(sessionid, 3600 * 24, res.data.user);
       ctx.redirect('/');
     } else {
       ctx.body = {

@@ -8,8 +8,11 @@
 </head>
 <body>
   <h2>
-    Welcome , your name is {{user.username}}, your password is {{user.password}}
+    Welcome , your name is {{user.username}}, your password is {{user.password}},your userId is {{user.id}}.
   </h2>
+  <p>
+    {{sessionid}}
+  </p>
   
 </body>
 </html>
