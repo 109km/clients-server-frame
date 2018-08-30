@@ -39,6 +39,7 @@ module.exports = appInfo => {
     port: '3306',
     username: 'root',
     password: 'root',
+    insecureAuth: true,
   };
 
   config.proxyworker = {
@@ -50,5 +51,23 @@ module.exports = appInfo => {
       ignore: () => true,
     }
   }
+
+  config.view = {
+    defaultViewEngine: 'nunjucks',
+    defaultExtension: '.nj'
+  }
+
+  config.redis = {
+    client: {
+      host: 'localhost',
+      port: '6379',
+      password: 'root',
+      db: '0',
+    },
+    agent: true,
+  };
+  
+
+
   return config;
 };

@@ -35,11 +35,13 @@ class UserController extends Controller {
       username: ctx.request.body.username,
       password: ctx.request.body.password
     }
-
+    const sessionid = ctx.helper.uuidv1();
     const res = await ctx.service.user.findOne(userData);
 
     if (res.code === 0) {
+     
       ctx.session.user = res.data.user;
+      await app.redis.setex(sessionid, 3600 * 24, res.data.user);
       ctx.redirect('/');
     } else {
       ctx.body = {
