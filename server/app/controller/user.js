@@ -15,7 +15,7 @@ class UserController extends Controller {
   // POST 用户注册
   async doSignup(ctx) {
     const userData = {
-      name: ctx.request.body.name,
+      username: ctx.request.body.username,
       password: ctx.request.body.password,
       're-password': ctx.request.body['re-password']
     }
@@ -32,14 +32,14 @@ class UserController extends Controller {
   async doSignin(ctx) {
 
     const userData = {
-      name: ctx.request.body.name,
+      username: ctx.request.body.username,
       password: ctx.request.body.password
     }
 
     const res = await ctx.service.user.findOne(userData);
 
     if (res.code === 0) {
-      ctx.session.user = user;
+      ctx.session.user = res.data.user;
       ctx.redirect('/');
     } else {
       ctx.body = {
@@ -58,7 +58,7 @@ class UserController extends Controller {
   // 新增用户接口
   async create(ctx) {
     const userData = {
-      name: ctx.request.body.name,
+      username: ctx.request.body.username,
       password: ctx.request.body.password
     }
     const res = await ctx.service.user.create(userData);

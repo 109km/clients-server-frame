@@ -8,7 +8,7 @@ module.exports = app => {
       type: STRING,
       primaryKey: true
     },
-    name: STRING,
+    username: STRING,
     password: STRING
   });
   

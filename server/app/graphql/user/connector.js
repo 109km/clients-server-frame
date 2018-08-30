@@ -23,7 +23,7 @@ class UserConnector {
   }
   fetchAll(){
     const users = this.ctx.app.model.User.findAll({
-      attributes: ['name'],
+      attributes: ['username'],
       limit: 10,
     }).then(us => us.map(u => u.toJSON()));
     return users;

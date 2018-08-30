@@ -8,7 +8,7 @@
 </head>
 <body>
   <h2>
-    Welcome , your name is {{user.name}}, your password is {{user.password}}
+    Welcome , your name is {{user.username}}, your password is {{user.password}}
   </h2>
   
 </body>

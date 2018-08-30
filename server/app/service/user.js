@@ -6,7 +6,7 @@ class UserService extends Service {
       ctx
     } = this;
     const createRule = {
-      name: {
+      username: {
         type: 'string'
       },
       password: {
