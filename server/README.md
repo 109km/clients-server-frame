@@ -1,6 +1,11 @@
 # server
 
 
+## Introduction
+DB: Mysql
+Server: Eggjs + GraphQL
+Frontend: React + Antd
+
 
 ## QuickStart
 

@@ -4,7 +4,10 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index(ctx) {
-    await ctx.render('index',ctx.session);
+    console.log(ctx.cookies.get('csrfToken',{
+      signed:false
+    }));
+    await ctx.render('index', ctx.session);
   }
 }
 

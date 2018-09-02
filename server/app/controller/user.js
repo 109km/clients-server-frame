@@ -30,7 +30,7 @@ class UserController extends Controller {
   }
   // POST 用户登录
   async doSignin(ctx) {
-
+    let maxAge = 3600 * 24;
     const userData = {
       username: ctx.request.body.username,
       password: ctx.request.body.password
@@ -41,8 +41,14 @@ class UserController extends Controller {
     if (res.code === 0) {
       ctx.session.user = res.data.user;
       ctx.session.sessionid = sessionid;
-      await this.app.redis.setex(sessionid, 3600 * 24, res.data.user);
+      // 记住我
+      if (ctx.request.body.rememberMe) {
+        maxAge = maxAge * 30;
+      }
+      // session记录到redis
+      await this.app.redis.setex(sessionid, maxAge, res.data.user);
       ctx.redirect('/');
+
     } else {
       ctx.body = {
         code: 10000,
