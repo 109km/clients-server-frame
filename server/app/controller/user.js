@@ -1,5 +1,6 @@
 'use strict';
-
+const crypto = require('crypto');
+const md5 = crypto.createHash('md5');
 const Controller = require('egg').Controller;
 
 class UserController extends Controller {
@@ -19,6 +20,7 @@ class UserController extends Controller {
       password: ctx.request.body.password,
       're-password': ctx.request.body['re-password']
     }
+
     const res = await ctx.service.user.create(userData);
 
     if (res.code === 0) {
@@ -35,18 +37,21 @@ class UserController extends Controller {
       username: ctx.request.body.username,
       password: ctx.request.body.password
     }
-    const sessionid = ctx.helper.uuidv1();
+    const sessionId = ctx.helper.uuidv1();
+    
+    userData.password = md5.update(userData.password).digest('hex');
     const res = await ctx.service.user.findOne(userData);
 
     if (res.code === 0) {
       ctx.session.user = res.data.user;
-      ctx.session.sessionid = sessionid;
+      ctx.session.sessionId = sessionId;
       // 记住我
       if (ctx.request.body.rememberMe) {
         maxAge = maxAge * 30;
       }
+      console.log(sessionId);
       // session记录到redis
-      await this.app.redis.setex(sessionid, maxAge, res.data.user);
+      await this.app.redis.setex(sessionId, maxAge, res.data.user);
       ctx.redirect('/');
 
     } else {
@@ -60,7 +65,7 @@ class UserController extends Controller {
 
   // GET 登出
   async signout(ctx) {
-
+    ctx.session = null;
   }
 
   // 新增用户接口
