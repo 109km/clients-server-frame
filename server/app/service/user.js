@@ -20,7 +20,7 @@ class UserService extends Service {
     ctx.validate(createRule);
 
     // 密码加密储存
-    userData.password = md5.update(userData.password).digest('hex');
+    userData.password = this.app.middleware.encrypt(userData.password).digest('hex');
 
     await ctx.model.User.create(userData);
 

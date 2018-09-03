@@ -65,7 +65,9 @@ class UserController extends Controller {
 
   // GET 登出
   async signout(ctx) {
+    this.app.redis.del(ctx.session.sessionId);
     ctx.session = null;
+    ctx.redirect('/');
   }
 
   // 新增用户接口

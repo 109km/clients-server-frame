@@ -14,13 +14,15 @@ module.exports = app => {
   app.get('/api/tags', controller.api.tags);
 
   // 注册
-  app.get('/user/signup', controller.user.signup);
+  app.get('/signup', controller.user.signup);
   app.post('/user/signup',controller.user.doSignup);
   // 登录
-  app.get('/user/signin', controller.user.signin);
+  app.get('/signin', controller.user.signin);
   app.post('/user/signin', controller.user.doSignin);
   // 新增用户
   app.post('/user/create', controller.user.create);
+  // 登出
+  app.get('/signout', controller.user.signout);
 
   app.resources('users', '/api/users', controller.user);
 };
