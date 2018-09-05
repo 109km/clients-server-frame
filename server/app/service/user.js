@@ -1,6 +1,4 @@
-const crypto = require('crypto');
 const Service = require('egg').Service;
-const md5 = crypto.createHash('md5');
 
 class UserService extends Service {
   async create(userData) {
@@ -20,10 +18,8 @@ class UserService extends Service {
     ctx.validate(createRule);
 
     // 密码加密储存
-    userData.password = this.app.middleware.encrypt(userData.password).digest('hex');
-
+    userData.password = ctx.helper.encrypt(userData.password);
     await ctx.model.User.create(userData);
-
     return {
       code: 0,
       message: 'success',

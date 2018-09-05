@@ -24,7 +24,7 @@ class UserController extends Controller {
     const res = await ctx.service.user.create(userData);
 
     if (res.code === 0) {
-      ctx.redirect('/user/signin');
+      ctx.redirect('/signin');
     } else {
       ctx.body = res.message;
     }
@@ -38,8 +38,6 @@ class UserController extends Controller {
       password: ctx.request.body.password
     }
     const sessionId = ctx.helper.uuidv1();
-    
-    userData.password = md5.update(userData.password).digest('hex');
     const res = await ctx.service.user.findOne(userData);
 
     if (res.code === 0) {
@@ -49,7 +47,6 @@ class UserController extends Controller {
       if (ctx.request.body.rememberMe) {
         maxAge = maxAge * 30;
       }
-      console.log(sessionId);
       // session记录到redis
       await this.app.redis.setex(sessionId, maxAge, res.data.user);
       ctx.redirect('/');
