@@ -27,6 +27,10 @@ class UserService extends Service {
   }
 
   async findOne(userData) {
+    const {
+      ctx
+    } = this;
+    userData.password = ctx.helper.encrypt(userData.password);
     const user = await this.ctx.model.User.findOne({
       where: userData,
     });
