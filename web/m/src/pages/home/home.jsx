@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Button } from 'antd-mobile';
 import './home.less';
+import BragList from '../../components/BragList/BragList';
 class Home extends Component {
   render() {
     return (
       <div className="page">
-        
+        <BragList />
         <Button type="primary">+ Brag</Button>
       </div>
     );
