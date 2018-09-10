@@ -3,7 +3,7 @@ const {
 } = require('react-app-rewired');
 const rewireLess = require('react-app-rewire-less');
 const theme = require('./src/theme');
-console.log(theme);
+
 module.exports = function override(config, env) {
   config = injectBabelPlugin(['import', {
     libraryName: 'antd-mobile',
@@ -12,8 +12,9 @@ module.exports = function override(config, env) {
   }], config);
 
   config = rewireLess.withLoaderOptions({
-    modifyVars: theme
+    modifyVars: theme,
+    javascriptEnabled: true
   })(config, env);
-  
+
   return config;
 };

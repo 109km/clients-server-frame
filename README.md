@@ -5,3 +5,10 @@
 `backend`代表后台管理系统，基于`antd-pro`
 
 `server`代表服务端代码，基于`eggjs`
+
+
+### Getting started
+
+1. Create mysql database.
+2. Start redis server.
+3. Run `npm install` in each directories.
