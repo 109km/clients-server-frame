@@ -6,14 +6,20 @@ class UploaderController extends Controller {
     const ctx = this.ctx;
     const parts = ctx.multipart();
     let part;
-
+  
     while ((part = await parts() != null)) {
+      console.log(part);
+      this.ctx.body = {
+        code: 0,
+        message: 'success'
+      };
       if (part.length) {
         // 如果是数组的话是 filed
         console.log('field: ' + part[0]);
         console.log('value: ' + part[1]);
         console.log('valueTruncated: ' + part[2]);
         console.log('fieldnameTruncated: ' + part[3]);
+
       } else {
         if (!part.filename) {
           return;
@@ -23,7 +29,6 @@ class UploaderController extends Controller {
         console.log('filename: ' + part.filename);
         console.log('encoding: ' + part.encoding);
         console.log('mime: ' + part.mime);
-
         let result;
         try {
           result = await ctx.oss.put('egg-multipart-test/' + part.filename, part);
@@ -31,6 +36,10 @@ class UploaderController extends Controller {
           await sendToWormhole(part);
           throw err;
         }
+        this.ctx.body = {
+          code: 0,
+          message: 'success'
+        };
       }
     }
   }

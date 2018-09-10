@@ -23,6 +23,8 @@ module.exports = app => {
   app.post('/user/create', controller.user.create);
   // 登出
   app.get('/signout', controller.user.signout);
+  // 上传
+  app.post('/upload', controller.uploadFile.upload);
 
   app.resources('users', '/api/users', controller.user);
 };

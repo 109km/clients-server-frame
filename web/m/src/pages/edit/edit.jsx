@@ -3,17 +3,10 @@ import PropTypes from 'prop-types';
 import { ImagePicker, List, TextareaItem, Button } from 'antd-mobile';
 import './edit.less';
 
-
-const data = [{
-  url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
-  id: '2121',
-}, {
-  url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
-  id: '2122',
-}];
 class Edit extends Component {
   state = {
-    files: data
+    files: [],
+    content: ""
   }
   render() {
     const { files } = this.state;
@@ -24,6 +17,8 @@ class Edit extends Component {
             <TextareaItem
               rows={10}
               placeholder="输入点啥"
+              value={this.state.content}
+              onChange={this.onTextChange}
             />
           </List>
           <ImagePicker
@@ -32,9 +27,8 @@ class Edit extends Component {
             onChange={this.onChange}
             onImageClick={(index, fs) => console.log(index, fs)}
             selectable={files.length < 9}
-            onAddImageClick={this.onAddImageClick}
           />
-          <Button type="primary">提交</Button>
+          <Button type="primary" onClick={this.onSubmit}>提交</Button>
         </form>
       </div>
     );
@@ -42,6 +36,11 @@ class Edit extends Component {
   onChange = (files, type, index) => {
     this.setState({
       files
+    });
+  }
+  onTextChange = (value) => {
+    this.setState({
+      content: value
     });
   }
   onAddImageClick = (e) => {
@@ -52,7 +51,21 @@ class Edit extends Component {
         id: '3',
       }),
     });
-  };
+  }
+  onSubmit = async (e) => {
+    e.preventDefault();
+    let formData = new FormData();
+    console.log(this.state);
+    formData.append('content', this.state.content);
+    formData.append('pics[]', this.state.files[0], 'pic01.jpg');
+    formData.append('pics[]', this.state.files[1], 'pic02.jpg');
+    console.log(formData);
+    const res = await fetch('http://127.0.0.1:7001/upload/', {
+      body: formData,
+      method: 'POST'
+    });
+    console.log(res);
+  }
 }
 
 // BragItem.propTypes = {
