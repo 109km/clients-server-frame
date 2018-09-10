@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Route } from 'react-router-dom';
-import './global.less';
+import {BrowserRouter} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 import App from './app';
-
+import './global.less';
 
 ReactDOM.render(
   <BrowserRouter>

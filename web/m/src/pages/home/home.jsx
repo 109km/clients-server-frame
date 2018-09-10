@@ -17,9 +17,6 @@ const lists = [{
 }];
 
 class Home extends Component {
-  constructor(...args) {
-    super(...args);
-  }
   render() {
     return (
       <div className="page page-home">

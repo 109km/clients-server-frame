@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { WingBlank } from 'antd-mobile';
 import './BragItem.less';
 
@@ -11,7 +10,7 @@ class BragItem extends Component {
           {this.props.title}
         </div>
         <div className="info">
-          <img className="avatar" src={this.props.avatar} />
+          <img className="avatar" src={this.props.avatar} alt={this.props.author}/>
           <span className="author">
             {this.props.author}
           </span>
@@ -23,10 +22,6 @@ class BragItem extends Component {
       </WingBlank>
     );
   }
-}
-
-BragItem.propTypes = {
-  avatar: PropTypes.string.isRequired
 }
 
 export default BragItem;
