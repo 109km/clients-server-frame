@@ -31,18 +31,23 @@ class UploaderController extends Controller {
       autoFields: true
     });
     const files = [];
+    const fileUrls = [];
     let stream;
     while ((stream = await parts()) != null) {
       const filename = ctx.helper.md5(stream.filename) + path
         .extname(stream.filename)
-        .toLocaleLowerCase();;
+        .toLocaleLowerCase();
       const target = path.join(this.config.baseDir, 'app/public/uploads', filename);
+      fileUrls.push(target);
       const writeStream = fs.createWriteStream(target);
       await pump(stream, writeStream);
       files.push(filename);
     }
     ctx.body = {
       code: 0,
+      data: {
+        pics: fileUrls
+      },
       message: 'success'
     };
   }
