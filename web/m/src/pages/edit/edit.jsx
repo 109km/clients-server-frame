@@ -12,6 +12,7 @@ class Edit extends Component {
     const { files } = this.state;
     return (
       <div className="page page-edit">
+        <input id="file-picker" type="file" onChange={this.onFileChange} />
         <form method="POST">
           <List>
             <TextareaItem
@@ -33,7 +34,12 @@ class Edit extends Component {
       </div>
     );
   }
+  onFileChange = (file) => {
+    let input = document.getElementById('file-picker');
+    console.log(input.files);
+  }
   onChange = (files, type, index) => {
+    console.log(files);
     this.setState({
       files
     });
@@ -55,16 +61,15 @@ class Edit extends Component {
   onSubmit = async (e) => {
     e.preventDefault();
     let formData = new FormData();
-    console.log(this.state);
+    console.log(this.state.files[0]);
     formData.append('content', this.state.content);
-    formData.append('pics[]', this.state.files[0], 'pic01.jpg');
-    formData.append('pics[]', this.state.files[1], 'pic02.jpg');
-    console.log(formData);
+    formData.append('pics', this.state.files[0].file, 'pic01.jpg');
+    // formData.append('pics[]', this.state.files[1].url, 'pic02.jpg');
+    console.log(formData.getAll('content'),formData.getAll('pics'));
     const res = await fetch('http://127.0.0.1:7001/upload/', {
       body: formData,
       method: 'POST'
     });
-    console.log(res);
   }
 }
 

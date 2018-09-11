@@ -6,7 +6,6 @@ class UploaderController extends Controller {
     const ctx = this.ctx;
     const parts = ctx.multipart();
     let part;
-  
     while ((part = await parts() != null)) {
       console.log(part);
       this.ctx.body = {
