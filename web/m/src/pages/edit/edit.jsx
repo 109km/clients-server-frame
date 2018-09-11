@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { ImagePicker, List, TextareaItem, Button } from 'antd-mobile';
 import './edit.less';
@@ -61,11 +62,11 @@ class Edit extends Component {
   onSubmit = async (e) => {
     e.preventDefault();
     let formData = new FormData();
-    console.log(this.state.files[0]);
     formData.append('content', this.state.content);
-    formData.append('pics', this.state.files[0].file, 'pic01.jpg');
-    // formData.append('pics[]', this.state.files[1].url, 'pic02.jpg');
-    console.log(formData.getAll('content'),formData.getAll('pics'));
+
+    this.state.files.forEach(file => {
+      formData.append('pics[]', file.file);
+    });
     const res = await fetch('http://127.0.0.1:7001/upload/', {
       body: formData,
       method: 'POST'
