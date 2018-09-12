@@ -10,11 +10,12 @@ If you brag to every one, and you achieve your brag, you're a hero.
 # Product Design
 
 ### Working flow
-1. Add a `brag`.
-2. A `brag` includes some `schedules`, a final deadline, a final target.
-3. A `schedule` includes a phase target, a deadline, the stories(How you achieve this target).
-4. Every one can add `brags`.
-5. Every `brag` is public.
+1. Add a `dream`.
+2. A `dream` includes some `goals`.
+3. A `goal` includes a precise target, your stories(how you acheive this), a deadline.
+4. Every one can add `dreams`.
+5. Every `dream` is public.
+6. `Fans` can `follow` you, `fund` you.
 
 
 # Architecture

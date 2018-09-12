@@ -1,6 +1,6 @@
 const uuidv1 = require('uuid/v1');
 const crypto = require('crypto');
-const cmd5 = crypto.createHash('md5');
+// const cmd5 = crypto.createHash('md5');
 const cryptoKey = 'Hello,world!';
 
 module.exports = {
@@ -8,10 +8,12 @@ module.exports = {
   dayFormat: '%Y-%m-%d',
   dayTimeFormat: '%Y-%m-%d %H:%i:%s',
   encrypt(str) {
+    const cmd5 = crypto.createHash('md5');
     const s = str + '_' + cryptoKey;
     return cmd5.update(s).digest('hex');
   },
   md5(s){
+    const cmd5 = crypto.createHash('md5');
     return cmd5.update(s).digest('hex');
   }
 }

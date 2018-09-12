@@ -1,6 +1,4 @@
 'use strict';
-const crypto = require('crypto');
-const md5 = crypto.createHash('md5');
 const Controller = require('egg').Controller;
 
 class UserController extends Controller {
@@ -37,9 +35,10 @@ class UserController extends Controller {
       username: ctx.request.body.username,
       password: ctx.request.body.password
     }
-    const sessionId = ctx.helper.uuidv1();
     const res = await ctx.service.user.findOne(userData);
-
+    const sessionId = ctx.helper.uuidv1();
+    ctx.cookies.set('sessionId', sessionId);
+    
     if (res.code === 0) {
       ctx.session.user = res.data.user;
       ctx.session.sessionId = sessionId;
@@ -49,8 +48,8 @@ class UserController extends Controller {
       }
       // session记录到redis
       await this.app.redis.setex(sessionId, maxAge, res.data.user);
-      ctx.redirect('/');
-
+      ctx.body = await ctx.service.user.findOne(userData);;
+      // ctx.redirect('/');
     } else {
       ctx.body = {
         code: 10000,

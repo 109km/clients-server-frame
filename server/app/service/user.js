@@ -25,21 +25,56 @@ class UserService extends Service {
       message: 'success',
     }
   }
-
-  async findOne(userData) {
+  async updateOne(userData) {
     const {
       ctx
     } = this;
+    let res;
     userData.password = ctx.helper.encrypt(userData.password);
     const user = await this.ctx.model.User.findOne({
       where: userData,
     });
-    return {
-      code: 0,
-      data: {
-        user
+    if (user) {
+      user.update({
+        lastSignInAt: new Date().getTime()
+      });
+      res = {
+        code: 0,
+        data: {
+          user
+        }
+      }
+    } else {
+      res = {
+        code: 10000,
+        message: 'User not found'
       }
     }
+    return res;
+  }
+  async findOne(userData) {
+    const {
+      ctx
+    } = this;
+    let res;
+    userData.password = ctx.helper.encrypt(userData.password);
+    const user = await this.ctx.model.User.findOne({
+      where: userData,
+    });
+    if (user) {
+      res = {
+        code: 0,
+        data: {
+          user
+        }
+      }
+    } else {
+      res = {
+        code: 10000,
+        message: 'User not found'
+      }
+    }
+    return res;
   }
 }
 

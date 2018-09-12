@@ -13,7 +13,6 @@ class Edit extends Component {
     const { files } = this.state;
     return (
       <div className="page page-edit">
-        <input id="file-picker" type="file" onChange={this.onFileChange} />
         <form method="POST">
           <List>
             <TextareaItem

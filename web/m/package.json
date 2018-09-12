@@ -6,6 +6,8 @@
     "ajv": "^6.5.3",
     "antd-mobile": "^2.2.3",
     "axios": "^0.18.0",
+    "lodash": "^4.17.10",
+    "rc-form": "^2.2.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
