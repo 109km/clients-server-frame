@@ -25,43 +25,23 @@ class UserService extends Service {
       message: 'success',
     }
   }
-  async updateOne(userData) {
+  async findOne(data, isUpdate = false) {
     const {
       ctx
     } = this;
     let res;
+    let userData = Object.assign({}, data);
     userData.password = ctx.helper.encrypt(userData.password);
     const user = await this.ctx.model.User.findOne({
       where: userData,
     });
     if (user) {
-      user.update({
-        lastSignInAt: new Date().getTime()
-      });
-      res = {
-        code: 0,
-        data: {
-          user
-        }
+      if (isUpdate) {
+        user.update({
+          lastSignInAt: new Date().getTime()
+        });
       }
-    } else {
-      res = {
-        code: 10000,
-        message: 'User not found'
-      }
-    }
-    return res;
-  }
-  async findOne(userData) {
-    const {
-      ctx
-    } = this;
-    let res;
-    userData.password = ctx.helper.encrypt(userData.password);
-    const user = await this.ctx.model.User.findOne({
-      where: userData,
-    });
-    if (user) {
+
       res = {
         code: 0,
         data: {

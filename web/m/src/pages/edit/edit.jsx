@@ -59,13 +59,12 @@ class Edit extends Component {
     });
   }
   onSubmit = async (e) => {
-    e.preventDefault();
     let formData = new FormData();
     formData.append('content', this.state.content);
-
     this.state.files.forEach(file => {
       formData.append('pics[]', file.file);
     });
+    
     const res = await fetch('http://127.0.0.1:7001/upload/', {
       body: formData,
       method: 'POST'

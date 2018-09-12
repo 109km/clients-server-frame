@@ -35,10 +35,13 @@ class UserController extends Controller {
       username: ctx.request.body.username,
       password: ctx.request.body.password
     }
-    const res = await ctx.service.user.findOne(userData);
+    const res = await ctx.service.user.findOne(userData, true);
     const sessionId = ctx.helper.uuidv1();
-    ctx.cookies.set('sessionId', sessionId);
-    
+    ctx.cookies.set('sessionId', sessionId, {
+      httpOnly: false,
+      signed: false
+    });
+
     if (res.code === 0) {
       ctx.session.user = res.data.user;
       ctx.session.sessionId = sessionId;
@@ -48,7 +51,7 @@ class UserController extends Controller {
       }
       // session记录到redis
       await this.app.redis.setex(sessionId, maxAge, res.data.user);
-      ctx.body = await ctx.service.user.findOne(userData);;
+      ctx.body = res;
       // ctx.redirect('/');
     } else {
       ctx.body = {
