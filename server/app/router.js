@@ -7,7 +7,7 @@ module.exports = app => {
   } = app;
 
   app.get('/', controller.home.index);
- 
+
 
   app.get('/api/fake_chart_data', controller.api.fake_chart_data);
   app.get('/api/currentUser', controller.api.currentUser);
@@ -15,7 +15,7 @@ module.exports = app => {
 
   // 注册
   app.get('/signup', controller.user.signup);
-  app.post('/user/signup',controller.user.doSignup);
+  app.post('/user/signup', controller.user.doSignup);
   // 登录
   app.get('/signin', controller.user.signin);
   app.post('/user/signin', controller.user.doSignin);
@@ -25,6 +25,8 @@ module.exports = app => {
   app.get('/signout', controller.user.signout);
   // 上传
   app.post('/upload', controller.uploadFile.upload);
+
+  app.post('/dream/create', controller.dream.create);
 
   app.resources('users', '/api/users', controller.user);
 };

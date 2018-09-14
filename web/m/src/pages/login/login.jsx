@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from "react-router-dom";
 import PropTypes from 'prop-types';
 import { createForm } from 'rc-form';
 import { List, InputItem, Button, WhiteSpace } from 'antd-mobile';
@@ -48,9 +49,17 @@ class Login extends Component {
       username: this.state.username,
       password: this.state.password
     };
-    const res = post('http://127.0.0.1:7001/user/signin', {
+    const response = await post('http://127.0.0.1:7001/user/signin', {
       data: formData
     });
+
+    const result = await response.json();
+    console.log(result);
+    if (result.code === 0) {
+      this.props.history.push({
+        pathname: 'edit'
+      });
+    }
   }
 }
 
@@ -58,6 +67,8 @@ class Login extends Component {
 //   avatar: PropTypes.string.isRequired
 // }
 
+
+
 const LoginWrapper = createForm()(Login);
 
-export default LoginWrapper;
+export default withRouter(LoginWrapper);

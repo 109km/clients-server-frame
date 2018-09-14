@@ -4,7 +4,6 @@ import {BrowserRouter} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 import App from './app';
 import './global.less';
-
 ReactDOM.render(
   <BrowserRouter>
     <App />

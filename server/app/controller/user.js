@@ -51,7 +51,7 @@ class UserController extends Controller {
       }
       // session记录到redis
       await this.app.redis.setex(sessionId, maxAge, res.data.user);
-      ctx.body = res;
+      ctx.body = JSON.stringify(res);
       // ctx.redirect('/');
     } else {
       ctx.body = {

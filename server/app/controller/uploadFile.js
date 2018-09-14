@@ -6,8 +6,8 @@ const awaitWriteStream = require('await-stream-ready').write;
 const pump = require('mz-modules/pump');
 
 class UploaderController extends Controller {
-  constructor() {
-    super();
+  constructor(ctx) {
+    super(ctx);
     this.UPLOAD_PATH = path.join(this.config.baseDir, 'app/public/uploads');
   }
   async single() {
@@ -35,7 +35,6 @@ class UploaderController extends Controller {
   }
   async upload() {
     const ctx = this.ctx;
-
     const parts = ctx.multipart({
       autoFields: true
     });
