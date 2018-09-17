@@ -32,7 +32,7 @@ class UserService extends Service {
     let res;
     let userData = Object.assign({}, data);
     userData.password = ctx.helper.encrypt(userData.password);
-    const user = await this.ctx.model.User.findOne({
+    const user = await ctx.model.User.findOne({
       where: userData,
     });
     if (user) {

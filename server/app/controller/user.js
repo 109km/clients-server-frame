@@ -78,6 +78,11 @@ class UserController extends Controller {
     const res = await ctx.service.user.create(userData);
     ctx.body = res;
   }
+
+  // 获取用户登录状态
+  async getLogin(ctx) {
+    
+  }
 }
 
 module.exports = UserController;

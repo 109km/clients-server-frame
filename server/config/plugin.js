@@ -8,7 +8,7 @@ exports.cors = {
 };
 
 exports.security = {
-  domainWhiteList: [ 'http://localhost:8000' ],
+  domainWhiteList: ['http://localhost:3000'],
 };
 
 exports.graphql = {

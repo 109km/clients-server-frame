@@ -28,7 +28,8 @@ If you brag to every one, and you achieve your brag, you're a hero.
 
 ### User
 * Session & Cookies' settings.
-* User's password encryption.
+* Some api need to check user's login.
+* User's password encryption.(done)
 
 
 ## h5
