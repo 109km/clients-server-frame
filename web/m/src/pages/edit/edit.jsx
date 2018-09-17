@@ -36,7 +36,6 @@ class Edit extends Component {
   }
   onFileChange = (file) => {
     let input = document.getElementById('file-picker');
-    console.log(input.files);
   }
   onChange = (files, type, index) => {
     console.log(files);
@@ -49,22 +48,12 @@ class Edit extends Component {
       content: value
     });
   }
-  onAddImageClick = (e) => {
-    e.preventDefault();
-    this.setState({
-      files: this.state.files.concat({
-        url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
-        id: '3',
-      }),
-    });
-  }
   onSubmit = async (e) => {
     let formData = new FormData();
     formData.append('content', this.state.content);
     this.state.files.forEach(file => {
       formData.append('pics[]', file.file);
     });
-    
     const res = await fetch('http://127.0.0.1:7001/dream/create', {
       body: formData,
       method: 'POST'

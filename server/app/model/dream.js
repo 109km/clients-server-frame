@@ -3,17 +3,18 @@ const db = require('../db');
 module.exports = app => {
   const {
     STRING,
+    INT,
     DATE
   } = app.Sequelize;
 
-  const User = db.defineModel(app, 'dreams', {
+  const Dream = db.defineModel(app, 'dreams', {
     id: {
       type: STRING,
       unique: true,
       primaryKey: true
     },
     userId: {
-      type: STRING,
+      type: INT,
       unique: true,
       allowNull: false
     },
@@ -26,5 +27,5 @@ module.exports = app => {
     }
   });
 
-  return User;
+  return Dream;
 }

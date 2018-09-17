@@ -5,17 +5,23 @@ class DreamService extends Service {
     const {
       ctx
     } = this;
-    const createRule = {
-      userId: {
-        type: 'string'
-      },
-      content: {
-        type: 'string'
-      },
-    };
-    // 校验参数
-    ctx.validate(createRule);
-    await ctx.model.dream.create(dreamData);
+
+
+    // const createRule = {
+    //   userId: {
+    //     type: 'string'
+    //   },
+    //   content: {
+    //     type: 'string'
+    //   },
+    //   pics: {
+    //     type: 'string'
+    //   }
+    // };
+    // // 校验参数
+    // ctx.validate(createRule);
+    const res = await ctx.model.Dream.create(dreamData);
+    console.log(res.get('id'));
     return {
       code: 0,
       message: 'success',
