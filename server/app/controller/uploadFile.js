@@ -8,10 +8,9 @@ const pump = require('mz-modules/pump');
 class UploaderController extends Controller {
   constructor(ctx) {
     super(ctx);
-    this.UPLOAD_PATH = path.join(this.config.baseDir, 'app/public/uploads');
+    this.UPLOAD_PATH = this.config.UPLOAD_PATH;
   }
-  async single() {
-    const ctx = this.ctx;
+  async single(ctx) {
     const stream = await ctx.getFileStream();
     const filename = ctx.helper.md5(stream.filename) + path
       .extname(stream.filename)
@@ -33,8 +32,7 @@ class UploaderController extends Controller {
       url: target
     };
   }
-  async upload() {
-    const ctx = this.ctx;
+  async upload(ctx) {
     const parts = ctx.multipart({
       autoFields: true
     });

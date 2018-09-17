@@ -65,7 +65,7 @@ class Edit extends Component {
       formData.append('pics[]', file.file);
     });
     
-    const res = await fetch('http://127.0.0.1:7001/upload/', {
+    const res = await fetch('http://127.0.0.1:7001/dream/create', {
       body: formData,
       method: 'POST'
     });
