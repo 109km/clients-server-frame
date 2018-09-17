@@ -3,7 +3,7 @@ const db = require('../db');
 module.exports = app => {
   const {
     STRING,
-    INT,
+    INTEGER,
     DATE
   } = app.Sequelize;
 
@@ -14,7 +14,7 @@ module.exports = app => {
       primaryKey: true
     },
     userId: {
-      type: INT,
+      type: INTEGER,
       unique: true,
       allowNull: false
     },

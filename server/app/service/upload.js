@@ -35,30 +35,38 @@ class UploaderService extends Service {
       message: 'success'
     }
   }
-  async multiple(ctx) {
-    const parts = ctx.multipart({
-      autoFields: true
-    });
+  async multiple() {
+    const {
+      ctx
+    } = this;
+    const parts = ctx.multipart();
     const files = [];
+    const fields = {};
     let stream;
     // 多文件循环
     while ((stream = await parts()) != null) {
-      const filename = ctx.helper.md5(stream.filename) + path
-        .extname(stream.filename)
-        .toLocaleLowerCase();
-      const target = path.join(this.UPLOAD_PATH, filename);
-      const writeStream = fs.createWriteStream(target);
-      await pump(stream, writeStream);
-      files.push({
-        filename: filename,
-        url: target
-      });
+      console.log('while stream:', stream);
+      if (stream.length) {
+        fields[stream[0]] = stream[1];
+      } else {
+        const filename = ctx.helper.md5(stream.filename) + path
+          .extname(stream.filename)
+          .toLocaleLowerCase();
+        const target = path.join(this.UPLOAD_PATH, filename);
+        const writeStream = fs.createWriteStream(target);
+        await pump(stream, writeStream);
+        files.push({
+          filename: filename,
+          url: target
+        });
+      }
     }
 
     return {
       code: 0,
       data: {
-        files: files
+        files,
+        fields
       },
       message: 'success'
     }

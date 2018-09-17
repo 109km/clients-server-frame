@@ -5,8 +5,6 @@ class DreamService extends Service {
     const {
       ctx
     } = this;
-
-
     // const createRule = {
     //   userId: {
     //     type: 'string'
@@ -21,12 +19,11 @@ class DreamService extends Service {
     // // 校验参数
     // ctx.validate(createRule);
     const res = await ctx.model.Dream.create(dreamData);
-    console.log(res.get('id'));
-    return {
-      code: 0,
-      message: 'success',
+      return {
+        code: 0,
+        message: 'success',
+      }
     }
   }
-}
 
-module.exports = DreamService;
+  module.exports = DreamService;
