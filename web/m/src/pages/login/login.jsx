@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { createForm } from 'rc-form';
 import { List, InputItem, Button, WhiteSpace } from 'antd-mobile';
 import { post } from '../../utils/api';
+import Cookies from 'js-cookie';
 import './login.less';
 
 class Login extends Component {
@@ -53,9 +54,10 @@ class Login extends Component {
       data: formData
     });
 
-    const result = await response.json();
-    console.log(result);
-    if (result.code === 0) {
+    // const result = await response.json();
+    console.log(response);
+    if (response.data.code === 0) {
+      Cookies.set('sessionId', response.data.data.sessionId);
       this.props.history.push({
         pathname: 'edit'
       });

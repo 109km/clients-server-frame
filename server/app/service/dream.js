@@ -19,11 +19,12 @@ class DreamService extends Service {
     // // 校验参数
     // ctx.validate(createRule);
     const res = await ctx.model.Dream.create(dreamData);
-      return {
-        code: 0,
-        message: 'success',
-      }
+    console.log('Service.create:',res);
+    return {
+      code: 0,
+      message: 'success',
     }
   }
+}
 
-  module.exports = DreamService;
+module.exports = DreamService;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { ImagePicker, List, TextareaItem, Button } from 'antd-mobile';
+import { createHeader, post } from '../../utils/api';
 import './edit.less';
 
 class Edit extends Component {
@@ -38,7 +38,6 @@ class Edit extends Component {
     let input = document.getElementById('file-picker');
   }
   onChange = (files, type, index) => {
-    console.log(files);
     this.setState({
       files
     });
@@ -54,9 +53,8 @@ class Edit extends Component {
     this.state.files.forEach(file => {
       formData.append('pics[]', file.file);
     });
-    const res = await fetch('http://127.0.0.1:7001/dream/create', {
-      body: formData,
-      method: 'POST'
+    const res = await post('http://127.0.0.1:7001/dream/create', {
+      data: formData
     });
   }
 }

@@ -37,10 +37,6 @@ class UserController extends Controller {
     }
     const res = await ctx.service.user.findOne(userData, true);
     const sessionId = ctx.helper.uuidv1();
-    ctx.cookies.set('sessionId', sessionId, {
-      httpOnly: false,
-      signed: false
-    });
 
     if (res.code === 0) {
       ctx.session.user = res.data.user;
@@ -50,7 +46,8 @@ class UserController extends Controller {
         maxAge = maxAge * 30;
       }
       // session记录到redis
-      await this.app.redis.setex(sessionId, maxAge, res.data.user);
+      await this.app.redis.set(sessionId, JSON.stringify(res.data.user), 'EX', maxAge);
+      res.data.sessionId = sessionId;
       ctx.body = JSON.stringify(res);
       // ctx.redirect('/');
     } else {
@@ -77,11 +74,6 @@ class UserController extends Controller {
     }
     const res = await ctx.service.user.create(userData);
     ctx.body = res;
-  }
-
-  // 获取用户登录状态
-  async getLogin(ctx) {
-    
   }
 }
 

@@ -1,4 +1,14 @@
 import _ from 'lodash';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
+
+export const createHeader = (headers) => {
+  let newHeaders = headers || {};
+  let sessionId = Cookies.get('sessionId');
+  newHeaders['X-Api-Key'] = sessionId;
+  return newHeaders;
+}
 
 /**
  * @desc Convert an object to form string.
@@ -19,11 +29,11 @@ export const convertObjectToForm = (data) => {
  * @param {Object} options 
  */
 export const post = async (url, options) => {
-  return await fetch(url, {
+  options.headers = createHeader(options.headers);
+  return await axios({
+    url: url,
     method: "POST",
-    headers: options.headers ? options.headers : {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: convertObjectToForm(options.data)
+    headers: options.headers,
+    data: options.data
   });
 }
