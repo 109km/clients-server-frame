@@ -3,13 +3,14 @@ const db = require('../db');
 module.exports = app => {
   const {
     STRING,
+    INTEGER,
     DATE
   } = app.Sequelize;
 
   const User = db.defineModel(app, 'users', {
     id: {
-      type: STRING,
-      unique: true,
+      type: INTEGER,
+      autoIncrement: true,
       primaryKey: true
     },
     username: {

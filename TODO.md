@@ -27,9 +27,12 @@ If you brag to every one, and you achieve your brag, you're a hero.
 ## Server
 
 ### User
-* Session & Cookies' settings.
-* Some api need to check user's login.
+* Session & Cookies' settings. 
+* Some api need to check user's login.(done, using token)
 * User's password encryption.(done)
+
+### Dream
+* Get `id` after creating a new dream.
 
 
 ## h5

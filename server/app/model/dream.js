@@ -9,8 +9,8 @@ module.exports = app => {
 
   const Dream = db.defineModel(app, 'dreams', {
     id: {
-      type: STRING,
-      unique: true,
+      type: INTEGER,
+      autoIncrement: true,
       primaryKey: true
     },
     userId: {

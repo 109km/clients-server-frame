@@ -19,7 +19,8 @@ class UserService extends Service {
 
     // 密码加密储存
     userData.password = ctx.helper.encrypt(userData.password);
-    await ctx.model.User.create(userData);
+    const user = await ctx.model.User.create(userData);
+    console.log(user);
     return {
       code: 0,
       message: 'success',

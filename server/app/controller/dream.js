@@ -19,12 +19,7 @@ class DreamController extends Controller {
       pics: JSON.stringify(uploadData.data.files)
     });
 
-
-    if (req.code === 0) {
-      ctx.body = {
-        code: 0
-      };
-    }
+    ctx.body = req;
 
 
   }

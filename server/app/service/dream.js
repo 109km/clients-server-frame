@@ -18,11 +18,14 @@ class DreamService extends Service {
     // };
     // // 校验参数
     // ctx.validate(createRule);
-    const res = await ctx.model.Dream.create(dreamData);
-    console.log('Service.create:',res);
+    const res = await ctx.model.Dream.create(dreamData, {
+      isNewRecord: true
+    });
+    console.log('Service.create:', res.get('id'));
     return {
       code: 0,
       message: 'success',
+      data: res
     }
   }
 }

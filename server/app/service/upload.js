@@ -45,7 +45,6 @@ class UploaderService extends Service {
     let stream;
     // 多文件循环
     while ((stream = await parts()) != null) {
-      console.log('while stream:', stream);
       if (stream.length) {
         fields[stream[0]] = stream[1];
       } else {
