@@ -3,8 +3,7 @@ const db = require('../db');
 module.exports = app => {
   const {
     STRING,
-    INTEGER,
-    DATE
+    INTEGER
   } = app.Sequelize;
 
   const Dream = db.defineModel(app, 'dreams', {

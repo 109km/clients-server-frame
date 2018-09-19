@@ -26,10 +26,14 @@ If you brag to every one, and you achieve your brag, you're a hero.
 
 ## Server
 
+### Error code
+* Design the error code configuration.
+
 ### User
 * Session & Cookies' settings. 
 * Some api need to check user's login.(done, using token)
 * User's password encryption.(done)
+* Repeated username forbidden.
 
 ### Dream
 * Get `id` after creating a new dream.

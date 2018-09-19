@@ -19,12 +19,26 @@ class UserService extends Service {
 
     // 密码加密储存
     userData.password = ctx.helper.encrypt(userData.password);
-    const user = await ctx.model.User.create(userData);
-    console.log(user);
-    return {
-      code: 0,
-      message: 'success',
+    const res = await ctx.model.User.findOrCreate({
+      where: {
+        username: userData.username
+      },
+      defaults: userData
+    });
+    console.log(res);
+    if(res[1]){
+      return {
+        code: 0,
+        message: 'success',
+        data: res[0]
+      }
+    }else{
+      return {
+        code: 10000,
+        message: `username: '${userData.username}' already exists.`
+      }
     }
+    
   }
   async findOne(data, isUpdate = false) {
     const {

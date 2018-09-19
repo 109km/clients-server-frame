@@ -5,17 +5,17 @@ import { createForm } from 'rc-form';
 import { List, InputItem, Button, WhiteSpace } from 'antd-mobile';
 import { post } from '../../utils/api';
 import Cookies from 'js-cookie';
-import './login.less';
+import './signup.less';
 
-class Login extends Component {
+class Signup extends Component {
   state = {
     username: '',
     password: ''
   }
   render() {
     return (
-      <div className="page page-edit">
-        <List renderHeader={() => '输入用户名和密码'}>
+      <div className="page page-signup">
+        <List renderHeader={() => '注册新用户'}>
           <InputItem
             onChange={this.onUsernameChange}
             value={this.state.username}
@@ -28,6 +28,13 @@ class Login extends Component {
             type="password"
           >
             密码
+          </InputItem>
+          <InputItem
+            onChange={this.onRePasswordChange}
+            value={this.state.repassword}
+            type="password"
+          >
+            确认密码
           </InputItem>
         </List>
         <WhiteSpace size="lg" />
@@ -45,18 +52,26 @@ class Login extends Component {
       password: value
     });
   }
+  onRePasswordChange = async (value) => {
+    this.setState({
+      repassword: value
+    });
+  }
   onSubmit = async (e) => {
     let formData = {
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      're-password': this.state.repassword
     };
-    const response = await post('http://127.0.0.1:7001/user/signin', {
+    const response = await post('http://127.0.0.1:7001/user/create', {
       data: formData
     });
+
+    // const result = await response.json();
+    console.log(response);
     if (response.data.code === 0) {
-      Cookies.set('sessionId', response.data.data.sessionId);
       this.props.history.push({
-        pathname: 'edit'
+        pathname: 'login'
       });
     }
   }
@@ -68,6 +83,6 @@ class Login extends Component {
 
 
 
-const LoginWrapper = createForm()(Login);
+const SignupWrapper = createForm()(Signup);
 
-export default withRouter(LoginWrapper);
+export default withRouter(SignupWrapper);
