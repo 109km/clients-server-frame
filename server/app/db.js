@@ -2,7 +2,7 @@ const VERSION = '1.0.0';
 
 function defineModel(app, name, attributes) {
   const {
-    STRING
+    INTEGER
   } = app.Sequelize;
 
   let attrs = {};
@@ -20,7 +20,8 @@ function defineModel(app, name, attributes) {
   }
 
   attrs.id = {
-    type: STRING,
+    type: INTEGER,
+    autoIncrement: true,
     primaryKey: true
   };
 

@@ -13,6 +13,7 @@ class DreamService extends Service {
     //     type: 'string'
     //   },
     //   pics: {
+    //   pics: {
     //     type: 'string'
     //   }
     // };

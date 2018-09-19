@@ -8,11 +8,6 @@ module.exports = app => {
   } = app.Sequelize;
 
   const User = db.defineModel(app, 'users', {
-    id: {
-      type: INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    },
     username: {
       type: STRING,
       unique: true,
@@ -22,7 +17,9 @@ module.exports = app => {
       type: STRING,
       allowNull: false
     },
-    lastSignInAt: DATE
+    lastSignInAt: {
+      type: DATE
+    }
   });
 
   return User;

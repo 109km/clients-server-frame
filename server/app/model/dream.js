@@ -2,27 +2,21 @@ const db = require('../db');
 
 module.exports = app => {
   const {
-    STRING,
-    INTEGER
+    INTEGER,
+    TEXT
   } = app.Sequelize;
 
   const Dream = db.defineModel(app, 'dreams', {
-    id: {
-      type: INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    },
     userId: {
       type: INTEGER,
       unique: true,
       allowNull: false
     },
     content: {
-      type: STRING,
-      allowNull: false
+      type: TEXT
     },
     pics: {
-      type: STRING
+      type: TEXT
     }
   });
 

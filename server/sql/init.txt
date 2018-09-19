@@ -1,0 +1,14 @@
+CREATE DATABASE users;
+CREATE DATABASE dreams;
+
+
+CREATE TABLE users(
+	id int(11) not null AUTO_INCREMENT,
+	primary key (id),
+	username varchar(255),
+	password varchar(255),
+	createdAt DATETIME,
+	updatedAt DATETIME,
+	lastSignInAt DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment='Table for users';
+
