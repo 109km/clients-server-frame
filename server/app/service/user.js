@@ -1,5 +1,6 @@
 const Service = require('egg').Service;
 const STATUS_CODE = require('../statusCode');
+const format = require('date-fns/format');
 class UserService extends Service {
   async create(userData) {
     const {
@@ -49,7 +50,7 @@ class UserService extends Service {
     if (user) {
       if (isUpdate) {
         user.update({
-          lastSignInAt: new Date().getTime()
+          lastSignInAt: format(new Date(), 'YYYY-MM-D HH:mm:ssTZ')
         });
       }
       res = STATUS_CODE['SUCCESS'];

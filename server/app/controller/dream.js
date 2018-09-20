@@ -1,6 +1,7 @@
 'use strict';
 const Controller = require('egg').Controller;
 const STATUS_CODE = require('../statusCode');
+const format = require('date-fns/format');
 class DreamController extends Controller {
   async create(ctx) {
     let key = ctx.headers['x-api-key'];
@@ -19,6 +20,7 @@ class DreamController extends Controller {
     ctx.body = res;
   }
   async detail(ctx) {
+    console.log();
     let res = await ctx.service.dream.findOne(ctx.request.body);
     ctx.body = res;
   }
