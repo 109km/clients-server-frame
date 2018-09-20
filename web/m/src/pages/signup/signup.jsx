@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { createForm } from 'rc-form';
-import { List, InputItem, Button, WhiteSpace } from 'antd-mobile';
+import { List, InputItem, Button, WhiteSpace, Toast } from 'antd-mobile';
 import { post } from '../../utils/api';
 import Cookies from 'js-cookie';
 import './signup.less';
@@ -68,11 +68,13 @@ class Signup extends Component {
     });
 
     // const result = await response.json();
-    console.log(response);
-    if (response.data.code === 0) {
+    const res = response.data;
+    if (res.code === 0) {
       this.props.history.push({
         pathname: 'login'
       });
+    } else {
+      Toast.fail(`${res.message}`);
     }
   }
 }

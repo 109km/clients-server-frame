@@ -1,6 +1,5 @@
 'use strict';
 const Controller = require('egg').Controller;
-
 class UserController extends Controller {
 
   // GET ， 展示页面
@@ -51,10 +50,7 @@ class UserController extends Controller {
       ctx.body = JSON.stringify(res);
       // ctx.redirect('/');
     } else {
-      ctx.body = {
-        code: 10000,
-        message: '用户不存在',
-      };
+      ctx.body = res;
     }
 
   }

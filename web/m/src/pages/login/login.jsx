@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { createForm } from 'rc-form';
-import { List, InputItem, Button, WhiteSpace } from 'antd-mobile';
+import { List, InputItem, Button, WhiteSpace,Toast } from 'antd-mobile';
 import { post } from '../../utils/api';
 import Cookies from 'js-cookie';
 import './login.less';
@@ -32,6 +32,7 @@ class Login extends Component {
         </List>
         <WhiteSpace size="lg" />
         <Button type="primary" onClick={this.onSubmit}>提交</Button>
+        <Toast />
       </div>
     );
   }
@@ -53,11 +54,14 @@ class Login extends Component {
     const response = await post('http://127.0.0.1:7001/user/signin', {
       data: formData
     });
-    if (response.data.code === 0) {
-      Cookies.set('sessionId', response.data.data.sessionId);
+    const res = response.data;
+    if (res.code === 0) {
+      Cookies.set('sessionId', res.data.sessionId);
       this.props.history.push({
         pathname: 'edit'
       });
+    }else{
+      Toast.fail(`${res.message}`,1);
     }
   }
 }

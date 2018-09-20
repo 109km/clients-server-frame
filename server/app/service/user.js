@@ -1,5 +1,5 @@
 const Service = require('egg').Service;
-
+const STATUS_CODE = require('../statusCode');
 class UserService extends Service {
   async create(userData) {
     const {
@@ -28,16 +28,11 @@ class UserService extends Service {
       }
     });
     if (res[1]) {
-      return {
-        code: 0,
-        message: 'success',
-        data: res[0]
-      }
+      let ret = STATUS_CODE['SUCCESS'];
+      ret.data = res[0];
+      return ret;
     } else {
-      return {
-        code: 10000,
-        message: `username: '${userData.username}' already exists.`
-      }
+      return STATUS_CODE['USER_ALREADY_EXIST'];
     }
 
   }
@@ -57,18 +52,12 @@ class UserService extends Service {
           lastSignInAt: new Date().getTime()
         });
       }
-
-      res = {
-        code: 0,
-        data: {
-          user
-        }
-      }
+      res = STATUS_CODE['SUCCESS'];
+      res.data = {
+        user
+      };
     } else {
-      res = {
-        code: 10000,
-        message: 'User not found'
-      }
+      res = STATUS_CODE['USER_DONT_EXIST'];
     }
     return res;
   }
