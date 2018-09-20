@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { createForm } from 'rc-form';
 import { List, InputItem, Button, WhiteSpace, Toast } from 'antd-mobile';
-import { post } from '../../utils/api';
+import { post } from '../../utils/util';
 import Cookies from 'js-cookie';
 import './signup.less';
 

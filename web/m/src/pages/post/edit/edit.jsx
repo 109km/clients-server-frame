@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ImagePicker, List, TextareaItem, Button } from 'antd-mobile';
-import { createHeader, post } from '../../utils/api';
+import { createHeader, post } from '../../../utils/util';
 import './edit.less';
 
-class Edit extends Component {
+class PostEdit extends Component {
   state = {
     files: [],
     content: ""
@@ -34,26 +34,30 @@ class Edit extends Component {
       </div>
     );
   }
-  onFileChange = (file) => {
+  componentDidMount() {
+
+  }
+  onFileChange(file) {
     let input = document.getElementById('file-picker');
   }
-  onChange = (files, type, index) => {
+  onChange(files, type, index) {
     this.setState({
       files
     });
   }
-  onTextChange = (value) => {
+  onTextChange(value) {
     this.setState({
       content: value
     });
   }
-  onSubmit = async (e) => {
+  async onSubmit(e) {
     let formData = new FormData();
+
     formData.append('content', this.state.content);
     this.state.files.forEach(file => {
       formData.append('pics[]', file.file);
     });
-    const res = await post('http://127.0.0.1:7001/dream/create', {
+    const res = await post('http://127.0.0.1:7001/dream/edit', {
       data: formData
     });
   }
@@ -63,4 +67,4 @@ class Edit extends Component {
 //   avatar: PropTypes.string.isRequired
 // }
 
-export default Edit;
+export default PostEdit;
