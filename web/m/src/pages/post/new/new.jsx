@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ImagePicker, List, TextareaItem, Button } from 'antd-mobile';
+import { ImagePicker, List, TextareaItem, Button, Toast } from 'antd-mobile';
 import { createHeader, post } from '../../../utils/util';
 import './new.less';
 
@@ -56,6 +56,11 @@ class PostNew extends Component {
     const res = await post('http://127.0.0.1:7001/dream/create', {
       data: formData
     });
+    if (res.data.code === 0) {
+      Toast.success('文章创建成功！');
+    } else {
+      Toast.fail(res.data.message);
+    }
   }
 }
 
