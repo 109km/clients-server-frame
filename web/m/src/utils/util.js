@@ -50,16 +50,16 @@ export const isMobile = function(mobile) {
 }
 /**
  * @desc Get the query's params.
- * @param {String} url 
+ * @param {String} str 
  */
 export const getQuery = function(url) {
-  var url = url,
-    request = new Object(),
+  let request = new Object(),
     strs;
-  if (url.indexOf("?") != -1) {
-    var str = url.slice(url.indexOf("?") + 1, url.indexOf("#") >= 0 ? url.indexOf("#") : url.length);
+  console.log(url);
+  if (url.indexOf("?") !== -1) {
+    let str = url.slice(url.indexOf("?") + 1, url.indexOf("#") >= 0 ? url.indexOf("#") : url.length);
     strs = str.split("&");
-    for (var i = 0; i < strs.length; i++) {
+    for (let i = 0; i < strs.length; i++) {
       request[strs[i].split("=")[0]] = strs[i].split("=")[1];
     }
   }

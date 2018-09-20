@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ImagePicker, List, TextareaItem, Button } from 'antd-mobile';
-import { createHeader, post } from '../../../utils/util';
+import { createHeader, post, getQuery } from '../../../utils/util';
 import './edit.less';
 
 class PostEdit extends Component {
@@ -35,7 +35,13 @@ class PostEdit extends Component {
     );
   }
   componentDidMount() {
-
+    let query = getQuery(this.props.location.search);
+    const res = await post('http://127.0.0.1:7001/dream/detail', {
+      data: {
+        postId: query.postId
+      }
+    });
+    console.log(res);
   }
   onFileChange(file) {
     let input = document.getElementById('file-picker');
