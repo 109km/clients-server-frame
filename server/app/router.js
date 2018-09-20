@@ -27,6 +27,7 @@ module.exports = app => {
   app.post('/upload', controller.uploadFile.upload);
 
   app.post('/dream/create', controller.dream.create);
+  app.post('/dream/detail', controller.dream.detail);
 
   app.resources('users', '/api/users', controller.user);
 };

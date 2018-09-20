@@ -57,7 +57,7 @@ class UserService extends Service {
         user
       };
     } else {
-      res = STATUS_CODE['USER_DONT_EXIST'];
+      res = STATUS_CODE['USER_NOT_EXIST'];
     }
     return res;
   }
