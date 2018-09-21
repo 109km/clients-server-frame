@@ -1,0 +1,31 @@
+@startuml
+class Project{
+  String title
+  String description
+  Array postList
+  Array targetList
+  Array tierList
+}
+class Target{ 
+  String title
+  String description
+}
+class Post{
+  String title
+  String content
+  Array pics
+}
+class Tier{
+  String title
+  String description
+  String reward
+  Number price
+}
+
+Project "1" -- "many" Target
+Project "1" -- "many" Tier
+Project "1" -- "many" Post
+
+
+
+@enduml
