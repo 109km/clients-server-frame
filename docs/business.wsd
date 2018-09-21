@@ -1,18 +1,19 @@
 @startuml
-class Project{
+class Dream{
   String title
   String description
   Array postList
   Array targetList
   Array tierList
 }
-class Target{ 
+class Target{
   String title
   String description
 }
 class Post{
   String title
   String content
+  Boolean isMemberOnly
   Array pics
 }
 class Tier{
@@ -22,9 +23,9 @@ class Tier{
   Number price
 }
 
-Project "1" -- "many" Target
-Project "1" -- "many" Tier
-Project "1" -- "many" Post
+Dream "1" -- "many" Target
+Dream "1" -- "many" Tier
+Dream "1" -- "many" Post
 
 
 

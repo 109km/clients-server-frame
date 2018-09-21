@@ -53,7 +53,7 @@ class PostNew extends Component {
     this.state.files.forEach(file => {
       formData.append('pics[]', file.file);
     });
-    const res = await post('http://127.0.0.1:7001/dream/create', {
+    const res = await post('http://127.0.0.1:7001/post/create', {
       data: formData
     });
     if (res.data.code === 0) {

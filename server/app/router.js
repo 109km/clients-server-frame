@@ -26,8 +26,12 @@ module.exports = app => {
   // 上传
   app.post('/upload', controller.uploadFile.upload);
 
+  // 项目
   app.post('/dream/create', controller.dream.create);
   app.post('/dream/detail', controller.dream.detail);
+
+  app.post('/post/create', controller.post.create);
+  app.post('/post/detail', controller.post.detail);
 
   app.resources('users', '/api/users', controller.user);
 };

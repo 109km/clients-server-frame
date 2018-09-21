@@ -1,7 +1,7 @@
 const Service = require('egg').Service;
 const STATUS_CODE = require('../statusCode');
-class DreamService extends Service {
-  async create(dreamData) {
+class PostService extends Service {
+  async create(postData) {
     const {
       ctx
     } = this;
@@ -19,29 +19,27 @@ class DreamService extends Service {
     // };
     // // 校验参数
     // ctx.validate(createRule);
-    const dream = await ctx.model.Dream.create(dreamData, {
+    const post = await ctx.model.Post.create(postData, {
       isNewRecord: true
     });
     const res = STATUS_CODE['SUCCESS'];
-    res.data = dream;
+    res.data = post;
     return res;
   }
 
-  async findOne(dreamParams) {
+  async findOne(postParams) {
     const {
       ctx
     } = this;
-    const dream = await ctx.model.Dream.findOne({
+    const post = await ctx.model.Post.findOne({
       where: {
-        id: dreamParams.dreamId
+        id: postParams.postId
       },
     });
-    console.log(dream);
-
     let res;
-    if (dream) {
+    if (post) {
       res = STATUS_CODE['SUCCESS'];
-      res.data = dream;
+      res.data = post;
     } else {
       res = STATUS_CODE['POST_NOT_FOUND'];
     }
@@ -49,4 +47,4 @@ class DreamService extends Service {
   }
 }
 
-module.exports = DreamService;
+module.exports = PostService;

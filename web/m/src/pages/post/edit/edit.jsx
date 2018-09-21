@@ -36,7 +36,7 @@ class PostEdit extends Component {
   }
   async componentDidMount() {
     let query = getQuery(this.props.location.search);
-    const res = await post('http://127.0.0.1:7001/dream/detail', {
+    const res = await post('http://127.0.0.1:7001/post/detail', {
       data: {
         postId: query.postId
       }

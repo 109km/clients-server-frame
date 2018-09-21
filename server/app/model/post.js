@@ -4,7 +4,8 @@ module.exports = app => {
   const {
     INTEGER,
     TEXT,
-    STRING
+    STRING,
+    BOOLEAN
   } = app.Sequelize;
 
   const Dream = db.defineModel(app, 'dreams', {
@@ -13,23 +14,23 @@ module.exports = app => {
       unique: true,
       allowNull: false
     },
+    dreamId: {
+      type: INTEGER,
+      unique: true,
+      allowNull: false
+    },
     title: {
       type: STRING,
       allowNull: false
     },
-    description: {
-      type: TEXT
+    content: {
+      type: TEXT,
+      allowNull: false
     },
-    postsList: {
-      type: TEXT
+    isMemberOnly: {
+      type: BOOLEAN
     },
-    targetsList: {
-      type: TEXT
-    },
-    backersList: {
-      type: TEXT
-    },
-    tiersList: {
+    pics: {
       type: TEXT
     }
   });
