@@ -32,7 +32,6 @@ class Login extends Component {
         </List>
         <WhiteSpace size="lg" />
         <Button type="primary" onClick={this.onSubmit}>提交</Button>
-        <Toast />
       </div>
     );
   }
@@ -58,7 +57,7 @@ class Login extends Component {
     if (res.code === 0) {
       Cookies.set('sessionId', res.data.sessionId);
       this.props.history.push({
-        pathname: 'edit'
+        pathname: '/dream/new'
       });
     }else{
       Toast.fail(`${res.message}`,1);

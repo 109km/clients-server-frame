@@ -50,7 +50,7 @@ class UserService extends Service {
     if (user) {
       if (isUpdate) {
         user.update({
-          lastSignInAt: dayjs().format('YYYY-MM-D HH:mm:ssTZ')
+          lastSignInAt: dayjs().format('YYYY-MM-D HH:mm:ss')
         });
       }
       res = STATUS_CODE['SUCCESS'];

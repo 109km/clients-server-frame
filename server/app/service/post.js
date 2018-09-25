@@ -5,20 +5,19 @@ class PostService extends Service {
     const {
       ctx
     } = this;
-    // const createRule = {
-    //   userId: {
-    //     type: 'string'
-    //   },
-    //   content: {
-    //     type: 'string'
-    //   },
-    //   pics: {
-    //   pics: {
-    //     type: 'string'
-    //   }
-    // };
-    // // 校验参数
-    // ctx.validate(createRule);
+    const createRule = {
+      userId: {
+        type: 'string'
+      },
+      content: {
+        type: 'string'
+      },
+      pics: {
+        type: 'string'
+      }
+    };
+    // 校验参数
+    ctx.validate(createRule);
     const post = await ctx.model.Post.create(postData, {
       isNewRecord: true
     });

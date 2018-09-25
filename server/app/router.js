@@ -29,6 +29,7 @@ module.exports = app => {
   // 项目
   app.post('/dream/create', controller.dream.create);
   app.post('/dream/detail', controller.dream.detail);
+  app.post('/dream/addGoals', controller.dream.addGoals);
 
   app.post('/post/create', controller.post.create);
   app.post('/post/detail', controller.post.detail);

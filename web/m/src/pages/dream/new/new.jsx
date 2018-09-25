@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, Icon } from 'antd-mobile';
 import { post } from '../../../utils/util';
+import STATUS_CODE from '../../../utils/statusCode';
 import './new.less';
 
 class DreamNew extends Component {
   state = {
     files: [],
+    title: "",
     content: ""
   }
   render() {
@@ -17,7 +19,7 @@ class DreamNew extends Component {
           <List>
             <InputItem
               placeholder="项目的标题"
-              value={this.state.content}
+              value={this.state.title}
               onChange={this.onTitleChange}
             />
             <TextareaItem
@@ -33,30 +35,40 @@ class DreamNew extends Component {
       </div>
     );
   }
-  onTitleChange(value) {
+  onTitleChange = (value) => {
     this.setState({
       title: value
     });
   }
-  onDescChange(value) {
+  onDescChange = (value) => {
     this.setState({
-      desc: value
+      content: value
     });
   }
-  async onSubmit(e) {
-    let formData = new FormData();
-    formData.append('desc', this.state.desc);
-    formData.append('title', this.state.title);
+  onSubmit = async (e) => {
+    let formData = {
+      title: this.state.title,
+      content: this.state.content
+    };
+
     const res = await post('http://127.0.0.1:7001/dream/create', {
       data: formData
     });
-    if (res.data.code === 0) {
+    if (res.data.code === STATUS_CODE['SUCCESS'].code) {
       Toast.success('项目创建成功！', 3, () => {
         this.props.history.push({
-          pathname: `/dream/goal?dreamId=${res.data.dreamId}`,
+          pathname: '/dream/goal',
+          search: '?dreamId=' + res.data.id
         });
       });
-    } else {
+    } else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
+      Toast.fail(res.data.message, 3, () => {
+        this.props.history.push({
+          pathname: '/user/signin',
+        });
+      });
+    }
+    else {
       Toast.fail(res.data.message);
     }
   }

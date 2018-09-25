@@ -2,19 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, Icon } from 'antd-mobile';
 import { post, getQuery } from '../../../utils/util';
+import STATUS_CODE from '../../../utils/statusCode';
 import GoalList from '../../../components/GoalList/GoalList';
 import './goal.less';
 
 class DreamGoal extends Component {
-  constructor(props) {
-    super(props);
-    this.onUpdate = this.onUpdate.bind(this);
-    this.state = {
-      goals: [{
-        title: "",
-        content: ""
-      }],
-    }
+  state = {
+    goals: [{
+      title: "",
+      content: ""
+    }]
   }
   render() {
     return (
@@ -27,7 +24,7 @@ class DreamGoal extends Component {
       </div>
     );
   }
-  onUpdate(type, value, index) {
+  onUpdate = (type, value, index) => {
     console.log('Goal:', type, value, index);
     let goals = this.state.goals;
     goals[index][type] = value;
@@ -58,16 +55,25 @@ class DreamGoal extends Component {
   }
   onSubmit = async (e) => {
     let query = getQuery(this.props.location.search);
-    let dreamId = query.dreamId;
-    let formData = new FormData();
-    formData.append('dreamId', dreamId);
-    formData.append('goals', this.state.goals);
-    const res = await post('http://127.0.0.1:7001/dream/goal', {
+    let formData = {
+      dreamId: query.dreamId,
+      goals: this.state.goals
+    };
+    const res = await post('http://127.0.0.1:7001/dream/addGoals', {
       data: formData
     });
-    if (res.data.code === 0) {
+    console.log(res.data.code);
+    if (res.data.code === STATUS_CODE['SUCCESS']) {
       Toast.success('目标创建成功！');
-    } else {
+    }
+    else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN']) {
+      Toast.fail(res.data.message, 3, () => {
+        this.props.history.push({
+          pathname: `/user/signin`,
+        });
+      });
+    }
+    else {
       Toast.fail(res.data.message);
     }
   }

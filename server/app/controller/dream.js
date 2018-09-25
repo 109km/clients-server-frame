@@ -10,17 +10,20 @@ class DreamController extends Controller {
       ctx.body = STATUS_CODE['USER_NOT_LOGIN'];
       return;
     }
-    const uploadData = await ctx.service.upload.multiple();
     const res = await ctx.service.dream.create({
       userId: user.id,
-      content: uploadData.data.fields.content,
-      pics: JSON.stringify(uploadData.data.files)
+      content: ctx.request.body.content,
+      title: ctx.request.body.title
     });
     ctx.body = res;
   }
   async detail(ctx) {
-    console.log();
     let res = await ctx.service.dream.findOne(ctx.request.body);
+    ctx.body = res;
+  }
+  async addGoals(ctx) {
+    console.log('addGoals', ctx.request.body);
+    let res = await ctx.service.dream.addGoals(ctx.request.body);
     ctx.body = res;
   }
 }

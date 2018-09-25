@@ -26,6 +26,22 @@ class DreamService extends Service {
     res.data = dream;
     return res;
   }
+  async addGoals(goalsData) {
+    const {
+      ctx
+    } = this;
+
+    const dream = await ctx.model.Dream.update({
+      goals: goalsData.goals
+    }, {
+      where: {
+        id: goalsData.dreamId
+      }
+    });
+    const res = STATUS_CODE['SUCCESS'];
+    res.data = dream;
+    return res;
+  }
 
   async findOne(dreamParams) {
     const {
