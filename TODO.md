@@ -40,4 +40,4 @@ If you brag to every one, and you achieve your brag, you're a hero.
 
 
 ## h5
-
+* Dynamically add `input` components to the page, and get the values.

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ImagePicker, List, TextareaItem, Button } from 'antd-mobile';
-import { createHeader, post, getQuery } from '../../../utils/util';
+import { post, getQuery } from '../../../utils/util';
 import './edit.less';
 
 class PostEdit extends Component {

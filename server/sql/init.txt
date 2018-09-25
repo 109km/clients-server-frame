@@ -2,7 +2,7 @@ CREATE DATABASE users;
 CREATE DATABASE dreams;
 
 
-CREATE TABLE users(
+CREATE TABLE dreams_db.users(
 	id int(11) not null AUTO_INCREMENT,
 	primary key (id),
 	username varchar(255),
@@ -12,3 +12,12 @@ CREATE TABLE users(
 	lastSignInAt DATETIME 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment='Table for users';
 
+
+CREATE TABLE dreams_db.posts
+(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    isMemberOnly BOOLEAN,
+    pics TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment='Table for posts';

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { WingBlank } from 'antd-mobile';
-import './BragItem.less';
+import './DreamItem.less';
 
-class BragItem extends Component {
+class DreamItem extends Component {
   render() {
     return (
       <WingBlank className="com-brag-item">
@@ -24,4 +24,4 @@ class BragItem extends Component {
   }
 }
 
-export default BragItem;
+export default DreamItem;

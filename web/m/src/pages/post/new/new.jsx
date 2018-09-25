@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ImagePicker, List, TextareaItem, Button, Toast } from 'antd-mobile';
-import { createHeader, post } from '../../../utils/util';
+import { post } from '../../../utils/util';
 import './new.less';
 
 class PostNew extends Component {
