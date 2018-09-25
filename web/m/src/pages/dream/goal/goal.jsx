@@ -6,22 +6,34 @@ import GoalList from '../../../components/GoalList/GoalList';
 import './goal.less';
 
 class DreamGoal extends Component {
-  state = {
-    goals: [{
-      title: "",
-      content: ""
-    }],
+  constructor(props) {
+    super(props);
+    this.onUpdate = this.onUpdate.bind(this);
+    this.state = {
+      goals: [{
+        title: "",
+        content: ""
+      }],
+    }
   }
   render() {
     return (
       <div className="page page-dream-new">
-        <GoalList items={this.state.goals}/>
+        <GoalList onUpdate={this.onUpdate} items={this.state.goals} />
         <WhiteSpace size="lg" />
         <Button type="primary" onClick={this.onAdd}>新增目标</Button>
         <WhiteSpace size="lg" />
         <Button type="primary" onClick={this.onSubmit}>下一步</Button>
       </div>
     );
+  }
+  onUpdate(type, value, index) {
+    console.log('Goal:', type, value, index);
+    let goals = this.state.goals;
+    goals[index][type] = value;
+    this.setState({
+      goals: goals
+    });
   }
   onTitleChange = (value, index) => {
 
@@ -34,10 +46,8 @@ class DreamGoal extends Component {
       desc: value
     });
   }
-  onAdd = async (value) => {
-
+  onAdd = async () => {
     let goals = this.state.goals;
-    console.log(goals);
     goals.push({
       title: '',
       content: ''
@@ -51,8 +61,7 @@ class DreamGoal extends Component {
     let dreamId = query.dreamId;
     let formData = new FormData();
     formData.append('dreamId', dreamId);
-    formData.append('desc', this.state.desc);
-    formData.append('title', this.state.title);
+    formData.append('goals', this.state.goals);
     const res = await post('http://127.0.0.1:7001/dream/goal', {
       data: formData
     });
