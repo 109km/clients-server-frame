@@ -25,6 +25,10 @@ class DreamController extends Controller {
     let res = await ctx.service.dream.addGoals(ctx.request.body);
     ctx.body = res;
   }
+  async addTiers(ctx) {
+    let res = await ctx.service.dream.addTiers(ctx.request.body);
+    ctx.body = res;
+  }
 }
 
 module.exports = DreamController;

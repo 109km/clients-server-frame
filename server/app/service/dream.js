@@ -47,8 +47,35 @@ class DreamService extends Service {
       res = await this.findOne({
         dreamId: dreamId
       });
-    }else{
+    } else {
+      res = STATUS_CODE['UNKNOWN_ERROR'];
+    }
+    return res;
+  }
 
+  async addTiers(tiersData) {
+    const {
+      ctx
+    } = this;
+    const tiers = JSON.stringify(tiersData.tiers);
+    const dreamId = tiersData.dreamId;
+    const updatedResult = await ctx.model.Dream.update({
+      tiersList: tiers
+    }, {
+      where: {
+        id: dreamId
+      }
+    });
+    // Updated successfully.
+    // But the sequelize's update method won't return the instance.
+    // So we have to make another `find`.
+    let res;
+    if (updatedResult[0] === 1) {
+      res = await this.findOne({
+        dreamId: dreamId
+      });
+    } else {
+      res = STATUS_CODE['UNKNOWN_ERROR'];
     }
     return res;
   }

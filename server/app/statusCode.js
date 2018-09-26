@@ -28,9 +28,12 @@ module.exports = {
     message: '用户已存在'
   },
 
-  'POST_NOT_FOUND':{
+  'POST_NOT_FOUND': {
     code: 20100,
     message: '文章未找到'
+  },
+  'UNKNOWN_ERROR': {
+    code: -1,
+    message: '未知错误'
   }
-
 }

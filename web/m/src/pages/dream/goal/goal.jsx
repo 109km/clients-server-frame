@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, Icon } from 'antd-mobile';
-import { post, getQuery } from '../../../utils/util';
+import { post, getQuery, Config } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
-import GoalList from '../../../components/GoalList/GoalList';
+import InputGoalList from '../../../components/InputGoalList/InputGoalList';
 import './goal.less';
 
 class DreamGoal extends Component {
@@ -16,7 +16,7 @@ class DreamGoal extends Component {
   render() {
     return (
       <div className="page page-dream-new">
-        <GoalList onUpdate={this.onUpdate} items={this.state.goals} />
+        <InputGoalList onUpdate={this.onUpdate} items={this.state.goals} />
         <WhiteSpace size="lg" />
         <Button type="primary" onClick={this.onAdd}>新增目标</Button>
         <WhiteSpace size="lg" />
@@ -58,7 +58,7 @@ class DreamGoal extends Component {
       dreamId: query.dreamId,
       goals: this.state.goals
     };
-    const res = await post('http://127.0.0.1:7001/dream/addGoals', {
+    const res = await post(Config.apiUrl + '/dream/addGoals', {
       data: formData
     });
     if (res.data.code === STATUS_CODE['SUCCESS'].code) {

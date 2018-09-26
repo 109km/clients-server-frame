@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './TierList.less';
-import TierItem from '../TierItem/TierItem';
+import './InputTierList.less';
+import InputTierItem from '../InputTierItem/InputTierItem';
 
-class TierList extends Component {
+class InputTierList extends Component {
   render() {
     const items = this.props.items.map((item, index) =>
-      <TierItem onUpdate={this.onUpdate.bind(this)} key={index} index={index} title={item.title} content={item.content} />
+      <InputTierItem onUpdate={this.onUpdate.bind(this)} key={index} index={index} title={item.title} content={item.content} />
     );
     return (
       <div className="com-tier-list">
@@ -22,4 +22,4 @@ class TierList extends Component {
   }
 }
 
-export default TierList;
+export default InputTierList;

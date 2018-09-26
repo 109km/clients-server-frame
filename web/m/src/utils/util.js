@@ -59,7 +59,6 @@ export const isMobile = function(mobile) {
 export const getQuery = function(url) {
   let request = new Object(),
     strs;
-  console.log(url);
   if (url.indexOf("?") !== -1) {
     let str = url.slice(url.indexOf("?") + 1, url.indexOf("#") >= 0 ? url.indexOf("#") : url.length);
     strs = str.split("&");

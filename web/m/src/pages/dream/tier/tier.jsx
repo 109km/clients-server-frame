@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, Icon } from 'antd-mobile';
 import { post, getQuery, Config } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
-import TierList from '../../../components/TierList/TierList';
+import InputTierList from '../../../components/InputTierList/InputTierList';
 import './tier.less';
 
 class DreamTier extends Component {
@@ -16,7 +16,7 @@ class DreamTier extends Component {
   render() {
     return (
       <div className="page page-tier-new">
-        <TierList onUpdate={this.onUpdate} items={this.state.tiers} />
+        <InputTierList onUpdate={this.onUpdate} items={this.state.tiers} />
         <WhiteSpace size="lg" />
         <Button type="primary" onClick={this.onAdd}>新增回报</Button>
         <WhiteSpace size="lg" />
@@ -57,12 +57,12 @@ class DreamTier extends Component {
       dreamId: query.dreamId,
       tiers: this.state.tiers
     };
-    const res = await post(Config + '/dream/addTiers', {
+    const res = await post(Config.apiUrl + '/dream/addTiers', {
       data: formData
     });
 
     if (res.data.code === STATUS_CODE['SUCCESS'].code) {
-      Toast.success('项目创建成功！', 3, () => {
+      Toast.success('Tier添加成功！', 3, () => {
         this.props.history.push({
           pathname: '/'
         });

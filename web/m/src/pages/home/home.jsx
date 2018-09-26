@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'antd-mobile';
 import { Link } from 'react-router-dom';
 import './home.less';
-import BragList from '../../components/BragList/BragList';
+import DreamList from '../../components/DreamList/DreamList';
 
 const lists = [{
   title: '我要在30岁之前登上乞力马扎罗山',
@@ -20,7 +20,7 @@ class Home extends Component {
   render() {
     return (
       <div className="page page-home">
-        <BragList lists={lists} />
+        <DreamList lists={lists} />
         <Link to="/edit">
           <Button type="primary" >
             Brag
