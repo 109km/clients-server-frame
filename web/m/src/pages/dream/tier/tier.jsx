@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, Icon } from 'antd-mobile';
-import { post, getQuery } from '../../../utils/util';
+import { post, getQuery, Config } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
 import TierList from '../../../components/TierList/TierList';
 import './tier.less';
@@ -57,7 +57,7 @@ class DreamTier extends Component {
       dreamId: query.dreamId,
       tiers: this.state.tiers
     };
-    const res = await post('http://127.0.0.1:7001/dream/addTiers', {
+    const res = await post(Config + '/dream/addTiers', {
       data: formData
     });
 

@@ -6,7 +6,7 @@
  * 2xxxx - 文章相关
  */
 
-module.exports = {
+const STATUS_CODE = {
   'SUCCESS': {
     code: 0,
     message: '成功'
@@ -34,3 +34,5 @@ module.exports = {
   }
 
 }
+
+export default STATUS_CODE;
