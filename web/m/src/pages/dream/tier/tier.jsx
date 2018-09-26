@@ -3,75 +3,74 @@ import PropTypes from 'prop-types';
 import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, Icon } from 'antd-mobile';
 import { post, getQuery } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
-import GoalList from '../../../components/GoalList/GoalList';
-import './goal.less';
+import TierList from '../../../components/TierList/TierList';
+import './tier.less';
 
-class DreamGoal extends Component {
+class DreamTier extends Component {
   state = {
-    goals: [{
-      title: "",
-      content: ""
+    tiers: [{
+      title: '',
+      content: ''
     }]
   }
   render() {
     return (
-      <div className="page page-dream-new">
-        <GoalList onUpdate={this.onUpdate} items={this.state.goals} />
+      <div className="page page-tier-new">
+        <TierList onUpdate={this.onUpdate} items={this.state.tiers} />
         <WhiteSpace size="lg" />
-        <Button type="primary" onClick={this.onAdd}>新增目标</Button>
+        <Button type="primary" onClick={this.onAdd}>新增回报</Button>
         <WhiteSpace size="lg" />
         <Button type="primary" onClick={this.onSubmit}>下一步</Button>
       </div>
     );
   }
-  onUpdate = (type, value, index) => {
-    console.log('Goal:', type, value, index);
-    let goals = this.state.goals;
-    goals[index][type] = value;
-    this.setState({
-      goals: goals
-    });
-  }
-  onTitleChange = (value, index) => {
+  onTitleChange = (value) => {
     this.setState({
       title: value
     });
   }
-  onDescChange = (value, index) => {
+  onDescChange = (value) => {
     this.setState({
-      desc: value
+      content: value
+    });
+  }
+  onUpdate = (type, value, index) => {
+    let tiers = this.state.tiers;
+    tiers[index][type] = value;
+    this.setState({
+      tiers: tiers
     });
   }
   onAdd = async () => {
-    let goals = this.state.goals;
-    goals.push({
+    let tiers = this.state.tiers;
+    tiers.push({
       title: '',
       content: ''
     });
     this.setState({
-      goals: goals
+      tiers: tiers
     });
   }
   onSubmit = async (e) => {
     let query = getQuery(this.props.location.search);
     let formData = {
       dreamId: query.dreamId,
-      goals: this.state.goals
+      tiers: this.state.tiers
     };
-    const res = await post('http://127.0.0.1:7001/dream/addGoals', {
+    const res = await post('http://127.0.0.1:7001/dream/addTiers', {
       data: formData
     });
+
     if (res.data.code === STATUS_CODE['SUCCESS'].code) {
-      Toast.success('目标创建成功！', 3, () => {
+      Toast.success('项目创建成功！', 3, () => {
         this.props.history.push({
-          pathname: 'login'
+          pathname: '/'
         });
       });
-    }
-    else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
+    } else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
       Toast.fail(res.data.message, 3, () => {
         this.props.history.push({
-          pathname: 'login'
+          pathname: '/user/signin',
         });
       });
     }
@@ -85,4 +84,4 @@ class DreamGoal extends Component {
 //   avatar: PropTypes.string.isRequired
 // }
 
-export default DreamGoal;
+export default DreamTier;
