@@ -22,7 +22,6 @@ class DreamController extends Controller {
     ctx.body = res;
   }
   async addGoals(ctx) {
-    console.log('addGoals', ctx.request.body);
     let res = await ctx.service.dream.addGoals(ctx.request.body);
     ctx.body = res;
   }

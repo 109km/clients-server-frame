@@ -62,14 +62,13 @@ class DreamGoal extends Component {
     const res = await post('http://127.0.0.1:7001/dream/addGoals', {
       data: formData
     });
-    console.log(res.data.code);
-    if (res.data.code === STATUS_CODE['SUCCESS']) {
+    if (res.data.code === STATUS_CODE['SUCCESS'].code) {
       Toast.success('目标创建成功！');
     }
-    else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN']) {
+    else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
       Toast.fail(res.data.message, 3, () => {
         this.props.history.push({
-          pathname: `/user/signin`,
+          pathname: 'login'
         });
       });
     }

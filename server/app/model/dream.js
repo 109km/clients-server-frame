@@ -17,13 +17,13 @@ module.exports = app => {
       type: STRING,
       allowNull: false
     },
-    description: {
+    content: {
       type: TEXT
     },
     postsList: {
       type: TEXT
     },
-    targetsList: {
+    goalsList: {
       type: TEXT
     },
     backersList: {

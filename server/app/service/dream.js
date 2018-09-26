@@ -30,16 +30,26 @@ class DreamService extends Service {
     const {
       ctx
     } = this;
-
-    const dream = await ctx.model.Dream.update({
-      goals: goalsData.goals
+    const goals = JSON.stringify(goalsData.goals);
+    const dreamId = goalsData.dreamId;
+    const updatedResult = await ctx.model.Dream.update({
+      goalsList: goals
     }, {
       where: {
-        id: goalsData.dreamId
+        id: dreamId
       }
     });
-    const res = STATUS_CODE['SUCCESS'];
-    res.data = dream;
+    // Updated successfully.
+    // But the sequelize's update method won't return the instance.
+    // So we have to make another `find`.
+    let res;
+    if (updatedResult[0] === 1) {
+      res = await this.findOne({
+        dreamId: dreamId
+      });
+    }else{
+
+    }
     return res;
   }
 
@@ -50,10 +60,8 @@ class DreamService extends Service {
     const dream = await ctx.model.Dream.findOne({
       where: {
         id: dreamParams.dreamId
-      },
+      }
     });
-    console.log(dream);
-
     let res;
     if (dream) {
       res = STATUS_CODE['SUCCESS'];

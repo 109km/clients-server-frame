@@ -30,10 +30,13 @@ If you brag to every one, and you achieve your brag, you're a hero.
 * Design the error code configuration.
 
 ### User
-* Session & Cookies' settings. 
+* Session & Cookies' settings. (done)
 * Some api need to check user's login.(done, using token)
 * User's password encryption.(done)
-* Repeated username forbidden.
+* Repeated username forbidden.(done)
+* `lastSigninAt` data format.
+
+
 
 ### Dream
 * Get `id` after creating a new dream.
