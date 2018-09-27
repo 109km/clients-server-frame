@@ -43,4 +43,5 @@ If you brag to every one, and you achieve your brag, you're a hero.
 * Best solution to store an array in mysql.
 
 ## h5
-* Dynamically add `input` components to the page, and get the values.
+* Dynamically add `input` components to the page, and get the values.(done)
+* Post format and style.

@@ -6,6 +6,7 @@ class PostItem extends Component {
   render() {
     return (
       <div className="com-post-item">
+        
         <div className="title">
           {this.props.title}
         </div>

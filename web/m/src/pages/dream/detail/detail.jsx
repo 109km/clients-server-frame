@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Tag, Toast, WhiteSpace, Icon,Button } from 'antd-mobile';
+import { Tag, Toast, WhiteSpace, Icon, Button } from 'antd-mobile';
 import { post, getQuery } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
 import PostList from '../../../components/PostList/PostList';
@@ -15,6 +15,7 @@ class DreamDetail extends Component {
     cover: "http://img.hb.aicdn.com/09b9379c464e0d394d5a4c26aa4380e9106e48015b4c3-lrqGkA_fw658",
     avatar: "http://img.hb.aicdn.com/36a968bce1b1bec6c39e8d1db849538152e0e94b19ce3-8hBny6_fw658",
     nickname: "阿信",
+    backersNum: 200,
     goalsList: [],
     tiersList: [],
     postsList: [{
@@ -48,7 +49,7 @@ class DreamDetail extends Component {
         <div className="container">
           <div className="backers-info">
             <div className="backers-show">
-              <span className="num">182</span>支持者
+              <span className="num">{this.state.backersNum}</span>支持者
             </div>
             <div className="actions-sheet">
               <Button className="btn-action" type="primary" inline size="small">+ 关注</Button>
