@@ -20,9 +20,15 @@ class DreamDetail extends Component {
     tiersList: [],
     postsList: [{
       title: '欢迎大家',
+      author: '阿信',
+      date: '09-25 19:30',
+      avatar: 'http://img.hb.aicdn.com/36a968bce1b1bec6c39e8d1db849538152e0e94b19ce3-8hBny6_fw658',
       content: '第一篇文章'
     }, {
       title: '欢迎大家',
+      author: '捞岛',
+      date: '09-25 20:30',
+      avatar: 'http://img.hb.aicdn.com/36a968bce1b1bec6c39e8d1db849538152e0e94b19ce3-8hBny6_fw658',
       content: '第二篇文章'
     }]
   }
