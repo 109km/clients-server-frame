@@ -10,7 +10,6 @@ module.exports = function override(config, env) {
     libraryDirectory: 'es',
     style: true
   }], config);
-
   config = rewireLess.withLoaderOptions({
     modifyVars: theme,
     javascriptEnabled: true

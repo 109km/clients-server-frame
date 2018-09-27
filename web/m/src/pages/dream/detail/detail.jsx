@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Tag, Toast, WhiteSpace, Icon } from 'antd-mobile';
+import { Tag, Toast, WhiteSpace, Icon,Button } from 'antd-mobile';
 import { post, getQuery } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
 import PostList from '../../../components/PostList/PostList';
@@ -50,9 +50,9 @@ class DreamDetail extends Component {
             <div className="backers-show">
               <span className="num">182</span>支持者
             </div>
-            <div className="">
-              <Tag selected>+ 关注</Tag>
-              <Tag selected>+ 分享</Tag>
+            <div className="actions-sheet">
+              <Button className="btn-action" type="primary" inline size="small">+ 关注</Button>
+              <Button className="btn-action" type="primary" inline size="small">+ 分享</Button>
             </div>
           </div>
           <div className="posts-list">

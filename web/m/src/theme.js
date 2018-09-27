@@ -1,3 +1,4 @@
 module.exports = {
-  "@primary-color": "#1DA57A"
+  "@brand-primary": "#f36838",
+  "@brand-primary-tap":"#ed5736"
 }
