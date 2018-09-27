@@ -1,37 +1,63 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, Icon } from 'antd-mobile';
+import { Tag, Toast, WhiteSpace, Icon } from 'antd-mobile';
 import { post, getQuery } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
-import GoalList from '../../../components/GoalList/GoalList';
+import PostList from '../../../components/PostList/PostList';
 import './detail.less';
 
 class DreamDetail extends Component {
   state = {
     title: "",
     content: "",
+    introduction: "这是一款5-6人玩了就会疯狂上瘾的游戏。",
+    category: "视频",
+    cover: "http://img.hb.aicdn.com/09b9379c464e0d394d5a4c26aa4380e9106e48015b4c3-lrqGkA_fw658",
+    avatar: "http://img.hb.aicdn.com/36a968bce1b1bec6c39e8d1db849538152e0e94b19ce3-8hBny6_fw658",
+    nickname: "阿信",
     goalsList: [],
-    tiersList: []
+    tiersList: [],
+    postsList: [{
+      title: '欢迎大家',
+      content: '第一篇文章'
+    }, {
+      title: '欢迎大家',
+      content: '第二篇文章'
+    }]
   }
   render() {
+
+    let backgroundCover = {
+      backgroundImage: 'url(' + this.state.cover + ')'
+    }
+
     return (
       <div className="page page-dream-detail">
-        <div className="detail-info">
-          <div className="title">
-            {this.state.title}
+        <div className="user-info">
+          <div className="cover" style={backgroundCover}></div>
+          <img className="avatar" src={this.state.avatar} alt="" />
+          <div className="user-desc">
+            <span className="nickname">{this.state.nickname}</span>
+            &nbsp;
+            正在创作{this.state.category}
           </div>
-          <div className="content">
-            {this.state.content}
+          <div className="introduction">
+            {this.state.introduction}
           </div>
         </div>
-        <div className="goals-list">
-          <div className="goals-list-title">
-            目标
+        <div className="container">
+          <div className="backers-info">
+            <div className="backers-show">
+              <span className="num">182</span>支持者
+            </div>
+            <div className="">
+              <Tag selected>+ 关注</Tag>
+              <Tag selected>+ 分享</Tag>
+            </div>
           </div>
-          <GoalList items={this.state.goalsList} />
-        </div>
-        <div className="tiers-list">
-
+          <div className="posts-list">
+            <PostList items={this.state.postsList} />
+          </div>
         </div>
       </div>
     );
@@ -47,6 +73,7 @@ class DreamDetail extends Component {
     if (result.code === STATUS_CODE['SUCCESS'].code) {
       data.tiersList = data.tiersList ? JSON.parse(data.tiersList) : data.tiersList;
       data.goalsList = data.goalsList ? JSON.parse(data.goalsList) : data.goalsList;
+      data.postsList = data.postsList ? JSON.parse(data.postsList) : data.postsList;
       this.setState({
         title: data.title,
         content: data.content,

@@ -1,8 +1,62 @@
-.detail-info {
+.user-info {
+  position: relative;
+
+  .cover {
+    height: 200px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+
+  .avatar {
+    position: absolute;
+    top: 50px;
+    left: 30px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #eee;
+    padding: 5px;
+  }
+
+  .user-desc {
+    position: absolute;
+    top: 70px;
+    left: 135px;
+    color: #fff;
+    font-size: 18px;
+    width: 200px;
+    letter-spacing: 1px;
+
+    .nickname {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+
+  .introduction {
+    position: absolute;
+    top: 110px;
+    left: 135px;
+    width: 200px;
+    color: #f1f1f1;
+  }
+
+}
+
+
+.backers-info {
+  padding: 10px;
+  background: #fff;
   margin-bottom: 10px;
-  padding: 10px 0;
-  text-indent: 20px;
-  font-size: 20px;
+
+  .backers-show {
+    padding:10px 0;
+  }
+  .num {
+    color: #108ee9;
+    font-size: 30px;
+  }
 }
 
 .goals-list {
