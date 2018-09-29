@@ -8,12 +8,7 @@ module.exports = app => {
     BOOLEAN
   } = app.Sequelize;
 
-  const Dream = db.defineModel(app, 'dreams', {
-    userId: {
-      type: INTEGER,
-      unique: true,
-      allowNull: false
-    },
+  const Dream = db.defineModel(app, 'posts', {
     dreamId: {
       type: INTEGER,
       unique: true,
