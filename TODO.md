@@ -42,7 +42,8 @@ If you brag to every one, and you achieve your brag, you're a hero.
 * Get `id` after creating a new dream.（done）
 * Best solution to store an array in mysql.
 
-## h5
+## Post
 * Dynamically add `input` components to the page, and get the values.(done)
 * Post format and style.(done)
 * Post - rich editor.
+* Leave a a comment to a post.
