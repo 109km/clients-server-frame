@@ -8,7 +8,7 @@ class CommentItem extends Component {
       <WingBlank className="com-comment-item">
         <div className="info">
           <img className="avatar" src={this.props.avatar} alt={this.props.nickname} />
-          <span className="nickname">
+          <span className="nickname bold">
             {this.props.nickname}
           </span>
           <span className="date">
