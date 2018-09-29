@@ -7,6 +7,7 @@ import DreamTier from './pages/dream/tier/tier';
 import DreamDetail from './pages/dream/detail/detail';
 import PostNew from './pages/post/new/new';
 import PostEdit from './pages/post/edit/edit';
+import PostDetail from './pages/post/detail/detail';
 import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
         <Route path="/dream/detail" component={DreamDetail} />
         <Route path="/post/new" component={PostNew} />
         <Route path="/post/edit" component={PostEdit} />
+        <Route path="/post/detail" component={PostDetail} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
       </div>
