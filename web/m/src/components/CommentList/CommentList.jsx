@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './CommentList.less';
-import CommentList from '../CommentList/CommentList';
+import CommentItem from '../CommentItem/CommentItem';
 
 class CommentList extends Component {
   render() {
     
     const items = this.props.items.map((item,index) =>
-      <CommentList key={index} comment={item.comment} avatar={item.avatar} nickname={item.nickname} date={item.date} />
+      <CommentItem key={index} comment={item.comment} avatar={item.avatar} nickname={item.nickname} date={item.date} />
     );
 
     return (

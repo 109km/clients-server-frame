@@ -38,9 +38,7 @@ class PostDetail extends Component {
         <div className="content">
           {ReactHtmlParser(this.state.content)}
         </div>
-        <div className="comment-list">
-          <CommentList items={this.state.commentsList}/>
-        </div>
+        <CommentList items={this.state.commentsList} />
       </div>
     );
   }
