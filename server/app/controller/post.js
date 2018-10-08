@@ -13,18 +13,18 @@ class PostController extends Controller {
     const uploadData = await ctx.service.upload.multiple();
 
     const params = {};
-    params.userId = user.id;
+    params.user_id = user.id;
     params.content = uploadData.data.fields.content;
     params.title = uploadData.data.fields.title;
-    params.dreamId = uploadData.data.fields.dreamId;
+    params.dream_id = uploadData.data.fields.dreamId;
     uploadData.data.files && uploadData.data.files.length && (params.pics = uploadData.data.files);
-    console.log(params);
     const res = await ctx.service.post.create(params);
     ctx.body = res;
   }
   async detail(ctx) {
-    console.log(ctx.request.body);
-    let res = await ctx.service.post.findOne(ctx.request.body);
+    let body = ctx.request.body;
+    // body = ctx.helper.toSnakeCase(body);
+    const res = await ctx.service.post.findOne(body);
     ctx.body = res;
   }
 }

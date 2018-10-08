@@ -17,7 +17,7 @@ module.exports = app => {
       type: STRING,
       allowNull: false
     },
-    lastSignInAt: {
+    last_signin_at: {
       type: DATE
     }
   });

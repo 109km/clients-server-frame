@@ -30,11 +30,13 @@ class PostService extends Service {
     const {
       ctx
     } = this;
-    console.log(postParams);
     const post = await ctx.model.Post.findOne({
       where: {
-        id: postParams.postId
+        id: postParams.post_id
       },
+      include: [{
+        model: ctx.model.Comment
+      }]
     });
     let res;
     if (post) {

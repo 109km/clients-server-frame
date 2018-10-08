@@ -9,22 +9,27 @@ module.exports = app => {
   } = app.Sequelize;
 
   const Comment = db.defineModel(app, 'comments', {
-    postId: {
+    post_id: {
       type: INTEGER,
       allowNull: false
     },
-    userId: {
+    commenter_id: {
       type: INTEGER,
+      allowNull: false
+    },
+    commenter_name: {
+      type: STRING,
       allowNull: false
     },
     content: {
       type: TEXT,
       allowNull: false
-    },
-    commentAt: {
-      type: DATE
     }
   });
+
+  Comment.associate = function() {
+    app.model.Comment.belongsTo(app.model.Post);
+  }
 
   return Comment;
 }

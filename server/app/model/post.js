@@ -8,10 +8,9 @@ module.exports = app => {
     BOOLEAN
   } = app.Sequelize;
 
-  const Dream = db.defineModel(app, 'posts', {
-    dreamId: {
+  const Post = db.defineModel(app, 'posts', {
+    dream_id: {
       type: INTEGER,
-      unique: true,
       allowNull: false
     },
     title: {
@@ -22,7 +21,7 @@ module.exports = app => {
       type: TEXT,
       allowNull: false
     },
-    isMemberOnly: {
+    is_member_only: {
       type: BOOLEAN
     },
     pics: {
@@ -30,5 +29,10 @@ module.exports = app => {
     }
   });
 
-  return Dream;
+  Post.associate = function() {
+    app.model.Post.belongsTo(app.model.Dream);
+    app.model.Post.hasMany(app.model.Comment);
+  }
+
+  return Post;
 }

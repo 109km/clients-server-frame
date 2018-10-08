@@ -26,8 +26,8 @@ function defineModel(app, name, attributes) {
   };
 
   return app.model.define(name, attrs, {
-    createdAt: "createdAt",
-    updatedAt: "updatedAt",
+    createdAt: "created_at",
+    updatedAt: "updated_at",
     // version: 'version'
   });
 }

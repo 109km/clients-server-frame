@@ -19,6 +19,7 @@
     "egg-validate": "^1.1.1",
     "egg-view-nunjucks": "^2.2.0",
     "egg-view-react": "^1.1.0",
+    "lodash": "^4.17.11",
     "mysql2": "^1.6.1",
     "mz-modules": "^2.1.0",
     "stream-wormhole": "^1.1.0",

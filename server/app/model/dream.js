@@ -8,9 +8,8 @@ module.exports = app => {
   } = app.Sequelize;
 
   const Dream = db.defineModel(app, 'dreams', {
-    userId: {
+    user_id: {
       type: INTEGER,
-      unique: true,
       allowNull: false
     },
     title: {
@@ -20,19 +19,25 @@ module.exports = app => {
     content: {
       type: TEXT
     },
-    postsList: {
+    posts_list: {
       type: TEXT
     },
-    goalsList: {
+    goals_list: {
       type: TEXT
     },
-    backersList: {
+    backers_list: {
       type: TEXT
     },
-    tiersList: {
-      type: TEXT
+    tiers_list: {
+      type: TEXT,
+      field: 'tiers_list'
     }
   });
+
+  Dream.associate = function() {
+    app.model.Dream.belongsTo(app.model.User);
+    app.model.Dream.hasMany(app.model.Post);
+  }
 
   return Dream;
 }

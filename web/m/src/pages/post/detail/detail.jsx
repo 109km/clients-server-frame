@@ -49,15 +49,16 @@ class PostDetail extends Component {
             <img src={this.state.user.avatar} alt="" />
             <TextareaItem
               className="textarea-input-comment"
-              onFocus={this.onCommentFocus}
+              onChange={this.onCommentChange}
               ref={el => this.textareaEl = el}
               placeholder="输入留言"
+              value={this.state.comment}
               rows={3}
               count={300}
             />
           </div>
           <WhiteSpace size="lg" />
-          <Button className="btn-leave-comment" type="primary" size="sm">留言</Button>
+          <Button className="btn-leave-comment" type="primary" size="sm" onClick={this.onCommentSubmit}>留言</Button>
         </div>
       </div>
     );
@@ -74,8 +75,34 @@ class PostDetail extends Component {
       this.setState(postDetail.data);
     }
   }
-  onCommentFocus = (e) => {
-    console.log(this.textareaEl);
+  onCommentChange = (value) => {
+    this.setState({
+      comment: value
+    });
+  }
+  onCommentSubmit = async () => {
+    let query = getQuery(this.props.location.search);
+    const formData = {
+      postId: query.postId,
+      content: this.state.comment
+    }
+    const response = await post('http://127.0.0.1:7001/comment/create', {
+      data: formData
+    });
+    const result = response.data;
+    if (result.code === 0) {
+      
+    }
+    else if (result.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
+      Toast.fail(result.message, 3, () => {
+        this.props.history.push({
+          pathname: '/login',
+        });
+      });
+    }
+    else {
+      Toast.fail(result.message);
+    }
   }
 }
 

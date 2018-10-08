@@ -35,5 +35,7 @@ module.exports = app => {
   app.post('/post/create', controller.post.create);
   app.post('/post/detail', controller.post.detail);
 
+  app.post('/comment/create', controller.comment.create);
+
   app.resources('users', '/api/users', controller.user);
 };
