@@ -27,14 +27,14 @@ If you brag to every one, and you achieve your brag, you're a hero.
 ## Server
 
 ### Error code
-* Design the error code configuration.
+* Design the error code configuration.(done)
 
 ### User
 * Session & Cookies' settings. (done)
 * Some api need to check user's login.(done, using token)
 * User's password encryption.(done)
 * Repeated username forbidden.(done)
-* `lastSigninAt` data format.
+* `lastSigninAt` data format.(done)
 
 
 
@@ -45,5 +45,5 @@ If you brag to every one, and you achieve your brag, you're a hero.
 ## Post
 * Dynamically add `input` components to the page, and get the values.(done)
 * Post format and style.(done)
-* Post - rich editor.
+* Post - rich editor.(done)
 * Leave a a comment to a post.
