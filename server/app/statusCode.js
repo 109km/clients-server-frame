@@ -27,10 +27,13 @@ module.exports = {
     code: 10200,
     message: '用户已存在'
   },
-
   'POST_NOT_FOUND': {
     code: 20100,
     message: '文章未找到'
+  },
+  'COMMENT_NOT_FOUND': {
+    code: 30100,
+    message: '留言未找到'
   },
   'UNKNOWN_ERROR': {
     code: -1,

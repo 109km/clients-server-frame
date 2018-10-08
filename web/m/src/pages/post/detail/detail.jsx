@@ -70,9 +70,7 @@ class PostDetail extends Component {
       }
     });
     const postDetail = res.data;
-    console.log(postDetail);
     if (postDetail.code === STATUS_CODE['SUCCESS'].code) {
-
       this.setState(postDetail.data);
     }
   }
