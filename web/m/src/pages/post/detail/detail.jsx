@@ -16,7 +16,7 @@ class PostDetail extends Component {
       avatar: 'http://img.hb.aicdn.com/36a968bce1b1bec6c39e8d1db849538152e0e94b19ce3-8hBny6_fw658',
       nickname: 'King.Sword',
     },
-    commentsList: [
+    comments: [
       {
         userId: '1',
         comment: 'Hello',
@@ -42,7 +42,7 @@ class PostDetail extends Component {
         <div className="content">
           {ReactHtmlParser(this.state.content)}
         </div>
-        <CommentList items={this.state.commentsList} />
+        <CommentList items={this.state.comments} />
 
         <div className="com-input-comment">
           <div className="container-input-comment">
@@ -71,6 +71,7 @@ class PostDetail extends Component {
       }
     });
     const postDetail = res.data;
+    console.log(postDetail);
     if (postDetail.code === STATUS_CODE['SUCCESS'].code) {
       this.setState(postDetail.data);
     }
@@ -90,6 +91,7 @@ class PostDetail extends Component {
       data: formData
     });
     const result = response.data;
+    
     if (result.code === 0) {
       
     }

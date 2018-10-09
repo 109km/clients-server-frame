@@ -16,7 +16,7 @@ class CommentItem extends Component {
           </span>
         </div>
         <div className="content">
-          {this.props.comment}
+          {this.props.content}
         </div>
 
       </WingBlank>

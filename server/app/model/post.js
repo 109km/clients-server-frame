@@ -31,6 +31,7 @@ module.exports = app => {
 
   Post.associate = function() {
     app.model.Post.belongsTo(app.model.Dream);
+    // app.model.Post.belongsTo(app.model.User);
     app.model.Post.hasMany(app.model.Comment);
   }
 

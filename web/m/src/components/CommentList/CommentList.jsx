@@ -6,7 +6,7 @@ class CommentList extends Component {
   render() {
     
     const items = this.props.items.map((item,index) =>
-      <CommentItem key={index} comment={item.comment} avatar={item.avatar} nickname={item.nickname} date={item.date} />
+      <CommentItem key={index} content={item.content} avatar={item.avatar} nickname={item.nickname} date={item.date} />
     );
 
     return (

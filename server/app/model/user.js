@@ -22,5 +22,14 @@ module.exports = app => {
     }
   });
 
+
+  User.associate = function() {
+    app.model.User.hasMany(app.model.Dream);
+    // app.model.User.hasMany(app.model.Post);
+    app.model.User.hasMany(app.model.Comment, {
+      foreignKey: 'user_id'
+    });
+  }
+
   return User;
 }

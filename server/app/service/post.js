@@ -35,8 +35,8 @@ class PostService extends Service {
         id: postParams.post_id
       },
       include: [{
-        model: ctx.model.Comment
-      }]
+          model: ctx.model.Comment
+        }]
     });
     let res;
     if (post) {

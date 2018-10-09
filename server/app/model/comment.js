@@ -13,11 +13,11 @@ module.exports = app => {
       type: INTEGER,
       allowNull: false
     },
-    commenter_id: {
+    user_id: {
       type: INTEGER,
       allowNull: false
     },
-    commenter_name: {
+    nickname: {
       type: STRING,
       allowNull: false
     },
@@ -28,7 +28,12 @@ module.exports = app => {
   });
 
   Comment.associate = function() {
-    app.model.Comment.belongsTo(app.model.Post);
+    app.model.Comment.belongsTo(app.model.Post, {
+      foreignKey: 'post_id'
+    });
+    app.model.Comment.belongsTo(app.model.User, {
+      foreignKey: 'user_id'
+    });
   }
 
   return Comment;
