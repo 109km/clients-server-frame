@@ -32,8 +32,11 @@ class CommentService extends Service {
     } = this;
     const comment = await ctx.model.Comment.findAll({
       where: {
-        postId: params.postId
+        post_id: params.post_id
       },
+      include: [{
+        model: ctx.model.User
+      }]
     });
     let res;
     if (comment) {
@@ -42,7 +45,6 @@ class CommentService extends Service {
     } else {
       res = STATUS_CODE['POST_NOT_FOUND'];
     }
-    console.log('findCommentsByPostId',res);
     return res;
   }
 

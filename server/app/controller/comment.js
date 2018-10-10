@@ -12,9 +12,9 @@ class CommentController extends Controller {
       return;
     }
     const res = await ctx.service.comment.create({
-      commenter_id: user.id,
-      commenter_name: user.username,
-      post_id: ctx.request.body.postId,
+      user_id: user.id,
+      nickname: user.nickname,
+      post_id: ctx.request.body.post_id,
       content: ctx.request.body.content
     });
     ctx.body = res;

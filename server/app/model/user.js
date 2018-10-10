@@ -17,6 +17,12 @@ module.exports = app => {
       type: STRING,
       allowNull: false
     },
+    avatar_url: {
+      type: STRING
+    },
+    nickname: {
+      type: STRING
+    },
     last_signin_at: {
       type: DATE
     }

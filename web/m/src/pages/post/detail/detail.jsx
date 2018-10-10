@@ -12,26 +12,8 @@ class PostDetail extends Component {
   state = {
     title: "",
     content: "",
-    user: {
-      avatar: 'http://img.hb.aicdn.com/36a968bce1b1bec6c39e8d1db849538152e0e94b19ce3-8hBny6_fw658',
-      nickname: 'King.Sword',
-    },
-    comments: [
-      {
-        userId: '1',
-        comment: 'Hello',
-        avatar: 'http://img.hb.aicdn.com/36a968bce1b1bec6c39e8d1db849538152e0e94b19ce3-8hBny6_fw658',
-        nickname: 'King.Sword',
-        date: '2018-09-10 22:22'
-      },
-      {
-        userId: '2',
-        comment: 'Hello',
-        avatar: 'http://img.hb.aicdn.com/36a968bce1b1bec6c39e8d1db849538152e0e94b19ce3-8hBny6_fw658',
-        nickname: 'LeooooPard',
-        date: '2018-09-10 22:22'
-      }
-    ]
+    user: null,
+    comments: []
   }
   render() {
     return (
@@ -43,23 +25,24 @@ class PostDetail extends Component {
           {ReactHtmlParser(this.state.content)}
         </div>
         <CommentList items={this.state.comments} />
-
-        <div className="com-input-comment">
-          <div className="container-input-comment">
-            <img src={this.state.user.avatar} alt="" />
-            <TextareaItem
-              className="textarea-input-comment"
-              onChange={this.onCommentChange}
-              ref={el => this.textareaEl = el}
-              placeholder="输入留言"
-              value={this.state.comment}
-              rows={3}
-              count={300}
-            />
+        {this.state.user &&
+          <div className="com-input-comment">
+            <div className="container-input-comment">
+              <img src={this.state.user.avatarUrl} alt="" />
+              <TextareaItem
+                className="textarea-input-comment"
+                onChange={this.onCommentChange}
+                ref={el => this.textareaEl = el}
+                placeholder="输入留言"
+                value={this.state.comment}
+                rows={3}
+                count={300}
+              />
+            </div>
+            <WhiteSpace size="lg" />
+            <Button className="btn-leave-comment" type="primary" size="sm" onClick={this.onCommentSubmit}>留言</Button>
           </div>
-          <WhiteSpace size="lg" />
-          <Button className="btn-leave-comment" type="primary" size="sm" onClick={this.onCommentSubmit}>留言</Button>
-        </div>
+        }
       </div>
     );
   }
@@ -91,9 +74,20 @@ class PostDetail extends Component {
       data: formData
     });
     const result = response.data;
-    
+
     if (result.code === 0) {
-      
+      console.log(result);
+      let comments = this.state.comments;
+      comments.push({
+        avatarUrl: this.state.user.avatarUrl,
+        nickname: this.state.user.nickname,
+        date: result.data.createdAt,
+        content: result.data.content
+      });
+      this.setState({
+        comment: '',
+        comments: comments
+      });
     }
     else if (result.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
       Toast.fail(result.message, 3, () => {

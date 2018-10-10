@@ -22,9 +22,18 @@ class PostController extends Controller {
     ctx.body = res;
   }
   async detail(ctx) {
+    let key = ctx.headers['x-api-key'];
+    let user = await this.app.redis.get(key);
+    user = JSON.parse(user);
     let body = ctx.request.body;
     // body = ctx.helper.toSnakeCase(body);
     const res = await ctx.service.post.findOne(body);
+    if (user) {
+      res.data.dataValues.user = {
+        nickname: user.nickname,
+        avatar_url: user.avatar_url
+      };
+    }
     ctx.body = res;
   }
 }

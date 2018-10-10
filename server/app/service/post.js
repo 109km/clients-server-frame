@@ -18,6 +18,7 @@ class PostService extends Service {
     // };
     // // 校验参数
     // ctx.validate(createRule);
+    console.log(postData);
     const post = await ctx.model.Post.create(postData, {
       isNewRecord: true
     });
@@ -35,9 +36,25 @@ class PostService extends Service {
         id: postParams.post_id
       },
       include: [{
-          model: ctx.model.Comment
-        }]
+        model: ctx.model.Comment
+      }]
     });
+
+    const comments = await ctx.service.comment.findCommentsByPostId({
+      post_id: postParams.post_id
+    });
+
+    let commentsData = comments.data;
+    commentsData = commentsData.map((value, index) => {
+      let val = value.dataValues;
+      val.nickname = val.user.dataValues.nickname;
+      val.avatar_url = val.user.dataValues.avatar_url;
+      delete val.user;
+      value.dataValues = val;
+      return value;
+    });
+
+    post.dataValues.comments = commentsData;
     let res;
     if (post) {
       res = STATUS_CODE['SUCCESS'];
