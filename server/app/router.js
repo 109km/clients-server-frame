@@ -21,6 +21,9 @@ module.exports = app => {
   app.post('/user/signin', controller.user.doSignin);
   // 新增用户
   app.post('/user/create', controller.user.create);
+  // 用户详情
+  app.post('/user/detail', controller.user.detail);
+
   // 登出
   app.get('/signout', controller.user.signout);
   // 上传

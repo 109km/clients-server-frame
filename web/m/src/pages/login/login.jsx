@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { createForm } from 'rc-form';
-import { List, InputItem, Button, WhiteSpace,Toast } from 'antd-mobile';
-import { post } from '../../utils/util';
+import { List, InputItem, Button, WhiteSpace, Toast } from 'antd-mobile';
+import { post, getQuery } from '../../utils/util';
 import Cookies from 'js-cookie';
 import './login.less';
 
@@ -50,6 +50,12 @@ class Login extends Component {
       username: this.state.username,
       password: this.state.password
     };
+    let query = getQuery(this.props.location.search);
+    let redirectUrl = decodeURIComponent(query['redirect']);
+    let jumpUrl = '/';
+    if (redirectUrl) {
+      jumpUrl = redirectUrl;
+    }
     const response = await post('http://127.0.0.1:7001/user/signin', {
       data: formData
     });
@@ -57,10 +63,10 @@ class Login extends Component {
     if (res.code === 0) {
       Cookies.set('sessionId', res.data.sessionId);
       this.props.history.push({
-        pathname: '/dream/new'
+        pathname: jumpUrl
       });
-    }else{
-      Toast.fail(`${res.message}`,1);
+    } else {
+      Toast.fail(`${res.message}`, 1);
     }
   }
 }

@@ -1,5 +1,6 @@
 'use strict';
 const Controller = require('egg').Controller;
+const STATUS_CODE = require('../statusCode');
 class UserController extends Controller {
 
   // GET ， 展示页面
@@ -53,6 +54,18 @@ class UserController extends Controller {
       ctx.body = res;
     }
 
+  }
+
+  async detail(ctx) {
+    let key = ctx.headers['x-api-key'];
+    let user = await this.app.redis.get(key);
+    user = JSON.parse(user);
+    console.log(user);
+    if (user){
+      ctx.body = user;
+    }else{
+      ctx.body = STATUS_CODE['USER_NOT_LOGIN'];
+    }
   }
 
   // GET 登出

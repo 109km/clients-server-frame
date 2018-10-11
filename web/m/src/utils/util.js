@@ -56,7 +56,7 @@ export const keysToCamelCase = (object) => {
  * @param {String} url 
  * @param {Object} options 
  */
-export const post = async (url, options) => {
+export const post = async (url, options = {}) => {
   options.headers = createHeader(options.headers);
   let res = await axios({
     url: url,
