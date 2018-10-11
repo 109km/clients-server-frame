@@ -29,7 +29,10 @@ class DreamController extends Controller {
     let res = await ctx.service.dream.addTiers(ctx.request.body);
     ctx.body = res;
   }
-  async 
+  async list(ctx) {
+    let res = await ctx.service.dream.findAndCountAll(ctx.request.body);
+    ctx.body = res;
+  }
 }
 
 module.exports = DreamController;

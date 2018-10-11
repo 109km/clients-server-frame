@@ -6,7 +6,7 @@ class DreamList extends Component {
   render() {
     
     const items = this.props.items.map((item,index) =>
-      <DreamItem key={index} title={item.title} avatar={item.avatar} author={item.author} date={item.date} />
+      <DreamItem key={index} title={item.title} avatar={item.avatarUrl} nickname={item.nickname} date={item.updatedAt} content={item.content} />
     );
 
     return (

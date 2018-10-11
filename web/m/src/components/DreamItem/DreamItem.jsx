@@ -10,13 +10,16 @@ class DreamItem extends Component {
           {this.props.title}
         </div>
         <div className="info">
-          <img className="avatar" src={this.props.avatar} alt={this.props.author}/>
+          <img className="avatar" src={this.props.avatar} alt={this.props.author} />
           <span className="author">
-            {this.props.author}
+            {this.props.nickname}
           </span>
           <span className="date">
             {this.props.date}
           </span>
+        </div>
+        <div className="content">
+          {this.props.content}
         </div>
 
       </WingBlank>

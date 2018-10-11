@@ -80,13 +80,13 @@ class DreamService extends Service {
     return res;
   }
 
-  async findOne(dreamParams) {
+  async findOne(params) {
     const {
       ctx
     } = this;
     const dream = await ctx.model.Dream.findOne({
       where: {
-        id: dreamParams.dreamId
+        id: params.dreamId
       }
     });
     let res;
@@ -98,6 +98,37 @@ class DreamService extends Service {
     }
     return res;
   }
+
+  async findAndCountAll(params = {}) {
+    const {
+      ctx
+    } = this;
+    const dreams = await ctx.model.Dream.findAndCountAll({
+      include: [{
+        model: ctx.model.User
+      }],
+      offset: params.start || 0,
+      limit: params.limit || 10
+    });
+    let res;
+    let formatedDreams = dreams.rows.map((dream)=>{
+      dream.dataValues.nickname = dream.user.nickname;
+      dream.dataValues.avatar_url = dream.user.avatar_url;
+      delete dream.dataValues.user
+      return dream;
+    });
+
+    console.log(formatedDreams);
+
+    if (dreams) {
+      res = STATUS_CODE['SUCCESS'];
+      res.data = dreams;
+    } else {
+      res = STATUS_CODE['POST_NOT_FOUND'];
+    }
+    return res;
+  }
+
 }
 
 module.exports = DreamService;
