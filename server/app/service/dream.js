@@ -111,16 +111,13 @@ class DreamService extends Service {
       limit: params.limit || 10
     });
     let res;
-    let formatedDreams = dreams.rows.map((dream)=>{
-      dream.dataValues.nickname = dream.user.nickname;
-      dream.dataValues.avatar_url = dream.user.avatar_url;
-      delete dream.dataValues.user
-      return dream;
-    });
-
-    console.log(formatedDreams);
-
     if (dreams) {
+      dreams.rows.map((dream) => {
+        dream.dataValues.nickname = dream.user.nickname;
+        dream.dataValues.avatar_url = dream.user.avatar_url;
+        delete dream.dataValues.user
+        return dream;
+      });
       res = STATUS_CODE['SUCCESS'];
       res.data = dreams;
     } else {

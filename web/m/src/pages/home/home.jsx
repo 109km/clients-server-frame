@@ -28,9 +28,9 @@ class Home extends Component {
     return (
       <div className="page page-home">
         <DreamList items={this.state.items} />
-        <Link to="/edit">
+        <Button className="btn-make-dream" type="primary" to="/edit">
           Make your dream
-        </Link>
+        </Button>
       </div>
     );
   }
