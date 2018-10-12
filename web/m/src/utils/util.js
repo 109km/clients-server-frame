@@ -77,7 +77,7 @@ export const isMobile = function(mobile) {
 }
 /**
  * @desc Get the query's params.
- * @param {String} str 
+ * @param {String} url 
  */
 export const getQuery = function(url) {
   let request = new Object(),
@@ -90,4 +90,16 @@ export const getQuery = function(url) {
     }
   }
   return request;
+}
+
+/**
+ * @desc Filter the html tags.
+ * @param {String} html
+ */
+export const filterHTML = (html) => {
+  console.log(html);
+  let ret = html.replace(/<\/?[^>]*>/g, ''); //去除HTML Tag
+  ret = ret.replace(/[|]*\n/, '') //去除行尾空格
+  ret = ret.replace(/&npsp;/ig, ''); //去掉npsp
+  return ret;
 }

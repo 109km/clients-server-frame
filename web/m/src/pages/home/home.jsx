@@ -37,7 +37,6 @@ class Home extends Component {
   async componentDidMount() {
     const user = await post('http://127.0.0.1:7001/user/detail/');
     const dreams = await post('http://127.0.0.1:7001/dream/list/');
-    console.log(dreams);
     this.setState({
       items: dreams.data.data.rows
     });

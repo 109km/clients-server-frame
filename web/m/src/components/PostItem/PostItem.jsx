@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { WingBlank } from 'antd-mobile';
+import { filterHTML } from '../../utils/util';
 import './PostItem.less';
 
 class PostItem extends Component {
@@ -7,9 +7,9 @@ class PostItem extends Component {
     return (
       <div className="com-post-item">
         <div className="author-info">
-          <img src={this.props.item.avatar} alt="" className="avatar"/>
+          <img src={this.props.avatar} alt="" className="avatar"/>
           <div className="name">
-            {this.props.item.author}
+            {this.props.nickname}
           </div>
           <div className="date">
             发布于 {this.props.item.date}
@@ -19,7 +19,7 @@ class PostItem extends Component {
           {this.props.item.title}
         </div>
         <div className="content">
-          {this.props.item.content}
+          {filterHTML(this.props.item.content)}
         </div>
       </div>
     );

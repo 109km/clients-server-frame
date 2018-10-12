@@ -86,15 +86,21 @@ class DreamService extends Service {
     } = this;
     const dream = await ctx.model.Dream.findOne({
       where: {
-        id: params.dreamId
-      }
+        id: params.dream_id
+      },
+      include: [{
+        model: ctx.model.User,
+        attributes: ['nickname', 'avatar_url']
+      }, {
+        model: ctx.model.Post
+      }]
     });
     let res;
     if (dream) {
       res = STATUS_CODE['SUCCESS'];
       res.data = dream;
     } else {
-      res = STATUS_CODE['POST_NOT_FOUND'];
+      res = STATUS_CODE['DREAM_NOT_FOUND'];
     }
     return res;
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { WingBlank } from 'antd-mobile';
+import { Link } from 'react-router-dom';
 import './DreamItem.less';
 
 class DreamItem extends Component {
@@ -8,11 +9,11 @@ class DreamItem extends Component {
       <div className="com-brag-item">
         <div className="author-area">
           <img className="avatar" src={this.props.avatar} alt={this.props.author} />
-          <div className="author">
-            {this.props.nickname}
-          </div>
         </div>
-        <div className="info">
+        <Link className="info" to={"/dream/detail?dreamId=" + this.props.dreamId}>
+          <div className="author">
+            {this.props.nickname} is making
+          </div>
           <div className="title">
             {this.props.title}
           </div>
@@ -22,7 +23,7 @@ class DreamItem extends Component {
           {/* <span className="date">
             {this.props.date}
           </span> */}
-        </div>
+        </Link>
       </div>
     );
   }

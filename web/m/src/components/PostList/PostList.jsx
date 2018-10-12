@@ -6,7 +6,7 @@ class PostList extends Component {
   render() {
     
     const items = this.props.items.map((item,index) =>
-      <PostItem key={index} item={item} />
+      <PostItem key={index} item={item} avatar={this.props.avatar} nickname={this.props.nickname} />
     );
 
     return (

@@ -26,9 +26,10 @@ If you brag to every one, and you achieve your brag, you're a hero.
 
 ## H5
 
+### Date format convert
+
 ### Data case
 * Response data is in snakecase, it needs to be in camelcase.(done)
-
 
 ## Server
 
@@ -42,8 +43,6 @@ If you brag to every one, and you achieve your brag, you're a hero.
 * Repeated username forbidden.(done)
 * `lastSigninAt` data format.(done)
 
-
-
 ### Dream
 * Get `id` after creating a new dream.（done）
 * Best solution to store an array in mysql.
@@ -56,4 +55,4 @@ If you brag to every one, and you achieve your brag, you're a hero.
 
 
 ### Comment
-* Find the comments with the users' avatars and nicknames.
+* Find the comments with the users' avatars and nicknames.(done)

@@ -35,6 +35,10 @@ module.exports = {
     code: 30100,
     message: '留言未找到'
   },
+  'DREAM_NOT_FOUND': {
+    code: 40100,
+    message: '项目未找到'
+  },
   'UNKNOWN_ERROR': {
     code: -1,
     message: '未知错误'
