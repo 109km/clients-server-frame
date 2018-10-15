@@ -36,10 +36,16 @@ module.exports = app => {
   app.post('/dream/addGoals', controller.dream.addGoals);
   app.post('/dream/addTiers', controller.dream.addTiers);
 
+  // 文章
   app.post('/post/create', controller.post.create);
   app.post('/post/detail', controller.post.detail);
 
+  // 评论
   app.post('/comment/create', controller.comment.create);
+
+  // 粉丝
+  app.post('/follower/add', controller.follower.add);
+  app.post('/follower/find', controller.follower.find);
 
   app.resources('users', '/api/users', controller.user);
 };

@@ -1,10 +1,9 @@
 # Idea
 
-If you love braging, you're awesome.
+If you love making dreams, you're awesome.
 
-If you brag to every one, and you achieve your brag, you're a hero. 
+If you try to fulfill your own dream, you're a hero. 
 
-—— Shao
 
 
 # Product Design

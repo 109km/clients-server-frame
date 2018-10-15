@@ -6,6 +6,7 @@ import { List, InputItem, Button, WhiteSpace, Toast } from 'antd-mobile';
 import { post, getQuery } from '../../utils/util';
 import Cookies from 'js-cookie';
 import './login.less';
+import STATUS_CODE from '../../utils/statusCode';
 
 class Login extends Component {
   state = {
@@ -51,7 +52,7 @@ class Login extends Component {
       password: this.state.password
     };
     let query = getQuery(this.props.location.search);
-    let redirectUrl = decodeURIComponent(query['redirect']);
+    let redirectUrl = decodeURIComponent(query['r']);
     let jumpUrl = '/';
     if (redirectUrl) {
       jumpUrl = redirectUrl;
@@ -60,7 +61,7 @@ class Login extends Component {
       data: formData
     });
     const res = response.data;
-    if (res.code === 0) {
+    if (res.code === STATUS_CODE['SUCCESS'].code) {
       Cookies.set('sessionId', res.data.sessionId);
       this.props.history.push({
         pathname: jumpUrl

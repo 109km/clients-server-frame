@@ -8,6 +8,7 @@ import './detail.less';
 
 class DreamDetail extends Component {
   state = {
+    isFollowed: false,
     title: "",
     content: "",
     category: "视频",
@@ -46,7 +47,7 @@ class DreamDetail extends Component {
               <span className="num">{this.state.backersNum}</span>支持者
             </div>
             <div className="actions-sheet">
-              <Button className="btn-action" type="primary" inline size="small">+ 关注</Button>
+              <Button className="btn-action" type="primary" inline size="small" onClick={this.onFollow}>{this.state.isFollowed ? '已关注' : '+ 关注'}</Button>
               <Button className="btn-action" type="primary" inline size="small">+ 分享</Button>
             </div>
           </div>
@@ -68,7 +69,6 @@ class DreamDetail extends Component {
       data.tiersList = data.tiersList ? JSON.parse(data.tiersList) : data.tiersList;
       data.goalsList = data.goalsList ? JSON.parse(data.goalsList) : data.goalsList;
       data.postsList = data.postsList ? JSON.parse(data.postsList) : data.postsList;
-      console.log(data);
       this.setState({
         nickname: data.user.nickname,
         avatarUrl: data.user.avatarUrl,
@@ -88,6 +88,44 @@ class DreamDetail extends Component {
     }
     else {
       Toast.fail(result.message);
+    }
+
+    const followersRes = await post('http://127.0.0.1:7001/follower/find', {
+      data: {
+        followerId: this.state.userId
+      }
+    });
+    const followersData = followersRes.data;
+    if (followersData.code === STATUS_CODE['SUCCESS'].code && followersData.data.length > 0) {
+      this.setState({
+        isFollowed: true
+      });
+    }
+
+  }
+  onFollow = async () => {
+    let params = {
+      followerId: this.state.userId
+    }
+    const res = await post('http://127.0.0.1:7001/follower/add', {
+      data: params
+    });
+    if (res.data.code === STATUS_CODE['SUCCESS'].code) {
+      Toast.success('关注成功!');
+      this.setState({
+        isFollowed: true
+      });
+    }
+    else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
+      Toast.fail(res.data.message, 3, () => {
+        this.props.history.push({
+          pathname: '/login',
+          search: `?r=${encodeURIComponent(this.props.location.pathname + this.props.location.search)}`
+        });
+      });
+    }
+    else {
+      Toast.fail(res.data.message);
     }
   }
 }
