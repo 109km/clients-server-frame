@@ -46,6 +46,7 @@ module.exports = app => {
   // 粉丝
   app.post('/follower/add', controller.follower.add);
   app.post('/follower/find', controller.follower.find);
+  app.post('/follower/remove', controller.follower.remove);
 
   app.resources('users', '/api/users', controller.user);
 };

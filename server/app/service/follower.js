@@ -10,7 +10,6 @@ class FollowerService extends Service {
     const data = await ctx.model.Follower.findOrCreate({
       where: params
     });
-    console.log(data);
     const res = STATUS_CODE['SUCCESS'];
     res.data = data;
     return res;
@@ -19,6 +18,12 @@ class FollowerService extends Service {
     const {
       ctx
     } = this;
+    const data = await ctx.model.Follower.destroy({
+      where: params
+    });
+    const res = STATUS_CODE['SUCCESS'];
+    res.data = data;
+    return res;
   }
   async find(params) {
     const {
@@ -28,7 +33,6 @@ class FollowerService extends Service {
     const data = await ctx.model.Follower.findAll({
       where: params
     });
-    console.log(data);
     const res = STATUS_CODE['SUCCESS'];
     res.data = data;
     return res;

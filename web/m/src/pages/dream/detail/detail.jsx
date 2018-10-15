@@ -47,7 +47,7 @@ class DreamDetail extends Component {
               <span className="num">{this.state.backersNum}</span>支持者
             </div>
             <div className="actions-sheet">
-              <Button className="btn-action" type="primary" inline size="small" onClick={this.onFollow}>{this.state.isFollowed ? '已关注' : '+ 关注'}</Button>
+              <Button className={this.state.isFollowed ? 'btn-action btn-action-followed' : 'btn-action'} type="primary" inline size="small" onClick={this.onFollow}>{this.state.isFollowed ? '已关注' : '+ 关注'}</Button>
               <Button className="btn-action" type="primary" inline size="small">+ 分享</Button>
             </div>
           </div>
@@ -106,14 +106,21 @@ class DreamDetail extends Component {
   onFollow = async () => {
     let params = {
       followerId: this.state.userId
+    };
+    let action = '';
+
+    if (this.state.isFollowed) {
+      action = 'remove';
+    } else {
+      action = 'add';
     }
-    const res = await post('http://127.0.0.1:7001/follower/add', {
+    const res = await post(`http://127.0.0.1:7001/follower/${action}`, {
       data: params
     });
     if (res.data.code === STATUS_CODE['SUCCESS'].code) {
-      Toast.success('关注成功!');
+      // Toast.success('关注成功!');
       this.setState({
-        isFollowed: true
+        isFollowed: action === 'add' ? true : false
       });
     }
     else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
