@@ -118,7 +118,6 @@ class DreamDetail extends Component {
       data: params
     });
     if (res.data.code === STATUS_CODE['SUCCESS'].code) {
-      // Toast.success('关注成功!');
       this.setState({
         isFollowed: action === 'add' ? true : false
       });
