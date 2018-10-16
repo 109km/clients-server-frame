@@ -29,8 +29,10 @@ module.exports = app => {
       type: TEXT
     },
     tiers_list: {
-      type: TEXT,
-      field: 'tiers_list'
+      type: TEXT
+    },
+    cover_url: {
+      type: STRING
     }
   });
 

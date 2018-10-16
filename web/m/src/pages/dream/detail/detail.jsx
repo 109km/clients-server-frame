@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Tag, Toast, WhiteSpace, Icon, Button } from 'antd-mobile';
+import { Tag, Toast, WhiteSpace, Icon, Button, SegmentedControl } from 'antd-mobile';
 import { post, getQuery, filterHTML } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
 import PostList from '../../../components/PostList/PostList';
+import TierList from '../../../components/TierList/TierList';
 import './detail.less';
 
 class DreamDetail extends Component {
   state = {
     isFollowed: false,
+    isShowPost: true,
     title: "",
     content: "",
     category: "视频",
-    cover: "http://img.hb.aicdn.com/09b9379c464e0d394d5a4c26aa4380e9106e48015b4c3-lrqGkA_fw658",
-    avatarUrl: "http://img.hb.aicdn.com/36a968bce1b1bec6c39e8d1db849538152e0e94b19ce3-8hBny6_fw658",
+    coverUrl: "",
+    avatarUrl: "",
     nickname: "阿信",
     backersNum: 200,
     goalsList: [],
@@ -23,7 +25,7 @@ class DreamDetail extends Component {
   render() {
 
     let backgroundCover = {
-      backgroundImage: 'url(' + this.state.cover + ')'
+      backgroundImage: 'url(' + this.state.coverUrl + ')'
     }
 
     return (
@@ -51,9 +53,18 @@ class DreamDetail extends Component {
               <Button className="btn-action" type="primary" inline size="small">+ 分享</Button>
             </div>
           </div>
-          <div className="posts-list">
-            <PostList items={this.state.postsList} nickname={this.state.nickname} avatar={this.state.avatarUrl} />
+          <div className="tabs">
+            <SegmentedControl values={['文章', '回报']} onChange={this.onChangeTab} />
           </div>
+          {this.state.isShowPost ?
+            <div className="posts-list">
+              <PostList items={this.state.postsList} nickname={this.state.nickname} avatar={this.state.avatarUrl} />
+            </div>
+            :
+            <div className="tiers-list">
+              <TierList items={this.state.tiersList} />
+            </div>
+          }
         </div>
       </div>
     );
@@ -69,6 +80,7 @@ class DreamDetail extends Component {
       data.tiersList = data.tiersList ? JSON.parse(data.tiersList) : data.tiersList;
       data.goalsList = data.goalsList ? JSON.parse(data.goalsList) : data.goalsList;
       data.postsList = data.postsList ? JSON.parse(data.postsList) : data.postsList;
+      console.log(data.tiersList);
       this.setState({
         nickname: data.user.nickname,
         avatarUrl: data.user.avatarUrl,
@@ -77,7 +89,8 @@ class DreamDetail extends Component {
         content: data.content,
         tiersList: data.tiersList,
         goalsList: data.goalsList,
-        postsList: data.posts
+        postsList: data.posts,
+        coverUrl: data.coverUrl
       });
     } else if (result.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
       Toast.fail(result.message, 3, () => {
@@ -133,6 +146,19 @@ class DreamDetail extends Component {
     else {
       Toast.fail(res.data.message);
     }
+  }
+  onChangeTab = (e) => {
+    let index = e.nativeEvent.selectedSegmentIndex;
+    if (index === 0) {
+      this.setState({
+        isShowPost: true
+      })
+    } else {
+      this.setState({
+        isShowPost: false
+      })
+    }
+
   }
 }
 
