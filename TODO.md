@@ -58,3 +58,4 @@ If you try to fulfill your own dream, you're a hero.
 
 ### Tier
 * Add tier's levels.
+* Wechat pay.
