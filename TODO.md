@@ -55,3 +55,6 @@ If you try to fulfill your own dream, you're a hero.
 
 ### Comment
 * Find the comments with the users' avatars and nicknames.(done)
+
+### Tier
+* Add tier's levels.
