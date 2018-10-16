@@ -9,5 +9,4 @@ coverage/
 run/
 .DS_Store
 *.swp
-config/config.default.js
 app/public/uploads
