@@ -1,0 +1,14 @@
+
+@startuml
+start
+:Fill in some basic information
+on your dream;
+:Set up the **tiers**' levels;
+:Write some **posts** about what you do;
+:Prompt your dream to others;
+:The one who is intersted in you
+may follow you;
+:The one who is intersted in your dream
+may support you by being your backer;
+stop
+@enduml

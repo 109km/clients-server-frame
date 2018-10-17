@@ -1,14 +1,16 @@
 @startuml
+class User{
+  Int id
+  String username
+  String nickname
+  String avatar_url
+}
 class Dream{
   String title
   String description
   Array postList
   Array targetList
   Array tierList
-}
-class Target{
-  String title
-  String description
 }
 class Post{
   String title
@@ -22,11 +24,14 @@ class Tier{
   String reward
   Number price
 }
-
-Dream "1" -- "many" Target
+class Comment{
+  String user_id
+  String title
+  String content
+}
+User "1" -- "many" Dream
 Dream "1" -- "many" Tier
 Dream "1" -- "many" Post
-
-
+Post "many" -- "many" Comment
 
 @enduml
