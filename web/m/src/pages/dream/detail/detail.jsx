@@ -80,7 +80,6 @@ class DreamDetail extends Component {
       data.tiersList = data.tiersList ? JSON.parse(data.tiersList) : data.tiersList;
       data.goalsList = data.goalsList ? JSON.parse(data.goalsList) : data.goalsList;
       data.postsList = data.postsList ? JSON.parse(data.postsList) : data.postsList;
-      console.log(data.tiersList);
       this.setState({
         nickname: data.user.nickname,
         avatarUrl: data.user.avatarUrl,
