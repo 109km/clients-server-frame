@@ -21,7 +21,7 @@ class InputGoalList extends Component {
     this.props.onUpdate(type, value, index);
   }
   async componentDidMount() {
-    // const res = await fetch('http://127.0.0.1:7001/user/login/');
+    // const res = await fetch(Config.apiUrl + '/user/login/');
     // console.log(res);
   }
 }

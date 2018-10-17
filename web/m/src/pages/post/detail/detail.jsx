@@ -70,7 +70,7 @@ class PostDetail extends Component {
       postId: query.postId,
       content: this.state.comment
     }
-    const response = await post('http://127.0.0.1:7001/comment/create', {
+    const response = await post(Config.apiUrl + '/comment/create', {
       data: formData
     });
     const result = response.data;

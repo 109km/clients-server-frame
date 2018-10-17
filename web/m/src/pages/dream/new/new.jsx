@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, Icon } from 'antd-mobile';
-import { post } from '../../../utils/util';
+import { post, Config } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
 import './new.less';
 
@@ -51,20 +51,20 @@ class DreamNew extends Component {
       content: this.state.content
     };
 
-    const res = await post('http://127.0.0.1:7001/dream/create', {
+    const res = await post(Config.apiUrl + '/dream/create', {
       data: formData
     });
     if (res.data.code === STATUS_CODE['SUCCESS'].code) {
       Toast.success('项目创建成功！', 3, () => {
         this.props.history.push({
-          pathname: '/dream/goal',
-          search: '?dreamId=' + res.data.id
+          path: '/dream/goal',
+          search: '?dreamId=' + res.data.data.id
         });
       });
     } else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
       Toast.fail(res.data.message, 3, () => {
         this.props.history.push({
-          pathname: '/user/signin',
+          path: '/user/signin',
         });
       });
     }

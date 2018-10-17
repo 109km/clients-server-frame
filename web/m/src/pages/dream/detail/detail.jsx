@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Tag, Toast, WhiteSpace, Icon, Button, SegmentedControl } from 'antd-mobile';
-import { post, getQuery, filterHTML } from '../../../utils/util';
+import { post, getQuery, filterHTML,Config } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
 import PostList from '../../../components/PostList/PostList';
 import TierList from '../../../components/TierList/TierList';
@@ -71,7 +71,7 @@ class DreamDetail extends Component {
   }
   async componentDidMount() {
     let query = getQuery(this.props.location.search);
-    const response = await post('http://127.0.0.1:7001/dream/detail', {
+    const response = await post(Config.apiUrl + '/dream/detail', {
       data: query
     });
     let result = response.data;
@@ -102,7 +102,7 @@ class DreamDetail extends Component {
       Toast.fail(result.message);
     }
 
-    const followersRes = await post('http://127.0.0.1:7001/follower/find', {
+    const followersRes = await post(Config.apiUrl + '/follower/find', {
       data: {
         followerId: this.state.userId
       }

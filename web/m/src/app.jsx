@@ -9,6 +9,7 @@ import PostNew from './pages/post/new/new';
 import PostEdit from './pages/post/edit/edit';
 import PostDetail from './pages/post/detail/detail';
 import Login from './pages/login/login';
+import Logout from './pages/logout/logout';
 import Signup from './pages/signup/signup';
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
         <Route path="/post/edit" component={PostEdit} />
         <Route path="/post/detail" component={PostDetail} />
         <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
         <Route path="/signup" component={Signup} />
       </div>
     )

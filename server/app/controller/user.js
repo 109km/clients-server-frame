@@ -71,7 +71,7 @@ class UserController extends Controller {
   async signout(ctx) {
     this.app.redis.del(ctx.session.sessionId);
     ctx.session = null;
-    ctx.redirect('/');
+    ctx.body = STATUS_CODE['SUCCESS'];
   }
 
   // 新增用户接口

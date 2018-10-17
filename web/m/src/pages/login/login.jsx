@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { createForm } from 'rc-form';
 import { List, InputItem, Button, WhiteSpace, Toast } from 'antd-mobile';
-import { post, getQuery } from '../../utils/util';
+import { post, getQuery, Config } from '../../utils/util';
 import Cookies from 'js-cookie';
 import './login.less';
 import STATUS_CODE from '../../utils/statusCode';
@@ -57,7 +57,7 @@ class Login extends Component {
     if (redirectUrl) {
       jumpUrl = redirectUrl;
     }
-    const response = await post('http://127.0.0.1:7001/user/signin', {
+    const response = await post(Config.apiUrl + '/user/signin', {
       data: formData
     });
     const res = response.data;

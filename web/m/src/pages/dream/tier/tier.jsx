@@ -62,7 +62,7 @@ class DreamTier extends Component {
     });
 
     if (res.data.code === STATUS_CODE['SUCCESS'].code) {
-      Toast.success('Tier添加成功！', 3, () => {
+      Toast.success('回报添加成功！', 3, () => {
         this.props.history.push({
           pathname: '/'
         });

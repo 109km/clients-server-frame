@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ImagePicker, List, TextareaItem, Button } from 'antd-mobile';
-import { post, getQuery } from '../../../utils/util';
+import { post, getQuery, Config } from '../../../utils/util';
 import './edit.less';
 
 class PostEdit extends Component {
@@ -36,7 +36,7 @@ class PostEdit extends Component {
   }
   async componentDidMount() {
     let query = getQuery(this.props.location.search);
-    const res = await post('http://127.0.0.1:7001/post/detail', {
+    const res = await post(Config.apiUrl + '/post/detail', {
       data: {
         postId: query.postId
       }
@@ -63,7 +63,7 @@ class PostEdit extends Component {
     this.state.files.forEach(file => {
       formData.append('pics[]', file.file);
     });
-    const res = await post('http://127.0.0.1:7001/dream/edit', {
+    const res = await post(Config.apiUrl + '/dream/edit', {
       data: formData
     });
   }

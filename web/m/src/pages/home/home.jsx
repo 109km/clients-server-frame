@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'antd-mobile';
 import { Link } from 'react-router-dom';
-import { post, getQuery } from '../../utils/util';
+import { post, getQuery, Config } from '../../utils/util';
 import STATUS_CODE from '../../utils/statusCode';
 import './home.less';
 import DreamList from '../../components/DreamList/DreamList';
@@ -35,8 +35,8 @@ class Home extends Component {
     );
   }
   async componentDidMount() {
-    const user = await post('http://127.0.0.1:7001/user/detail/');
-    const dreams = await post('http://127.0.0.1:7001/dream/list/');
+    const user = await post(Config.apiUrl + '/user/detail/');
+    const dreams = await post(Config.apiUrl + '/dream/list/');
     this.setState({
       items: dreams.data.data.rows
     });

@@ -31,7 +31,7 @@ class DreamService extends Service {
       ctx
     } = this;
     const goals = JSON.stringify(goalsData.goals);
-    const dreamId = goalsData.dreamId;
+    const dreamId = goalsData.dream_id;
     const updatedResult = await ctx.model.Dream.update({
       goalsList: goals
     }, {
@@ -58,9 +58,10 @@ class DreamService extends Service {
       ctx
     } = this;
     const tiers = JSON.stringify(tiersData.tiers);
-    const dreamId = tiersData.dreamId;
+    const dreamId = tiersData.dream_id;
+    console.log(dreamId);
     const updatedResult = await ctx.model.Dream.update({
-      tiersList: tiers
+      tiers_list: tiers
     }, {
       where: {
         id: dreamId
@@ -72,7 +73,7 @@ class DreamService extends Service {
     let res;
     if (updatedResult[0] === 1) {
       res = await this.findOne({
-        dreamId: dreamId
+        dream_id: dreamId
       });
     } else {
       res = STATUS_CODE['UNKNOWN_ERROR'];

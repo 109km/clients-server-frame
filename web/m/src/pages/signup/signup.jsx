@@ -3,8 +3,7 @@ import { withRouter } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { createForm } from 'rc-form';
 import { List, InputItem, Button, WhiteSpace, Toast } from 'antd-mobile';
-import { post } from '../../utils/util';
-import Cookies from 'js-cookie';
+import { post, Config } from '../../utils/util';
 import './signup.less';
 
 class Signup extends Component {
@@ -63,7 +62,7 @@ class Signup extends Component {
       password: this.state.password,
       're-password': this.state.repassword
     };
-    const response = await post('http://127.0.0.1:7001/user/create', {
+    const response = await post(Config.apiUrl + '/user/create', {
       data: formData
     });
 
