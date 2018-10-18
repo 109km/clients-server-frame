@@ -62,4 +62,8 @@ If you try to fulfill your own dream, you're a hero.
 
 ## Deployment
 
-### Mysql installation
+### Dependency Installation
+* Database initialization. (done)
+* Redis installation.(done)
+
+### web/m 
