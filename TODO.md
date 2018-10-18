@@ -67,4 +67,4 @@ If you try to fulfill your own dream, you're a hero.
 * Redis installation.(done)
 
 ### web/m 
-* How to deploy this?
+* Client-side routing.
