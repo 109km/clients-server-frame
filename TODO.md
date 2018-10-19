@@ -62,9 +62,13 @@ If you try to fulfill your own dream, you're a hero.
 
 ## Deployment
 
+### Server port problem.
+* HTML is running on `https`.
+* API is running on `http`.
+
 ### Dependency Installation
 * Database initialization. (done)
 * Redis installation.(done)
 
 ### web/m 
-* Client-side routing.
+* Client-side routing. （done）
