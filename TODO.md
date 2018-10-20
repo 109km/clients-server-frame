@@ -72,3 +72,4 @@ If you try to fulfill your own dream, you're a hero.
 
 ### web/m 
 * Client-side routing. （done）
+* Auto copy `web/m/build` to `weapp/build`
