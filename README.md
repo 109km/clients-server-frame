@@ -28,48 +28,55 @@ If you try to fulfill your own dream, you're a hero.
 ### Date format convert
 
 ### Data case
-- [x]  Response data is in snakecase, it needs to be in camelcase.
+- [x] Response data is in snakecase, it needs to be in camelcase.
+
+### Common components
+- [ ] Navigator
+  - [ ] Home
+  - [ ] Me
+  - [ ] Main page
+
 
 ## Server
 
 ### Error code
-- [x]  Design the error code configuration.
+- [x] Design the error code configuration.
 
 ### User
-- [x]  Session & Cookies' settings. 
-- [x]  Some api need to check user's login.(done, using token)
-- [x]  User's password encryption.
-- [x]  Repeated username forbidden.
-- [x]  `lastSigninAt` data format.
+- [x] Session & Cookies' settings. 
+- [x] Some api need to check user's login.(done, using token)
+- [x] User's password encryption.
+- [x] Repeated username forbidden.
+- [x] `lastSigninAt` data format.
 
 ### Dream
-- [x]  Get `id` after creating a new dream.
-- [x]  Best solution to store an array in mysql.
+- [x] Get `id` after creating a new dream.
+- [x] Best solution to store an array in mysql.
 
 ### Post
-- [x]  Dynamically add `input` components to the page, and get the values.
-- [x]  Post format and style.
-- [x]  Post - rich editor.
-- [x]  Leave a a comment to a post.
+- [x] Dynamically add `input` components to the page, and get the values.
+- [x] Post format and style.
+- [x] Post - rich editor.
+- [x] Leave a a comment to a post.
 
 
 ### Comment
-- [x]  Find the comments with the users' avatars and nicknames.
+- [x] Find the comments with the users' avatars and nicknames.
 
 ### Tier
-- [ ]  Add tier's levels.
-- [ ]  Wechat pay.
+- [ ] Add tier's levels.
+- [ ] Wechat pay.
 
 ## Deployment
 
 ### Server port problem.
-- [x]  HTML is running on `80`.
-- [x]  API is running on `7001`.
+- [x] HTML is running on `80`.
+- [x] API is running on `7001`.
 
 ### Dependency Installation
-- [x]  Database initialization. 
-- [x]  Redis installation.
+- [x] Database initialization. 
+- [x] Redis installation.
 
 ### web/m 
-- [x]  Client-side routing. 
-- [x]  Auto copy `web/m/build` to `weapp/build` 
+- [x] Client-side routing. 
+- [x] Auto copy `web/m/build` to `weapp/build` 

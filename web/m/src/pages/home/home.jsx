@@ -5,6 +5,8 @@ import { post, getQuery, Config } from '../../utils/util';
 import STATUS_CODE from '../../utils/statusCode';
 import './home.less';
 import DreamList from '../../components/DreamList/DreamList';
+import SiteNav from '../../components/SiteNav/SiteNav';
+
 
 // const items = [{
 //   title: '我要在30岁之前登上乞力马扎罗山',
@@ -33,17 +35,14 @@ class Home extends Component {
           this.state.isLogin ? '' :
             <div className="logion-actions">
               <Link className="btn-login" to="/signup">
-                <Button>
-                  注册
-            </Button>
+                注册
               </Link>
               <Link className="btn-login" to="/login">
-                <Button>
-                  登录
-            </Button>
+                登录
               </Link>
             </div>
         }
+        <SiteNav page="home" history={this.props.history} />
       </div>
     );
   }
