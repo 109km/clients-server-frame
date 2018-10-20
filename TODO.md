@@ -28,48 +28,48 @@ If you try to fulfill your own dream, you're a hero.
 ### Date format convert
 
 ### Data case
-* Response data is in snakecase, it needs to be in camelcase.(done)
+- [x]  Response data is in snakecase, it needs to be in camelcase.
 
 ## Server
 
 ### Error code
-* Design the error code configuration.(done)
+- [x]  Design the error code configuration.
 
 ### User
-* Session & Cookies' settings. (done)
-* Some api need to check user's login.(done, using token)
-* User's password encryption.(done)
-* Repeated username forbidden.(done)
-* `lastSigninAt` data format.(done)
+- [x]  Session & Cookies' settings. 
+- [x]  Some api need to check user's login.(done, using token)
+- [x]  User's password encryption.
+- [x]  Repeated username forbidden.
+- [x]  `lastSigninAt` data format.
 
 ### Dream
-* Get `id` after creating a new dream.（done）
-* Best solution to store an array in mysql.
+- [x]  Get `id` after creating a new dream.
+- [x]  Best solution to store an array in mysql.
 
 ### Post
-* Dynamically add `input` components to the page, and get the values.(done)
-* Post format and style.(done)
-* Post - rich editor.(done)
-* Leave a a comment to a post.(done)
+- [x]  Dynamically add `input` components to the page, and get the values.
+- [x]  Post format and style.
+- [x]  Post - rich editor.
+- [x]  Leave a a comment to a post.
 
 
 ### Comment
-* Find the comments with the users' avatars and nicknames.(done)
+- [x]  Find the comments with the users' avatars and nicknames.
 
 ### Tier
-* Add tier's levels.
-* Wechat pay.
+- [ ]  Add tier's levels.
+- [ ]  Wechat pay.
 
 ## Deployment
 
 ### Server port problem.
-* HTML is running on `80`.(done)
-* API is running on `7001`.(done)
+- [x]  HTML is running on `80`.
+- [x]  API is running on `7001`.
 
 ### Dependency Installation
-* Database initialization. (done)
-* Redis installation.(done)
+- [x]  Database initialization. 
+- [x]  Redis installation.
 
 ### web/m 
-* Client-side routing. （done）
-* Auto copy `web/m/build` to `weapp/build`
+- [x]  Client-side routing. 
+- [x]  Auto copy `web/m/build` to `weapp/build` 
