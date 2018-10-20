@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'antd-mobile';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { post, getQuery, Config } from '../../utils/util';
 import STATUS_CODE from '../../utils/statusCode';
 import './home.less';
@@ -62,4 +62,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);

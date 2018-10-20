@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import Cookies from 'js-cookie';
 import './logout.less';
 class Logout extends Component {
@@ -17,4 +18,4 @@ class Logout extends Component {
   }
 }
 
-export default Logout;
+export default withRouter(Logout);

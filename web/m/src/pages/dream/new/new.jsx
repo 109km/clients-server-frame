@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, Icon } from 'antd-mobile';
 import { post, Config } from '../../../utils/util';
@@ -78,4 +79,4 @@ class DreamNew extends Component {
 //   avatar: PropTypes.string.isRequired
 // }
 
-export default DreamNew;
+export default withRouter(DreamNew);

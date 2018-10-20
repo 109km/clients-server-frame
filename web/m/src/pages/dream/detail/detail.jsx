@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { withRouter } from "react-router-dom";
 import { Tag, Toast, WhiteSpace, Icon, Button, SegmentedControl } from 'antd-mobile';
-import { post, getQuery, filterHTML,Config } from '../../../utils/util';
+import { post, getQuery, filterHTML, Config } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
 import PostList from '../../../components/PostList/PostList';
 import TierList from '../../../components/TierList/TierList';
@@ -165,4 +165,4 @@ class DreamDetail extends Component {
 //   avatar: PropTypes.string.isRequired
 // }
 
-export default DreamDetail;
+export default withRouter(DreamDetail);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { withRouter } from "react-router-dom";
 import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, Icon } from 'antd-mobile';
 import { post, getQuery, Config } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
@@ -85,4 +85,4 @@ class DreamGoal extends Component {
 //   avatar: PropTypes.string.isRequired
 // }
 
-export default DreamGoal;
+export default withRouter(DreamGoal);
