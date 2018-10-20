@@ -20,9 +20,8 @@ class UserController extends Controller {
     }
 
     const res = await ctx.service.user.create(userData);
-
     if (res.code === 0) {
-      ctx.redirect('/signin');
+      ctx.redirect('/login');
     } else {
       ctx.body = res.message;
     }
@@ -81,7 +80,8 @@ class UserController extends Controller {
   async create(ctx) {
     const userData = {
       username: ctx.request.body.username,
-      password: ctx.request.body.password
+      password: ctx.request.body.password,
+      're-password': ctx.request.body['re-password']
     }
     const res = await ctx.service.user.create(userData);
     ctx.body = res;

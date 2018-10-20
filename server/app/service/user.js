@@ -12,12 +12,11 @@ class UserService extends Service {
       },
       password: {
         type: 'password',
-        compare: 're-password'
+        compare: 're_password'
       },
-    };
+    };    
     // 校验参数
     ctx.validate(createRule);
-
     // 密码加密储存
     userData.password = ctx.helper.encrypt(userData.password);
     const res = await ctx.model.User.findOrCreate({
