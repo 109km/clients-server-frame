@@ -63,8 +63,8 @@ If you try to fulfill your own dream, you're a hero.
 ## Deployment
 
 ### Server port problem.
-* HTML is running on `https`.
-* API is running on `http`.
+* HTML is running on `80`.(done)
+* API is running on `7001`.(done)
 
 ### Dependency Installation
 * Database initialization. (done)
