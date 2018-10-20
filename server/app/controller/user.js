@@ -60,9 +60,12 @@ class UserController extends Controller {
     let key = ctx.headers['x-api-key'];
     let user = await this.app.redis.get(key);
     user = JSON.parse(user);
-    if (user){
-      ctx.body = user;
-    }else{
+    if (user) {
+      let res = STATUS_CODE['SUCCESS'];
+      res.data = user;
+      console.log(user);
+      ctx.body = res;
+    } else {
       ctx.body = STATUS_CODE['USER_NOT_LOGIN'];
     }
   }

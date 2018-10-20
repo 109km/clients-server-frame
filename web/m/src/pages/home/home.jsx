@@ -21,24 +21,44 @@ import DreamList from '../../components/DreamList/DreamList';
 class Home extends Component {
 
   state = {
-    items: []
+    items: [],
+    isLogin: false
   }
 
   render() {
     return (
       <div className="page page-home">
         <DreamList items={this.state.items} />
-        <Button className="btn-make-dream" type="primary" to="/edit">
-          Make your dream
-        </Button>
+        {
+          this.state.isLogin ? '' :
+            <div className="logion-actions">
+              <Link className="btn-login" to="/signup">
+                <Button>
+                  注册
+            </Button>
+              </Link>
+              <Link className="btn-login" to="/login">
+                <Button>
+                  登录
+            </Button>
+              </Link>
+            </div>
+        }
       </div>
     );
   }
   async componentDidMount() {
     const user = await post(Config.apiUrl + '/user/detail/');
     const dreams = await post(Config.apiUrl + '/dream/list/');
+    let isLogin = false;
+    console.log(user);
+    if (user.data.code === STATUS_CODE['SUCCESS'].code) {
+      isLogin = true;
+    }
+
     this.setState({
-      items: dreams.data.data.rows
+      items: dreams.data.data.rows,
+      isLogin: isLogin
     });
   }
 }

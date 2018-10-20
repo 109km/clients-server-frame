@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import Conf from './config';
+import Conf from '../config';
 
 
 export const Config = Conf;

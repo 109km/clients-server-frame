@@ -52,7 +52,7 @@ class Login extends Component {
       password: this.state.password
     };
     let query = getQuery(this.props.location.search);
-    let redirectUrl = decodeURIComponent(query['r']);
+    let redirectUrl = query['r'] && decodeURIComponent(query['r']);
     let jumpUrl = '/';
     if (redirectUrl) {
       jumpUrl = redirectUrl;
