@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import goals from './goals'
+import user from './user'
 
 const Model = combineReducers({
-  goals
+  user
 })
 
 export default Model

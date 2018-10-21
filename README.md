@@ -31,11 +31,13 @@ If you try to fulfill your own dream, you're a hero.
 - [x] Response data is in snakecase, it needs to be in camelcase.
 
 ### Common components
-- [ ] Navigator
-  - [ ] Home
-  - [ ] Me
-  - [ ] Main page
+- [x] Navigator
+  - [x] Home
+  - [x] My
+  - [ ] Explore
 
+### Frontend data store
+- [ ] Add redux to this project.
 
 ## Server
 

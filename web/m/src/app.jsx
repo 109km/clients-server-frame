@@ -12,6 +12,7 @@ import Login from './pages/login/login';
 import Logout from './pages/logout/logout';
 import Signup from './pages/signup/signup';
 import Explore from './pages/explore/explore';
+import My from './pages/my/my';
 class App extends Component {
   render() {
     return (
@@ -28,6 +29,7 @@ class App extends Component {
         <Route path="/logout" component={Logout} />
         <Route path="/signup" component={Signup} />
         <Route path="/explore" component={Explore} />
+        <Route path="/my" component={My} />
       </div>
     )
   }
