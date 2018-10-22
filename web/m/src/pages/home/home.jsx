@@ -41,11 +41,6 @@ class Home extends Component {
       isLogin = true;
       this.props.setUserInfo(user.data);
     }
-
-    setTimeout(()=>{
-      this.props.setUserLogout();
-      console.log(this.props);
-    },3000);
     
     this.setState({
       items: dreams.data.data.rows,

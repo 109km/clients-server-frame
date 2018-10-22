@@ -14,7 +14,6 @@ import Home from '../pages/home/home';
 
 
 const mapStateToProps = state => {
-  console.log('home.js', state);
   return state;
 }
 
