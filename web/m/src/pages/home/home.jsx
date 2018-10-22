@@ -1,25 +1,11 @@
 import React, { Component } from 'react';
 import { Button } from 'antd-mobile';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { post, getQuery, Config } from '../../utils/util';
 import STATUS_CODE from '../../utils/statusCode';
 import './home.less';
 import DreamList from '../../components/DreamList/DreamList';
 import SiteNav from '../../components/SiteNav/SiteNav';
-
-
-// const items = [{
-//   title: '我要在30岁之前登上乞力马扎罗山',
-//   avatar: 'http://img.hb.aicdn.com/ae33521b96401212eee4ca4c2e8fd5001c380b251d3b5-LgMIla_fw658',
-//   author: '树人哥',
-//   date: '09-07'
-// }, {
-//   title: '我要在30岁之前登上乞力马扎罗山',
-//   avatar: 'http://img.hb.aicdn.com/ae33521b96401212eee4ca4c2e8fd5001c380b251d3b5-LgMIla_fw658',
-//   author: '树人哥',
-//   date: '09-08'
-// }];
-
 class Home extends Component {
 
   state = {
@@ -32,7 +18,7 @@ class Home extends Component {
       <div className="page page-home">
         <DreamList items={this.state.items} />
         {
-          this.state.isLogin ? '' :
+          this.props.user.username ? '' :
             <div className="logion-actions">
               <Link className="btn-login" to="/signup">
                 注册
@@ -47,14 +33,20 @@ class Home extends Component {
     );
   }
   async componentDidMount() {
-    const user = await post(Config.apiUrl + '/user/detail/');
+    const userData = await post(Config.apiUrl + '/user/detail/');
     const dreams = await post(Config.apiUrl + '/dream/list/');
     let isLogin = false;
-    console.log(user);
-    if (user.data.code === STATUS_CODE['SUCCESS'].code) {
+    const user = userData.data;
+    if (user.code === STATUS_CODE['SUCCESS'].code) {
       isLogin = true;
+      this.props.setUserInfo(user.data);
     }
 
+    setTimeout(()=>{
+      this.props.setUserLogout();
+      console.log(this.props);
+    },3000);
+    
     this.setState({
       items: dreams.data.data.rows,
       isLogin: isLogin
@@ -62,4 +54,4 @@ class Home extends Component {
   }
 }
 
-export default withRouter(Home);
+export default Home;

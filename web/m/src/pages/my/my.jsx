@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from "react-router-dom";
-import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
 import { List } from 'antd-mobile';
 import { post, Config } from '../../utils/util';
 import './my.less';
-import { SET_USER_INFO } from '../../models/actions'
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -21,7 +19,7 @@ class My extends Component {
             thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
             arrow="horizontal"
             onClick={() => { }}
-          >My wallet</Item>
+          >The wallet is {this.props.user.nickname}</Item>
           <Link to={`/dream/detail/?id=${this.state.userId}`}>
             <Item
               thumb="https://zos.alipayobjects.com/rmsportal/UmbJMbWOejVOpxe.png"
@@ -36,26 +34,10 @@ class My extends Component {
     );
   }
   async componentDidMount() {
-    const user = await post(Config.apiUrl + '/user/detail/');
-    const userId = user.data.data.id;
-
-    this.setState({
-      userId: userId
-    });
+    // const userResponse = await post(Config.apiUrl + '/user/detail/');
+    // const user = userResponse.data.data;
+    // this.props.setUserInfo(user);
   }
 }
 
-
-const mapStateToProps = state => {
-  return state
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onAddClick: data => {
-      console.log(data);
-    }
-  }
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(My));
+export default My;

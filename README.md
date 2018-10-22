@@ -36,8 +36,11 @@ If you try to fulfill your own dream, you're a hero.
   - [x] My
   - [ ] Explore
 
-### Frontend data store
-- [ ] Add redux to this project.
+### Using redux
+- [x] Home
+- [ ] Explore
+- [ ] My
+- [ ] Dream - detail
 
 ## Server
 

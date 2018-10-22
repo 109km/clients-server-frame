@@ -5,13 +5,16 @@ import {
 import {
   withRouter
 } from "react-router-dom";
+
 import {
   actionUser
 } from '../models/actions';
 
-import My from '../pages/my/my';
+import Home from '../pages/home/home';
+
 
 const mapStateToProps = state => {
+  console.log('home.js', state);
   return state;
 }
 
@@ -19,6 +22,9 @@ const mapDispatchToProps = dispatch => {
   return {
     setUserInfo: user => {
       dispatch(actionUser.setUserInfo(user));
+    },
+    setUserLogout: () => {
+      dispatch(actionUser.setUserLogout());
     }
   }
 }
@@ -26,5 +32,6 @@ const mapDispatchToProps = dispatch => {
 const container = connect(
   mapStateToProps,
   mapDispatchToProps
-)(My)
+)(Home)
+
 export default withRouter(container);

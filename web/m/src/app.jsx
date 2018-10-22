@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import Home from './pages/home/home';
+import Home from './containers/home';
 import DreamNew from './pages/dream/new/new';
 import DreamGoal from './pages/dream/goal/goal';
 import DreamTier from './pages/dream/tier/tier';
@@ -12,7 +12,7 @@ import Login from './pages/login/login';
 import Logout from './pages/logout/logout';
 import Signup from './pages/signup/signup';
 import Explore from './pages/explore/explore';
-import My from './pages/my/my';
+import My from './containers/my';
 class App extends Component {
   render() {
     return (

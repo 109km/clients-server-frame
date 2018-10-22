@@ -1,21 +1,20 @@
 import {
-  Actions
+  actionUser
 } from '../actions';
 
+const ACTIONS_TYPES = actionUser.ACTIONS_TYPES;
+
 const user = (state = {}, action) => {
+
   switch (action.type) {
-    case Actions.SET_USER_INFO:
-      return Object.assign({
-        isLogin: true
-      }, state, action);
-    case Actions.SET_USER_LOGOUT:
-      state.username = null;
-      state.id = null;
-      state.avatarUlr = null;
-      state.isLogin = false;
+
+    case ACTIONS_TYPES.SET_USER_INFO:
+      return Object.assign({}, state, action.payload);
+    case ACTIONS_TYPES.SET_USER_LOGOUT:
+      state = {};
       return state;
     default:
-      return state
+      return state;
   }
 }
 export default user;
