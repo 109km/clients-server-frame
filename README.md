@@ -37,6 +37,7 @@ If you try to fulfill your own dream, you're a hero.
   - [ ] Explore
 
 ### Using redux
+- [ ] Design `state` data structure
 - [x] Home
 - [ ] Explore
 - [ ] My

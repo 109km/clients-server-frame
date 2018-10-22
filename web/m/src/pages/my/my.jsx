@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { List } from 'antd-mobile';
 import { post, Config } from '../../utils/util';
 import './my.less';
+import SiteNav from '../../components/SiteNav/SiteNav';
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -30,6 +31,7 @@ class My extends Component {
             </Item>
           </Link>
         </List>
+        <SiteNav page="my" history={this.props.history} />
       </div >
     );
   }
