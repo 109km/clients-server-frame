@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, InputItem, Button, ImagePicker } from 'antd-mobile';
+import { List, InputItem, Button, ImagePicker, Toast } from 'antd-mobile';
 import { Link } from 'react-router-dom';
 import { post, getQuery, Config } from '../../utils/util';
 import STATUS_CODE from '../../utils/statusCode';
@@ -14,7 +14,6 @@ class Account extends Component {
   }
   render() {
     const { getFieldProps, getFieldError } = this.props.form;
-
     return (
       <div className="page page-account">
         <TopNav user={this.props.user} />
@@ -33,7 +32,7 @@ class Account extends Component {
               clear
               error={!!getFieldError('nickname')}
               onErrorClick={() => {
-                alert(getFieldError('nickname').join('、'));
+                Toast.fail(getFieldError('nickname').join(''));
               }}
               placeholder="请输入新的昵称"
             >昵称</InputItem>
@@ -45,10 +44,11 @@ class Account extends Component {
                   { validator: this.validatePassword },
                 ],
               })}
+              type="password"
               clear
               error={!!getFieldError('oldPassword')}
               onErrorClick={() => {
-                alert(getFieldError('oldPassword').join('、'));
+                Toast.fail(getFieldError('oldPassword').join(''));
               }}
               placeholder="输入旧密码"
             >旧密码</InputItem>
@@ -60,10 +60,11 @@ class Account extends Component {
                   { validator: this.validatePassword },
                 ],
               })}
+              type="password"
               clear
               error={!!getFieldError('newPassword')}
               onErrorClick={() => {
-                alert(getFieldError('newPassword').join('、'));
+                Toast.fail(getFieldError('newPassword').join('、'));
               }}
               placeholder="输入新密码"
             >新密码</InputItem>
@@ -75,26 +76,27 @@ class Account extends Component {
                   { validator: this.validatePassword },
                 ],
               })}
+              type="password"
               clear
               error={!!getFieldError('reNewPassword')}
               onErrorClick={() => {
-                alert(getFieldError('reNewPassword').join('、'));
+                Toast.fail(getFieldError('reNewPassword').join('、'));
               }}
               placeholder="再次输入新密码"
             >确认新密码</InputItem>
 
             <Item>
               <img className="avatar" src={this.props.user.avatarUrl} alt="" />
-
               <ImagePicker
                 files={this.state.files}
                 onChange={this.onChange}
+                selectable={this.state.files.length < 1}
                 onImageClick={(index, fs) => console.log(index, fs)}
               />
             </Item>
           </List>
-          <Button type="primary">确认</Button>
-          <Button type="ghost">取消</Button>
+          <Button type="primary" onClick={this.onSubmit}>确认</Button>
+          <Button type="ghost" onClick={this.onReset}>取消</Button>
         </form>
         {/* <SiteNav page="my" history={this.props.history} /> */}
       </div>
@@ -111,7 +113,7 @@ class Account extends Component {
       if (!error) {
         console.log(this.props.form.getFieldsValue());
       } else {
-        alert('Validation failed');
+        Toast.fail('您有必选项未填写完毕。');
       }
     });
   }
