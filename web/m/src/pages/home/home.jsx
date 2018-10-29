@@ -6,6 +6,7 @@ import STATUS_CODE from '../../utils/statusCode';
 import './home.less';
 import DreamList from '../../components/DreamList/DreamList';
 import SiteNav from '../../components/SiteNav/SiteNav';
+import TopNav from '../../components/TopNav/TopNav';
 class Home extends Component {
 
   state = {
@@ -15,21 +16,7 @@ class Home extends Component {
   render() {
     return (
       <div className="page page-home">
-        {
-          this.props.user.username ? '' :
-          <NavBar
-            mode="dark"
-            // icon={<Icon type="home" />}
-            rightContent={[
-              <Link key="0" className="btn-login" to="/signup">
-                注册
-              </Link>,
-              <Link key="1" className="btn-login" to="/login">
-                登录
-              </Link>
-            ]}
-          ></NavBar>
-        }
+        <TopNav user={this.props.user}/>
         <DreamList items={this.state.items} />
         <SiteNav page="home" history={this.props.history} />
       </div>

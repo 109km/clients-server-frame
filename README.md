@@ -43,6 +43,23 @@ If you try to fulfill your own dream, you're a hero.
 - [ ] My
 - [ ] Dream - detail
 
+### My
+- [ ] Settings
+  - [ ] Avatar
+  - [ ] Nickname
+  - [ ] Password
+  - [ ] Email / Phone number
+  - [ ] About me
+
+- [ ] My backers
+  - [ ] Filter
+
+- [ ] Edit my dream
+  - [ ] About
+  - [ ] Tiers
+  - [ ] Goals
+  - [ ] Posts
+
 ## Server
 
 ### Error code

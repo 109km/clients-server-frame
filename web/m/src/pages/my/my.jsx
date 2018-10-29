@@ -15,19 +15,30 @@ class My extends Component {
   render() {
     return (
       <div className="page page-my">
-        <List renderHeader={() => 'Icon in the left'}>
-          <Item
-            thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
-            arrow="horizontal"
-            onClick={() => { }}
-          >The wallet is {this.props.user.nickname}</Item>
-          <Link to={`/dream/detail/?id=${this.state.userId}`}>
+        <List renderHeader={() => '个人中心'}>
+          <Link className="link" to={`/account/`}>
             <Item
-              thumb="https://zos.alipayobjects.com/rmsportal/UmbJMbWOejVOpxe.png"
+              thumb="/images/icon-setting.png"
+              arrow="horizontal"
+              onClick={() => { }}
+            >账户设置</Item>
+          </Link>
+          <Link className="link" to={`/dream/edit/}`}>
+            <Item
+              thumb="/images/icon-edit.png"
               onClick={() => { }}
               arrow="horizontal"
             >
-              My Cost Ratio
+              编辑个人项目
+            </Item>
+          </Link>
+          <Link className="link" to={`/backers/`}>
+            <Item
+              thumb="/images/icon-backers.png"
+              onClick={() => { }}
+              arrow="horizontal"
+            >
+              我的支持者
             </Item>
           </Link>
         </List>

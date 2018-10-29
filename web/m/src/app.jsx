@@ -13,6 +13,7 @@ import Logout from './pages/logout/logout';
 import Signup from './pages/signup/signup';
 import Explore from './pages/explore/explore';
 import My from './containers/my';
+import Account from './containers/account';
 class App extends Component {
   render() {
     return (
@@ -30,6 +31,7 @@ class App extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/explore" component={Explore} />
         <Route path="/my" component={My} />
+        <Route path="/account" component={Account} />
       </div>
     )
   }
