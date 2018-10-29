@@ -24,12 +24,12 @@ class Home extends Component {
   }
   async componentDidMount() {
     const userData = await post(Config.apiUrl + '/user/detail/');
-    const dreams = await post(Config.apiUrl + '/dream/list/');
     const user = userData.data;
     if (user.code === STATUS_CODE['SUCCESS'].code) {
       this.props.setUserInfo(user.data);
     }
-
+    
+    const dreams = await post(Config.apiUrl + '/dream/list/');
     this.setState({
       items: dreams.data.data.rows
     });

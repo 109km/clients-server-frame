@@ -19,6 +19,9 @@ const mapDispatchToProps = dispatch => {
   return {
     setUserInfo: user => {
       dispatch(actionUser.setUserInfo(user));
+    },
+    setUserAvatar: avatar => {
+      dispatch(actionUser.setUserAvatar(avatar));
     }
   }
 }
