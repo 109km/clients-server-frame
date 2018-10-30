@@ -14,7 +14,7 @@ class UserService extends Service {
         type: 'password',
         compare: 're_password'
       },
-    };    
+    };
     // 校验参数
     ctx.validate(createRule);
     // 密码加密储存
@@ -36,7 +36,7 @@ class UserService extends Service {
     }
 
   }
-  async findOne(data, isUpdate = false) {
+  async findOne(data, isNewSignIn = false) {
     const {
       ctx
     } = this;
@@ -47,7 +47,7 @@ class UserService extends Service {
       where: userData,
     });
     if (user) {
-      if (isUpdate) {
+      if (isNewSignIn) {
         user.update({
           lastSignInAt: dayjs().format('YYYY-MM-D HH:mm:ss')
         });
@@ -56,6 +56,25 @@ class UserService extends Service {
       res.data = {
         user
       };
+    } else {
+      res = STATUS_CODE['USER_NOT_EXIST'];
+    }
+    return res;
+  }
+
+  async updateOne(id, data) {
+    const {
+      ctx
+    } = this;
+    let userData = Object.assign({}, data);
+    const user = await ctx.model.User.findOne({
+      where: {
+        id: id
+      },
+    });
+    console.log(userData);
+    if (user) {
+      user.update(userData);
     } else {
       res = STATUS_CODE['USER_NOT_EXIST'];
     }

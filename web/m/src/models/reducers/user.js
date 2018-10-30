@@ -13,6 +13,10 @@ const user = (state = {}, action) => {
     case ACTIONS_TYPES.SET_USER_LOGOUT:
       state = {};
       return state;
+    case ACTIONS_TYPES.SET_USER_AVATAR:
+      
+
+      return Object.assign({},state,action.payload);
     default:
       return state;
   }

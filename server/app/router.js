@@ -27,8 +27,8 @@ module.exports = app => {
   // 登出
   app.get('/signout', controller.user.signout);
   // 上传
-  app.post('/upload', controller.uploadFile.upload);
-
+  app.post('/upload/multiple', controller.uploadFile.upload);
+  app.post('/upload/single', controller.uploadFile.single);
   // 项目
   app.post('/dream/create', controller.dream.create);
   app.post('/dream/detail', controller.dream.detail);

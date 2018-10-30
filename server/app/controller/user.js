@@ -86,6 +86,15 @@ class UserController extends Controller {
     const res = await ctx.service.user.create(userData);
     ctx.body = res;
   }
+
+  async edit(ctx) {
+    const userData = {
+      username: ctx.request.body.username,
+      password: ctx.request.body.password,
+      're-password': ctx.request.body['re-password'],
+    }
+    
+  }
 }
 
 module.exports = UserController;

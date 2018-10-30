@@ -29,7 +29,7 @@ class UploaderController extends Controller {
     //文件响应
     ctx.body = {
       filename: filename,
-      url: target
+      url: target.replace('app/','/')
     };
   }
   async upload(ctx) {

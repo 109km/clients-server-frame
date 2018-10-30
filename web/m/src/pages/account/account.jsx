@@ -37,6 +37,7 @@ class Account extends Component {
               placeholder="请输入新的昵称"
             >昵称</InputItem>
 
+
             <InputItem
               {...getFieldProps('oldPassword', {
                 rules: [
@@ -57,14 +58,14 @@ class Account extends Component {
               {...getFieldProps('newPassword', {
                 rules: [
                   { required: true, message: '输入新密码' },
-                  { validator: this.validatePassword },
+                  { validator: this.validateNewPassword },
                 ],
               })}
               type="password"
               clear
               error={!!getFieldError('newPassword')}
               onErrorClick={() => {
-                Toast.fail(getFieldError('newPassword').join('、'));
+                Toast.fail(getFieldError('newPassword').join(''));
               }}
               placeholder="输入新密码"
             >新密码</InputItem>
@@ -73,20 +74,23 @@ class Account extends Component {
               {...getFieldProps('reNewPassword', {
                 rules: [
                   { required: true, message: '请再次输入密码' },
-                  { validator: this.validatePassword },
+                  { validator: this.validateRePassword },
                 ],
               })}
               type="password"
               clear
               error={!!getFieldError('reNewPassword')}
               onErrorClick={() => {
-                Toast.fail(getFieldError('reNewPassword').join('、'));
+                Toast.fail(getFieldError('reNewPassword').join(''));
               }}
               placeholder="再次输入新密码"
             >确认新密码</InputItem>
 
             <Item>
+              修改头像
               <img className="avatar" src={this.props.user.avatarUrl} alt="" />
+
+              选择新头像
               <ImagePicker
                 files={this.state.files}
                 onChange={this.onChange}
@@ -102,16 +106,25 @@ class Account extends Component {
       </div>
     );
   }
-  onChange = (files, type, index) => {
-    console.log(files);
+  onChange = async (files, type, index) => {
     this.setState({
       files,
     });
   }
   onSubmit = () => {
-    this.props.form.validateFields({ force: true }, (error) => {
+    this.props.form.validateFields({ force: true }, async (error) => {
       if (!error) {
-        console.log(this.props.form.getFieldsValue());
+        // Upload avatar file first
+        let avatarFormData = new FormData();
+        // avatarFormData.append('userId', this.props.user.id);
+        console.log(this.state.files);
+        avatarFormData.append('file', this.state.files[0].file);
+        const avatarResponse = await post(Config.apiUrl + '/upload/single', {
+          data: avatarFormData
+        });
+
+        console.log(avatarResponse);
+
       } else {
         Toast.fail('您有必选项未填写完毕。');
       }
@@ -125,6 +138,21 @@ class Account extends Component {
       callback();
     } else {
       callback(new Error('用户名不能少于2个字'));
+    }
+  }
+  validateNewPassword = (rule, value, callback) => {
+    if (value && value.length >= 6) {
+      callback();
+    } else {
+      callback(new Error('密码不能少于6位'));
+    }
+  }
+  validateRePassword = (rule, value, callback) => {
+    let newPassword = this.props.form.getFieldsValue()['newPassword'];
+    if (newPassword === value) {
+      callback();
+    } else {
+      callback(new Error('两次输入密码不同'));
     }
   }
   async componentDidMount() {
