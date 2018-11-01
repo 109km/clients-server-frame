@@ -1,0 +1,60 @@
+@startuml
+:User;
+split
+:Home;
+  split
+  :Recommended 
+  news;
+  split again
+  :Followed
+  people's news;
+  end split
+split again
+:New post;
+  split
+  :Title;
+  split again
+  :Content;
+  split again
+  :Images;
+  end split
+
+split again
+:Explore;
+  split
+  :Search;
+  split again
+  :Recommended
+  dreams;
+  end split
+split again
+:My;
+  split
+  :Account;
+    split
+    :Nickname;
+    split again
+    :Avatar;
+    split again
+    :Password;
+    split again
+    :Bio;
+    end split
+  split again
+  :Edit my page;
+    split
+    :Title;
+    split again
+    :Description;
+    split again
+    :Cover;
+    split again
+    :Tiers;
+    end split
+  split again
+  :My backers;
+  :Backers' list;
+  end split
+end split
+:End;
+@enduml
