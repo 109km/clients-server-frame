@@ -19,4 +19,4 @@ class Explore extends Component {
     );
   }
 }
-export default withRouter(Explore);
+export default Explore;

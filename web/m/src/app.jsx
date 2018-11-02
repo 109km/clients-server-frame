@@ -11,7 +11,7 @@ import PostDetail from './pages/post/detail/detail';
 import Login from './pages/login/login';
 import Logout from './pages/logout/logout';
 import Signup from './pages/signup/signup';
-import Explore from './pages/explore/explore';
+import Explore from './containers/explore';
 import My from './containers/my';
 import Account from './containers/account';
 class App extends Component {
