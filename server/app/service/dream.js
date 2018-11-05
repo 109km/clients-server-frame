@@ -84,35 +84,18 @@ class DreamService extends Service {
     const {
       ctx
     } = this;
-    const dream = await ctx.model.Dream.findOne({
-      where: {
+    let where = {};
+    if (params.dream_id) {
+      where = {
         id: params.dream_id
-      },
-      include: [{
-        model: ctx.model.User,
-        attributes: ['nickname', 'avatar_url']
-      }, {
-        model: ctx.model.Post
-      }]
-    });
-    let res;
-    if (dream) {
-      res = STATUS_CODE['SUCCESS'];
-      res.data = dream;
-    } else {
-      res = STATUS_CODE['DREAM_NOT_FOUND'];
-    }
-    return res;
-  }
-
-  async findDreamByUserId(params) {
-    const {
-      ctx
-    } = this;
-    const dream = await ctx.model.Dream.findOne({
-      where: {
+      };
+    } else if (params.user_id) {
+      where = {
         user_id: params.user_id
-      },
+      };
+    }
+    const dream = await ctx.model.Dream.findOne({
+      where: where,
       include: [{
         model: ctx.model.User,
         attributes: ['nickname', 'avatar_url']
@@ -120,7 +103,6 @@ class DreamService extends Service {
         model: ctx.model.Post
       }]
     });
-
     let res;
     if (dream) {
       res = STATUS_CODE['SUCCESS'];

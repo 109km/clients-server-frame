@@ -31,7 +31,7 @@ module.exports = app => {
   app.post('/upload/single', controller.uploadFile.single);
   // 项目
   app.post('/dream/create', controller.dream.create);
-  app.post('/dream/edit', controller.dream.edit);
+  app.post('/dream/update', controller.dream.update);
   app.post('/dream/detail', controller.dream.detail);
   app.post('/dream/list', controller.dream.list);
   app.post('/dream/updateGoals', controller.dream.updateGoals);

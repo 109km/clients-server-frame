@@ -1,9 +1,7 @@
-export const getDreamDetail = (dreamId = null) => ({
-  type: 'GET_DREAM_DETAIL',
-  payload: {
-    dreamId: dreamId
-  }
-})
+import {
+  post,
+  Config
+} from '../../utils/util';
 
 /**
  * @desc Save dream changes.
@@ -12,13 +10,53 @@ export const getDreamDetail = (dreamId = null) => ({
  * @param {String} options.content
  * @param {String} options.coverUrl
  */
-export const saveDreamDetail = (options) => ({
-  type: 'SAVE_DREAM_DETAIL',
+export const updateDreamDetail = (options) => ({
+  type: 'UPDATE_DREAM_DETAIL',
   payload: options
 })
+
+export const getDreamDetailStarted = () => ({
+  type: 'GET_DREAM_DETAIL_STARTED'
+})
+
+export const getDreamDetailSuccess = (dream) => ({
+  type: 'GET_DREAM_DETAIL_SUCCESS',
+  payload: { ...dream
+  }
+})
+
+export const getDreamDetailFail = (error) => ({
+  type: 'GET_DREAM_DETAIL_FAIL',
+  payload: {
+    error
+  }
+})
+
+/**
+ * @param {Number} dreamId 
+ */
+export const getDreamDetail = ({
+  dreamId
+}) => {
+  return dispatch => {
+    dispatch(getDreamDetailStarted());
+    post(Config.apiUrl + '/dream/detail', {
+        dreamId
+      })
+      .then(res => {
+        dispatch(getDreamDetailSuccess(res.data.data));
+      })
+      .catch(err => {
+        dispatch(getDreamDetailFail(err.message));
+      });
+  };
+};
 
 // Action types
 export const ACTIONS_TYPES = {
   GET_DREAM_DETAIL: 'GET_DREAM_DETAIL',
-  SAVE_DREAM_DETAIL: 'SAVE_DREAM_DETAIL'
+  UPDATE_DREAM_DETAIL: 'UPDATE_DREAM_DETAIL',
+  GET_DREAM_DETAIL_STARTED: 'GET_DREAM_DETAIL_STARTED',
+  GET_DREAM_DETAIL_SUCCESS: 'GET_DREAM_DETAIL_SUCCESS',
+  GET_DREAM_DETAIL_FAIL: 'GET_DREAM_DETAIL_FAIL'
 }

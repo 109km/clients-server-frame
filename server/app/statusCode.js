@@ -42,5 +42,9 @@ module.exports = {
   'UNKNOWN_ERROR': {
     code: -1,
     message: '未知错误'
-  }
+  },
+  'PARAMS_MISSING': {
+    code: -2,
+    message: '参数丢失'
+  },
 }

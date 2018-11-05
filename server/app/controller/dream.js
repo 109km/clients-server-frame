@@ -18,10 +18,22 @@ class DreamController extends Controller {
     ctx.body = res;
   }
   async detail(ctx) {
-    let res = await ctx.service.dream.findOne(ctx.request.body);
+    let res;
+    let key = ctx.headers['x-api-key'];
+    let user = await this.app.redis.get(key);
+    user = JSON.parse(user);
+    if (!(user && user.id && ctx.request.body['dream_id'])) {
+      ctx.body = STATUS_CODE['USER_NOT_LOGIN'];
+      return;
+    }
+    if (ctx.request.body['dream_id'] || ctx.request.body['user_id']) {
+      res = await ctx.service.dream.findOne(ctx.request.body);
+    } else {
+      res = STATUS_CODE['PARAMS_MISSING'];
+    }
     ctx.body = res;
   }
-  async edit(ctx) {
+  async update(ctx) {
     let key = ctx.headers['x-api-key'];
     let user = await this.app.redis.get(key);
     user = JSON.parse(user);
@@ -29,11 +41,9 @@ class DreamController extends Controller {
       ctx.body = STATUS_CODE['USER_NOT_LOGIN'];
       return;
     }
-    let res = await ctx.service.dream.findDreamByUserId({
+    let res = await ctx.service.dream.findOne({
       user_id: user.id
     });
-
-
     ctx.body = res;
   }
   async updateGoals(ctx) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, Icon } from 'antd-mobile';
+import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace } from 'antd-mobile';
 import { post, Config } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
 import './edit.less';
@@ -8,7 +8,8 @@ class DreamEdit extends Component {
   state = {
     files: [],
     title: "",
-    content: ""
+    content: "",
+    dream: {}
   }
   render() {
     return (
@@ -49,8 +50,7 @@ class DreamEdit extends Component {
       title: this.state.title,
       content: this.state.content
     };
-
-    const res = await post(Config.apiUrl + '/dream/create', {
+    const res = await post(Config.apiUrl + '/dream/edit', {
       data: formData
     });
     if (res.data.code === STATUS_CODE['SUCCESS'].code) {
@@ -71,9 +71,8 @@ class DreamEdit extends Component {
       Toast.fail(res.data.message);
     }
   }
-  componentDidMount(){
-    console.log(this.props);
-    this.props.getDreamDetail();
+  async componentDidMount() {
+    
   }
 }
 export default DreamEdit;
