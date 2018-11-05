@@ -21,8 +21,8 @@ const mapDispatchToProps = dispatch => {
     setUserInfo: user => {
       dispatch(actionUser.setUserInfo(user));
     },
-    getDreamDetail: dreamId => {
-      dispatch(actionDream.getDreamDetail(dreamId));
+    getDreamDetail: (dreamId = null) => {
+      return dispatch(actionDream.getDreamDetail({dreamId}));
     }
   }
 }

@@ -2,6 +2,7 @@ import {
   post,
   Config
 } from '../../utils/util';
+import STATUS_CODE from '../../utils/statusCode';
 
 /**
  * @desc Save dream changes.
@@ -21,8 +22,7 @@ export const getDreamDetailStarted = () => ({
 
 export const getDreamDetailSuccess = (dream) => ({
   type: 'GET_DREAM_DETAIL_SUCCESS',
-  payload: { ...dream
-  }
+  payload: { ...dream}
 })
 
 export const getDreamDetailFail = (error) => ({
@@ -38,17 +38,17 @@ export const getDreamDetailFail = (error) => ({
 export const getDreamDetail = ({
   dreamId
 }) => {
-  return dispatch => {
+  return async (dispatch, getState) => {
     dispatch(getDreamDetailStarted());
-    post(Config.apiUrl + '/dream/detail', {
-        dreamId
-      })
-      .then(res => {
-        dispatch(getDreamDetailSuccess(res.data.data));
-      })
-      .catch(err => {
-        dispatch(getDreamDetailFail(err.message));
-      });
+    let res = await post(Config.apiUrl + '/dream/detail', {
+      dreamId
+    });
+    if (res.data.code === STATUS_CODE['SUCCESS'].code) {
+      dispatch(getDreamDetailSuccess(res.data.data));
+    } else {
+      dispatch(getDreamDetailFail(res.data));
+    }
+    return getState();
   };
 };
 

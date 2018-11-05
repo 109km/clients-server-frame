@@ -6,10 +6,8 @@ import './edit.less';
 
 class DreamEdit extends Component {
   state = {
-    files: [],
     title: "",
-    content: "",
-    dream: {}
+    content: ""
   }
   render() {
     return (
@@ -72,7 +70,19 @@ class DreamEdit extends Component {
     }
   }
   async componentDidMount() {
-    
+    const res = await this.props.getDreamDetail();
+    if (this.props.dream.error) {
+      if (this.props.dream.error.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
+        Toast.fail(this.props.dream.error.message, 3, () => {
+          this.props.history.push({
+            pathname: '/login',
+            search: `?r=${encodeURIComponent(this.props.location.pathname + this.props.location.search)}`
+          });
+        });
+      }
+    }else{
+      this.setState(this.props.dream);
+    }
   }
 }
 export default DreamEdit;

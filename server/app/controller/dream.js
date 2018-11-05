@@ -22,12 +22,19 @@ class DreamController extends Controller {
     let key = ctx.headers['x-api-key'];
     let user = await this.app.redis.get(key);
     user = JSON.parse(user);
-    if (!(user && user.id && ctx.request.body['dream_id'])) {
+    if (!(user && user.id || ctx.request.body['dream_id'])) {
       ctx.body = STATUS_CODE['USER_NOT_LOGIN'];
       return;
     }
-    if (ctx.request.body['dream_id'] || ctx.request.body['user_id']) {
-      res = await ctx.service.dream.findOne(ctx.request.body);
+    let params = {
+      user_id: user.id
+    };
+
+    ctx.request.body['dream_id'] && (params['dream_id'] = ctx.request.body['dream_id']);
+    ctx.request.body['user_id'] && (params['user_id'] = ctx.request.body['user_id']);
+
+    if (params['dream_id'] || params['user_id']) {
+      res = await ctx.service.dream.findOne(params);
     } else {
       res = STATUS_CODE['PARAMS_MISSING'];
     }
