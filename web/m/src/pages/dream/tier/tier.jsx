@@ -57,7 +57,7 @@ class DreamTier extends Component {
       dreamId: query.dreamId,
       tiers: this.state.tiers
     };
-    const res = await post(Config.apiUrl + '/dream/addTiers', {
+    const res = await post(Config.apiUrl + '/dream/updateTiers', {
       data: formData
     });
 

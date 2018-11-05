@@ -5,13 +5,12 @@ import {
 import {
   withRouter
 } from "react-router-dom";
-
 import {
-  actionUser
-} from '../models/actions';
+  actionUser,
+  actionDream
+} from '../../models/actions';
 
-import Page from '../pages/home/home';
-
+import Page from '../../pages/dream/edit/edit';
 
 const mapStateToProps = state => {
   return state;
@@ -22,8 +21,8 @@ const mapDispatchToProps = dispatch => {
     setUserInfo: user => {
       dispatch(actionUser.setUserInfo(user));
     },
-    setUserLogout: () => {
-      dispatch(actionUser.setUserLogout());
+    getDreamDetail: dreamId => {
+      dispatch(actionDream.getDreamDetail(dreamId));
     }
   }
 }

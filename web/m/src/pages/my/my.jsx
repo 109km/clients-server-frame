@@ -23,7 +23,7 @@ class My extends Component {
               onClick={() => { }}
             >账户设置</Item>
           </Link>
-          <Link className="link" to={`/dream/edit/}`}>
+          <Link className="link" to={`/dream/edit/`}>
             <Item
               thumb="/images/icon-edit.png"
               onClick={() => { }}

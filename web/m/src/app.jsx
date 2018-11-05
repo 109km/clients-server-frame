@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import Home from './containers/home';
-import DreamNew from './pages/dream/new/new';
+import DreamEdit from './containers/dream/edit';
 import DreamGoal from './pages/dream/goal/goal';
 import DreamTier from './pages/dream/tier/tier';
 import DreamDetail from './pages/dream/detail/detail';
@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <div className="layout">
         <Route path="/" exact component={Home} />
-        <Route path="/dream/new" component={DreamNew} />
+        <Route path="/dream/edit" component={DreamEdit} />
         <Route path="/dream/goal" component={DreamGoal} />
         <Route path="/dream/tier" component={DreamTier} />
         <Route path="/dream/detail" component={DreamDetail} />

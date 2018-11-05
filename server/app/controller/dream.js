@@ -21,12 +21,27 @@ class DreamController extends Controller {
     let res = await ctx.service.dream.findOne(ctx.request.body);
     ctx.body = res;
   }
-  async addGoals(ctx) {
-    let res = await ctx.service.dream.addGoals(ctx.request.body);
+  async edit(ctx) {
+    let key = ctx.headers['x-api-key'];
+    let user = await this.app.redis.get(key);
+    user = JSON.parse(user);
+    if (!(user && user.id)) {
+      ctx.body = STATUS_CODE['USER_NOT_LOGIN'];
+      return;
+    }
+    let res = await ctx.service.dream.findDreamByUserId({
+      user_id: user.id
+    });
+
+
     ctx.body = res;
   }
-  async addTiers(ctx) {
-    let res = await ctx.service.dream.addTiers(ctx.request.body);
+  async updateGoals(ctx) {
+    let res = await ctx.service.dream.updateGoals(ctx.request.body);
+    ctx.body = res;
+  }
+  async updateTiers(ctx) {
+    let res = await ctx.service.dream.updateTiers(ctx.request.body);
     ctx.body = res;
   }
   async list(ctx) {

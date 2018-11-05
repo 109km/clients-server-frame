@@ -26,7 +26,7 @@ class DreamService extends Service {
     res.data = dream;
     return res;
   }
-  async addGoals(goalsData) {
+  async updateGoals(goalsData) {
     const {
       ctx
     } = this;
@@ -53,13 +53,12 @@ class DreamService extends Service {
     return res;
   }
 
-  async addTiers(tiersData) {
+  async updateTiers(tiersData) {
     const {
       ctx
     } = this;
     const tiers = JSON.stringify(tiersData.tiers);
     const dreamId = tiersData.dream_id;
-    console.log(dreamId);
     const updatedResult = await ctx.model.Dream.update({
       tiers_list: tiers
     }, {
@@ -85,6 +84,58 @@ class DreamService extends Service {
     const {
       ctx
     } = this;
+    const dream = await ctx.model.Dream.findOne({
+      where: {
+        id: params.dream_id
+      },
+      include: [{
+        model: ctx.model.User,
+        attributes: ['nickname', 'avatar_url']
+      }, {
+        model: ctx.model.Post
+      }]
+    });
+    let res;
+    if (dream) {
+      res = STATUS_CODE['SUCCESS'];
+      res.data = dream;
+    } else {
+      res = STATUS_CODE['DREAM_NOT_FOUND'];
+    }
+    return res;
+  }
+
+  async findDreamByUserId(params) {
+    const {
+      ctx
+    } = this;
+    const dream = await ctx.model.Dream.findOne({
+      where: {
+        user_id: params.user_id
+      },
+      include: [{
+        model: ctx.model.User,
+        attributes: ['nickname', 'avatar_url']
+      }, {
+        model: ctx.model.Post
+      }]
+    });
+
+    let res;
+    if (dream) {
+      res = STATUS_CODE['SUCCESS'];
+      res.data = dream;
+    } else {
+      res = STATUS_CODE['DREAM_NOT_FOUND'];
+    }
+    return res;
+  }
+
+  async updateOne(params) {
+    const {
+      ctx
+    } = this;
+
     const dream = await ctx.model.Dream.findOne({
       where: {
         id: params.dream_id

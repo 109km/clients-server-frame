@@ -58,7 +58,7 @@ class DreamGoal extends Component {
       dreamId: query.dreamId,
       goals: this.state.goals
     };
-    const res = await post(Config.apiUrl + '/dream/addGoals', {
+    const res = await post(Config.apiUrl + '/dream/updateGoals', {
       data: formData
     });
     if (res.data.code === STATUS_CODE['SUCCESS'].code) {

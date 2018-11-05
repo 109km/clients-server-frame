@@ -31,10 +31,11 @@ module.exports = app => {
   app.post('/upload/single', controller.uploadFile.single);
   // 项目
   app.post('/dream/create', controller.dream.create);
+  app.post('/dream/edit', controller.dream.edit);
   app.post('/dream/detail', controller.dream.detail);
   app.post('/dream/list', controller.dream.list);
-  app.post('/dream/addGoals', controller.dream.addGoals);
-  app.post('/dream/addTiers', controller.dream.addTiers);
+  app.post('/dream/updateGoals', controller.dream.updateGoals);
+  app.post('/dream/updateTiers', controller.dream.updateTiers);
 
   // 文章
   app.post('/post/create', controller.post.create);

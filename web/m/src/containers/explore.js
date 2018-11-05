@@ -9,7 +9,7 @@ import {
   actionUser
 } from '../models/actions';
 
-import Explore from '../pages/explore/explore';
+import Page from '../pages/explore/explore';
 
 const mapStateToProps = state => {
   return state;
@@ -26,5 +26,5 @@ const mapDispatchToProps = dispatch => {
 const container = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Explore)
+)(Page)
 export default withRouter(container);
