@@ -52,9 +52,7 @@ class DreamTier extends Component {
     });
   }
   onSubmit = async (e) => {
-    let query = getQuery(this.props.location.search);
     let formData = {
-      dreamId: query.dreamId,
       tiers: this.state.tiers
     };
     const res = await post(Config.apiUrl + '/dream/updateTiers', {

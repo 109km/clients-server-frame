@@ -18,9 +18,12 @@ class DreamGoal extends Component {
       <div className="page page-dream-new">
         <InputGoalList onUpdate={this.onUpdate} items={this.state.goals} />
         <WhiteSpace size="lg" />
-        <Button type="primary" onClick={this.onAdd}>新增目标</Button>
-        <WhiteSpace size="lg" />
-        <Button type="primary" onClick={this.onSubmit}>下一步</Button>
+        <div className="button-area">
+          <Button type="primary" onClick={this.onAdd}>新增目标</Button>
+          <WhiteSpace size="lg" />
+          <Button type="primary" onClick={this.onSubmit}>下一步</Button>
+        </div>
+
       </div>
     );
   }
@@ -53,9 +56,7 @@ class DreamGoal extends Component {
     });
   }
   onSubmit = async (e) => {
-    let query = getQuery(this.props.location.search);
     let formData = {
-      dreamId: query.dreamId,
       goals: this.state.goals
     };
     const res = await post(Config.apiUrl + '/dream/updateGoals', {

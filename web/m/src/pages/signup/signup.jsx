@@ -70,7 +70,7 @@ class Signup extends Component {
     const res = response.data;
     if (res.code === 0) {
       this.props.history.push({
-        pathname: 'login'
+        pathname: "/login"
       });
     } else {
       Toast.fail(`${res.message}`);

@@ -113,26 +113,24 @@ class DreamService extends Service {
     return res;
   }
 
-  async updateOne(params) {
+  async updateOne(where) {
     const {
       ctx
     } = this;
 
-    const dream = await ctx.model.Dream.findOne({
-      where: {
-        id: params.dream_id
-      },
-      include: [{
-        model: ctx.model.User,
-        attributes: ['nickname', 'avatar_url']
-      }, {
-        model: ctx.model.Post
-      }]
+    let updateData = ctx.request.body;
+    if (updateData.tiers_list) {
+      updateData.tiers_list = JSON.stringify(updateData.tiers_list);
+    }
+    if (updateData.goals_list) {
+      updateData.goals_list = JSON.stringify(updateData.goals_list);
+    }
+    const updateResult = await ctx.model.Dream.update(updateData, {
+      where: where
     });
     let res;
-    if (dream) {
-      res = STATUS_CODE['SUCCESS'];
-      res.data = dream;
+    if (updateResult[0] === 1) {
+      res = await this.findOne(where);
     } else {
       res = STATUS_CODE['DREAM_NOT_FOUND'];
     }

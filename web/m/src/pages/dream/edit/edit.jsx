@@ -48,20 +48,19 @@ class DreamEdit extends Component {
       title: this.state.title,
       content: this.state.content
     };
-    const res = await post(Config.apiUrl + '/dream/edit', {
+    const res = await post(Config.apiUrl + '/dream/update', {
       data: formData
     });
     if (res.data.code === STATUS_CODE['SUCCESS'].code) {
-      Toast.success('项目创建成功！', 3, () => {
+      Toast.success('项目修改成功！', 3, () => {
         this.props.history.push({
-          path: '/dream/goal',
-          search: '?dreamId=' + res.data.data.id
+          pathname: "/dream/goal"
         });
       });
     } else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
       Toast.fail(res.data.message, 3, () => {
         this.props.history.push({
-          path: '/user/signin',
+          pathname: "/login",
         });
       });
     }
@@ -71,9 +70,10 @@ class DreamEdit extends Component {
   }
   async componentDidMount() {
     const res = await this.props.getDreamDetail();
-    if (this.props.dream.error) {
-      if (this.props.dream.error.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
-        Toast.fail(this.props.dream.error.message, 3, () => {
+    let dream = res.dream;
+    if (dream.error) {
+      if (dream.error.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
+        Toast.fail(dream.error.message, 3, () => {
           this.props.history.push({
             pathname: '/login',
             search: `?r=${encodeURIComponent(this.props.location.pathname + this.props.location.search)}`
@@ -81,7 +81,7 @@ class DreamEdit extends Component {
         });
       }
     }else{
-      this.setState(this.props.dream);
+      this.setState(dream);
     }
   }
 }
