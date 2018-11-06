@@ -14,7 +14,7 @@ class SiteNav extends Component {
     iconSize: 26,
   }
   onTabSelected = (val) => {
-    let path = '/';
+    let path = "/";
     if (val !== 'home') {
       path = path + val;
     }
@@ -54,6 +54,31 @@ class SiteNav extends Component {
             // badge={1}
             onPress={() => { this.onTabSelected('home') }}
             data-seed="logId"
+          >
+          </TabBar.Item>
+          <TabBar.Item
+            icon={
+              <div style={{
+                width: `${this.state.iconSize}px`,
+                height: `${this.state.iconSize}px`,
+                background: `url(${this.state.cdnUrl}/icon-you-edit.png) ${iconStyle}`
+              }}
+              />
+            }
+            selectedIcon={
+              <div style={{
+                width: `${this.state.iconSize}px`,
+                height: `${this.state.iconSize}px`,
+                background: `url(${this.state.cdnUrl}/icon-you-edit-actived.png) ${iconStyle}`
+              }}
+              />
+            }
+            title="我的项目"
+            key="dream"
+            // badge={'new'}
+            selected={this.props.page === 'dream'}
+            onPress={() => { this.onTabSelected('dream/detail') }}
+            data-seed="logId1"
           >
           </TabBar.Item>
           <TabBar.Item

@@ -56,7 +56,7 @@ export const getDreamDetail = ({
     } else {
       dispatch(getDreamDetailFail(res.data));
     }
-    return getState();
+    return res.data;
   };
 };
 

@@ -10,7 +10,7 @@ import {
   actionDream
 } from '../../models/actions';
 
-import Page from '../../pages/dream/edit/edit';
+import Page from '../../pages/dream/detail/detail';
 
 const mapStateToProps = state => {
   return state;
@@ -25,9 +25,6 @@ const mapDispatchToProps = dispatch => {
       return dispatch(actionDream.getDreamDetail({
         dreamId
       }));
-    },
-    updateDreamDetail: (formData) => {
-      return dispatch(actionDream.updateDreamDetail(formData));
     }
   }
 }

@@ -1,95 +1,107 @@
-.user-info {
-  position: relative;
+.page-dream-detail {
+  .user-info {
+    position: relative;
 
-  .cover {
-    height: 200px;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-size: 100%;
+    .cover {
+      height: 200px;
+      overflow: hidden;
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+
+    .avatar {
+      position: absolute;
+      top: 50px;
+      left: 30px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #eee;
+      padding: 5px;
+    }
+
+    .btn-edit {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: @brand-primary;
+      padding:5px 15px;
+      color: #fff;
+      border-radius: 5px;
+    }
+
+    .user-desc {
+      position: absolute;
+      top: 70px;
+      left: 135px;
+      color: #fff;
+      font-size: 18px;
+      width: 200px;
+      letter-spacing: 1px;
+
+      .nickname {
+        font-size: 24px;
+        font-weight: bold;
+      }
+    }
+
+    .title {
+      position: absolute;
+      top: 110px;
+      left: 135px;
+      width: 200px;
+      color: #f1f1f1;
+    }
+
+    .introduction {
+      position: absolute;
+      top: 140px;
+      left: 135px;
+      width: 200px;
+      color: #f1f1f1;
+    }
+
   }
 
-  .avatar {
-    position: absolute;
-    top: 50px;
-    left: 30px;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: #eee;
-    padding: 5px;
-  }
 
-  .user-desc {
-    position: absolute;
-    top: 70px;
-    left: 135px;
-    color: #fff;
-    font-size: 18px;
-    width: 200px;
-    letter-spacing: 1px;
+  .backers-info {
+    padding: 20px 10px;
+    background: #fff;
+    margin-bottom: 10px;
 
-    .nickname {
-      font-size: 24px;
-      font-weight: bold;
+    .backers-show {
+      text-align: center;
+    }
+
+    .num {
+      color: @brand-primary;
+      font-size: 32px;
+      margin-right: 5px;
+    }
+
+    .actions-sheet {
+      display: flex;
+      margin-top: 15px;
+      justify-content: center;
+    }
+
+    .btn-action {
+      margin: 0 10px;
+    }
+
+    .btn-action-followed {
+      background: #999;
+    }
+
+    .btn-action-followed::before {
+      border-color: #999 !important;
     }
   }
 
-  .title {
-    position: absolute;
-    top: 110px;
-    left: 135px;
-    width: 200px;
-    color: #f1f1f1;
-  }
-
-  .introduction {
-    position: absolute;
-    top: 140px;
-    left: 135px;
-    width: 200px;
-    color: #f1f1f1;
-  }
-
-}
-
-
-.backers-info {
-  padding: 20px 10px;
-  background: #fff;
-  margin-bottom: 10px;
-
-  .backers-show {
-    text-align: center;
-  }
-
-  .num {
-    color: @brand-primary;
-    font-size: 32px;
-    margin-right: 5px;
-  }
-
-  .actions-sheet {
-    display: flex;
-    margin-top: 15px;
-    justify-content: center;
-  }
-
-  .btn-action {
-    margin: 0 10px;
-  }
-
-  .btn-action-followed {
-    background: #999;
-  }
-
-  .btn-action-followed::before {
-    border-color: #999 !important;
-  }
-}
-
-.goals-list {
-  .goals-list-title {
-    font-size: 16px;
-    margin-bottom: 10px;
+  .goals-list {
+    .goals-list-title {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
   }
 }

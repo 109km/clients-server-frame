@@ -4,7 +4,7 @@ import Home from './containers/home';
 import DreamEdit from './containers/dream/edit';
 import DreamGoal from './containers/dream/goal';
 import DreamTier from './containers/dream/tier';
-import DreamDetail from './pages/dream/detail/detail';
+import DreamDetail from './containers/dream/detail';
 import PostNew from './pages/post/new/new';
 import PostEdit from './pages/post/edit/edit';
 import PostDetail from './pages/post/detail/detail';

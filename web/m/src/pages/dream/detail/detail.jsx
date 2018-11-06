@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { Tag, Toast, WhiteSpace, Icon, Button, SegmentedControl } from 'antd-mobile';
 import { post, getQuery, filterHTML, Config } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
 import PostList from '../../../components/PostList/PostList';
 import TierList from '../../../components/TierList/TierList';
+import SiteNav from '../../../components/SiteNav/SiteNav';
 import './detail.less';
 
 class DreamDetail extends Component {
@@ -32,6 +33,7 @@ class DreamDetail extends Component {
       <div className="page page-dream-detail">
         <div className="user-info">
           <div className="cover" style={backgroundCover}></div>
+          {this.state.isSelf ? <Link className="btn-edit" to="/post/new">写文章</Link> : ''}
           <img className="avatar" src={this.state.avatarUrl} alt="" />
           <div className="user-desc">
             <span className="nickname">{this.state.nickname}</span>
@@ -66,17 +68,23 @@ class DreamDetail extends Component {
             </div>
           }
         </div>
+        <SiteNav page="dream" history={this.props.history} />
       </div>
     );
   }
   async componentDidMount() {
     let query = getQuery(this.props.location.search);
-    const response = await post(Config.apiUrl + '/dream/detail', {
-      data: query
-    });
-    let result = response.data;
+    let isSelf = false;
+    const result = await this.props.getDreamDetail(query.dreamId);
     let data = result.data;
     if (result.code === STATUS_CODE['SUCCESS'].code) {
+
+      if (query.dreamId) {
+        (query.dreamId == data.id) && (isSelf = true);
+      } else {
+        isSelf = true;
+      }
+
       data.tiersList = data.tiersList ? JSON.parse(data.tiersList) : data.tiersList;
       data.goalsList = data.goalsList ? JSON.parse(data.goalsList) : data.goalsList;
       data.postsList = data.postsList ? JSON.parse(data.postsList) : data.postsList;
@@ -89,12 +97,13 @@ class DreamDetail extends Component {
         tiersList: data.tiersList,
         goalsList: data.goalsList,
         postsList: data.posts,
-        coverUrl: data.coverUrl
+        coverUrl: data.coverUrl,
+        isSelf: isSelf
       });
     } else if (result.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
       Toast.fail(result.message, 3, () => {
         this.props.history.push({
-          pathname: '/user/signin',
+          pathname: "/login",
         });
       });
     }
@@ -126,7 +135,7 @@ class DreamDetail extends Component {
     } else {
       action = 'add';
     }
-    const res = await post(`http://127.0.0.1:7001/follower/${action}`, {
+    const res = await post(`${Config.apiUrl}/follower/${action}`, {
       data: params
     });
     if (res.data.code === STATUS_CODE['SUCCESS'].code) {
@@ -137,7 +146,7 @@ class DreamDetail extends Component {
     else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
       Toast.fail(res.data.message, 3, () => {
         this.props.history.push({
-          pathname: '/login',
+          pathname: "/login",
           search: `?r=${encodeURIComponent(this.props.location.pathname + this.props.location.search)}`
         });
       });
@@ -165,4 +174,4 @@ class DreamDetail extends Component {
 //   avatar: PropTypes.string.isRequired
 // }
 
-export default withRouter(DreamDetail);
+export default DreamDetail;
