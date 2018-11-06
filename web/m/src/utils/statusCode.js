@@ -27,12 +27,26 @@ const STATUS_CODE = {
     code: 10200,
     message: '用户已存在'
   },
-
-  'POST_NOT_FOUND':{
+  'POST_NOT_FOUND': {
     code: 20100,
     message: '文章未找到'
-  }
-
+  },
+  'COMMENT_NOT_FOUND': {
+    code: 30100,
+    message: '留言未找到'
+  },
+  'DREAM_NOT_FOUND': {
+    code: 40100,
+    message: '项目未找到'
+  },
+  'UNKNOWN_ERROR': {
+    code: -1,
+    message: '未知错误'
+  },
+  'PARAMS_MISSING': {
+    code: -2,
+    message: '参数丢失'
+  },
 }
 
 export default STATUS_CODE;

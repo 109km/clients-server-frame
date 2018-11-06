@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
-import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, Icon } from 'antd-mobile';
-import { post, getQuery, Config } from '../../../utils/util';
+import { Button, Toast, WhiteSpace } from 'antd-mobile';
+import { post, Config, getQuery } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
 import InputTierList from '../../../components/InputTierList/InputTierList';
 import './tier.less';
 
 class DreamTier extends Component {
   state = {
-    tiers: [{
+    tiersList: [{
       title: '',
       content: ''
     }]
   }
   render() {
     return (
-      <div className="page page-tier-new">
-        <InputTierList onUpdate={this.onUpdate} items={this.state.tiers} />
+      <div className="page page-dream-tier">
+        <InputTierList onUpdate={this.onUpdate} items={this.state.tiersList} />
         <WhiteSpace size="lg" />
-        <Button type="primary" onClick={this.onAdd}>新增回报</Button>
-        <WhiteSpace size="lg" />
-        <Button type="primary" onClick={this.onSubmit}>下一步</Button>
+        <div className="button-area">
+          <Button type="primary" onClick={this.onAdd}>新增回报</Button>
+          <WhiteSpace size="lg" />
+          <Button type="primary" onClick={this.onSubmit}>下一步</Button>
+        </div>
       </div>
     );
   }
@@ -35,51 +36,51 @@ class DreamTier extends Component {
     });
   }
   onUpdate = (type, value, index) => {
-    let tiers = this.state.tiers;
+    let tiers = this.state.tiersList;
     tiers[index][type] = value;
     this.setState({
       tiers: tiers
     });
   }
   onAdd = async () => {
-    let tiers = this.state.tiers;
+    let tiers = this.state.tiersList;
     tiers.push({
       title: '',
       content: ''
     });
     this.setState({
-      tiers: tiers
+      tiersList: tiers
     });
   }
   onSubmit = async (e) => {
     let formData = {
-      tiers: this.state.tiers
+      tiers: this.state.tiersList
     };
-    const res = await post(Config.apiUrl + '/dream/updateTiers', {
-      data: formData
-    });
-
-    if (res.data.code === STATUS_CODE['SUCCESS'].code) {
+    const res = await this.props.updateDreamDetail(formData);
+    if (res.code === STATUS_CODE['SUCCESS'].code) {
       Toast.success('回报添加成功！', 3, () => {
         this.props.history.push({
-          pathname: '/'
+          pathname: "/dream/detail"
         });
       });
-    } else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
-      Toast.fail(res.data.message, 3, () => {
+    } else if (res.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
+      Toast.fail(res.message, 3, () => {
         this.props.history.push({
-          pathname: '/user/signin',
+          pathname: "/login",
         });
       });
     }
     else {
-      Toast.fail(res.data.message);
+      Toast.fail(res.message);
     }
   }
+  async componentDidMount() {
+    await this.props.getDreamDetail();
+    const dream = this.props.dream;
+    const user = this.props.user;
+    this.setState({
+      tiersList: JSON.parse(dream.tiersList)
+    });
+  }
 }
-
-// BragItem.propTypes = {
-//   avatar: PropTypes.string.isRequired
-// }
-
-export default withRouter(DreamTier);
+export default DreamTier;

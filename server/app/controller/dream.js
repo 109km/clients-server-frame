@@ -48,6 +48,7 @@ class DreamController extends Controller {
       ctx.body = STATUS_CODE['USER_NOT_LOGIN'];
       return;
     }
+    
     let res = await ctx.service.dream.updateOne({
       user_id: user.id
     });

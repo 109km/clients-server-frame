@@ -8,28 +8,27 @@ import './goal.less';
 
 class DreamGoal extends Component {
   state = {
-    goals: [{
+    goalsList: [{
       title: "",
       content: ""
     }]
   }
   render() {
     return (
-      <div className="page page-dream-new">
-        <InputGoalList onUpdate={this.onUpdate} items={this.state.goals} />
+      <div className="page page-dream-goal">
+        <InputGoalList onUpdate={this.onUpdate} items={this.state.goalsList} />
         <WhiteSpace size="lg" />
         <div className="button-area">
           <Button type="primary" onClick={this.onAdd}>新增目标</Button>
           <WhiteSpace size="lg" />
           <Button type="primary" onClick={this.onSubmit}>下一步</Button>
         </div>
-
       </div>
     );
   }
   onUpdate = (type, value, index) => {
     console.log('Goal:', type, value, index);
-    let goals = this.state.goals;
+    let goals = this.state.goalsList;
     goals[index][type] = value;
     this.setState({
       goals: goals
@@ -46,33 +45,31 @@ class DreamGoal extends Component {
     });
   }
   onAdd = async () => {
-    let goals = this.state.goals;
+    let goals = this.state.goalsList;
     goals.push({
       title: '',
       content: ''
     });
     this.setState({
-      goals: goals
+      goalsList: goals
     });
   }
   onSubmit = async (e) => {
     let formData = {
-      goals: this.state.goals
+      goalsList: this.state.goalsList
     };
-    const res = await post(Config.apiUrl + '/dream/updateGoals', {
-      data: formData
-    });
-    if (res.data.code === STATUS_CODE['SUCCESS'].code) {
-      Toast.success('目标创建成功！', 3, () => {
+    const res = await this.props.updateDreamDetail(formData);
+    if (res.code === STATUS_CODE['SUCCESS'].code) {
+      Toast.success('目标修改成功！', 3, () => {
         this.props.history.push({
-          pathname: 'login'
+          pathname: "/dream/tier"
         });
       });
     }
-    else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
+    else if (res.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
       Toast.fail(res.data.message, 3, () => {
         this.props.history.push({
-          pathname: 'login'
+          pathname: "/login"
         });
       });
     }
@@ -80,10 +77,18 @@ class DreamGoal extends Component {
       Toast.fail(res.data.message);
     }
   }
+  async componentDidMount(){
+    await this.props.getDreamDetail();
+    const dream = this.props.dream;
+    const user = this.props.user;
+    this.setState({
+      goalsList: JSON.parse(dream.goalsList)
+    });
+  }
 }
 
 // BragItem.propTypes = {
 //   avatar: PropTypes.string.isRequired
 // }
 
-export default withRouter(DreamGoal);
+export default DreamGoal;

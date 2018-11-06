@@ -20,10 +20,6 @@ class InputGoalList extends Component {
   onUpdate(type, value, index) {
     this.props.onUpdate(type, value, index);
   }
-  async componentDidMount() {
-    // const res = await fetch(Config.apiUrl + '/user/login/');
-    // console.log(res);
-  }
 }
 
 export default InputGoalList;

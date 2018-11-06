@@ -29,12 +29,9 @@ class InputGoalItem extends Component {
     );
   }
   onTitleChange(value, index) {
-    console.log(value, index);
     this.props.onUpdate('title', value, index);
-    // this.props.title = value;
   }
   onDescChange(value, index) {
-    console.log(value, index);
     this.props.onUpdate('content', value, index);
   }
 }
