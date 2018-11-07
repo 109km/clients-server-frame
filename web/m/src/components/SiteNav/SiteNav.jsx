@@ -38,14 +38,14 @@ class SiteNav extends Component {
             icon={<div style={{
               width: `${this.state.iconSize}px`,
               height: `${this.state.iconSize}px`,
-              background: `url(${Config.cdnUrl}/icon-home.png) ${iconStyle}`
+              background: `url(${Config.cdnUrl}/images/icon-home.png) ${iconStyle}`
             }}
             />
             }
             selectedIcon={<div style={{
               width: `${this.state.iconSize}px`,
               height: `${this.state.iconSize}px`,
-              background: `url(${Config.cdnUrl}/icon-home-actived.png) ${iconStyle}`
+              background: `url(${Config.cdnUrl}/images/icon-home-actived.png) ${iconStyle}`
             }}
             />
             }
@@ -60,7 +60,7 @@ class SiteNav extends Component {
               <div style={{
                 width: `${this.state.iconSize}px`,
                 height: `${this.state.iconSize}px`,
-                background: `url(${Config.cdnUrl}/icon-you-edit.png) ${iconStyle}`
+                background: `url(${Config.cdnUrl}/images/icon-you-edit.png) ${iconStyle}`
               }}
               />
             }
@@ -68,7 +68,7 @@ class SiteNav extends Component {
               <div style={{
                 width: `${this.state.iconSize}px`,
                 height: `${this.state.iconSize}px`,
-                background: `url(${Config.cdnUrl}/icon-you-edit-actived.png) ${iconStyle}`
+                background: `url(${Config.cdnUrl}/images/icon-you-edit-actived.png) ${iconStyle}`
               }}
               />
             }
@@ -85,7 +85,7 @@ class SiteNav extends Component {
               <div style={{
                 width: `${this.state.iconSize}px`,
                 height: `${this.state.iconSize}px`,
-                background: `url(${Config.cdnUrl}/icon-search.png) ${iconStyle}`
+                background: `url(${Config.cdnUrl}/images/icon-search.png) ${iconStyle}`
               }}
               />
             }
@@ -93,7 +93,7 @@ class SiteNav extends Component {
               <div style={{
                 width: `${this.state.iconSize}px`,
                 height: `${this.state.iconSize}px`,
-                background: `url(${Config.cdnUrl}/icon-search-actived.png) ${iconStyle}`
+                background: `url(${Config.cdnUrl}/images/icon-search-actived.png) ${iconStyle}`
               }}
               />
             }
@@ -110,7 +110,7 @@ class SiteNav extends Component {
               <div style={{
                 width: `${this.state.iconSize}px`,
                 height: `${this.state.iconSize}px`,
-                background: `url(${Config.cdnUrl}/icon-user.png) ${iconStyle}`
+                background: `url(${Config.cdnUrl}/images/icon-user.png) ${iconStyle}`
               }}
               />
             }
@@ -118,7 +118,7 @@ class SiteNav extends Component {
               <div style={{
                 width: `${this.state.iconSize}px`,
                 height: `${this.state.iconSize}px`,
-                background: `url(${Config.cdnUrl}/icon-user-actived.png) ${iconStyle}`
+                background: `url(${Config.cdnUrl}/images/icon-user-actived.png) ${iconStyle}`
               }}
               />
             }

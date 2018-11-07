@@ -12,6 +12,7 @@ class DreamDetail extends Component {
   state = {
     isFollowed: false,
     isShowPost: true,
+    userHasOwnDream: true,
     title: "",
     content: "",
     category: "视频",
@@ -31,43 +32,49 @@ class DreamDetail extends Component {
 
     return (
       <div className="page page-dream-detail">
-        <div className="user-info">
-          <div className="cover" style={backgroundCover}></div>
-          {this.state.isSelf ? <Link className="btn-edit" to="/post/new">写文章</Link> : ''}
-          <img className="avatar" src={this.state.avatarUrl} alt="" />
-          <div className="user-desc">
-            <span className="nickname">{this.state.nickname}</span>
-          </div>
-          <div className="title">
-            {this.state.title}
-          </div>
-          <div className="introduction">
-            {this.state.content}
-          </div>
-        </div>
-        <div className="container">
-          <div className="backers-info">
-            <div className="backers-show">
-              <span className="num">{this.state.backersNum}</span>支持者
+        {this.state.userHasOwnDream ?
+          <div>
+            <div className="user-info">
+              <div className="cover" style={backgroundCover}></div>
+              {this.state.isSelf ? <Link className="btn-edit" to="/post/new">写文章</Link> : ''}
+              <img className="avatar" src={this.state.avatarUrl} alt="" />
+              <div className="user-desc">
+                <span className="nickname">{this.state.nickname}</span>
+              </div>
+              <div className="title">
+                {this.state.title}
+              </div>
+              <div className="introduction">
+                {this.state.content}
+              </div>
             </div>
-            <div className="actions-sheet">
-              <Button className={this.state.isFollowed ? 'btn-action btn-action-followed' : 'btn-action'} type="primary" inline size="small" onClick={this.onFollow}>{this.state.isFollowed ? '已关注' : '+ 关注'}</Button>
-              <Button className="btn-action" type="primary" inline size="small">+ 分享</Button>
+            <div className="container">
+              <div className="backers-info">
+                <div className="backers-show">
+                  <span className="num">{this.state.backersNum}</span>支持者
             </div>
-          </div>
-          <div className="tabs">
-            <SegmentedControl values={['文章', '回报']} onChange={this.onChangeTab} />
-          </div>
-          {this.state.isShowPost ?
-            <div className="posts-list">
-              <PostList items={this.state.postsList} nickname={this.state.nickname} avatar={this.state.avatarUrl} />
+                <div className="actions-sheet">
+                  <Button className={this.state.isFollowed ? 'btn-action btn-action-followed' : 'btn-action'} type="primary" inline size="small" onClick={this.onFollow}>{this.state.isFollowed ? '已关注' : '+ 关注'}</Button>
+                  <Button className="btn-action" type="primary" inline size="small">+ 分享</Button>
+                </div>
+              </div>
+              <div className="tabs">
+                <SegmentedControl values={['文章', '回报']} onChange={this.onChangeTab} />
+              </div>
+              {this.state.isShowPost ?
+                <div className="posts-list">
+                  <PostList items={this.state.postsList} nickname={this.state.nickname} avatar={this.state.avatarUrl} />
+                </div>
+                :
+                <div className="tiers-list">
+                  <TierList items={this.state.tiersList} />
+                </div>
+              }
             </div>
-            :
-            <div className="tiers-list">
-              <TierList items={this.state.tiersList} />
-            </div>
-          }
-        </div>
+          </div> : 
+          <div className="no-dream-container">
+              <Link to="/dream/new" className="btn-link">立即创造梦想 +</Link>
+          </div>}
         <SiteNav page="dream" history={this.props.history} />
       </div>
     );
@@ -77,6 +84,7 @@ class DreamDetail extends Component {
     let isSelf = false;
     const result = await this.props.getDreamDetail(query.dreamId);
     let data = result.data;
+    console.log(result);
     if (result.code === STATUS_CODE['SUCCESS'].code) {
 
       if (query.dreamId) {
@@ -107,7 +115,12 @@ class DreamDetail extends Component {
         });
       });
     }
-    else {
+    // 用户自己没有主页
+    else if (result.code === STATUS_CODE['DREAM_NOT_FOUND'].code && !query.dreamId) {
+      this.setState({
+        userHasOwnDream: false
+      });
+    } else {
       Toast.fail(result.message);
     }
 

@@ -18,7 +18,7 @@ class My extends Component {
         <List renderHeader={() => '个人中心'}>
           <Link className="link" to={`/account/`}>
             <Item
-              thumb={Config.cdnUrl + "/icon-setting.png"}
+              thumb={Config.cdnUrl + "/images/icon-setting.png"}
               arrow="horizontal"
               onClick={() => { }}
             >账户设置</Item>
