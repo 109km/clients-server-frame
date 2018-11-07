@@ -135,8 +135,6 @@ class Account extends Component {
           data: avatarFormData
         });
 
-        
-
         this.setState({
           isResult: true,
           result:{

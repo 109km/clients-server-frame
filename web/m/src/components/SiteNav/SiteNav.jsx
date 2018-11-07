@@ -9,7 +9,6 @@ import './SiteNav.less';
 class SiteNav extends Component {
   state = {
     page: '',
-    cdnUrl: Config.cdnUrl,
     hidden: false,
     iconSize: 26,
   }
@@ -39,14 +38,14 @@ class SiteNav extends Component {
             icon={<div style={{
               width: `${this.state.iconSize}px`,
               height: `${this.state.iconSize}px`,
-              background: `url(${this.state.cdnUrl}/icon-home.png) ${iconStyle}`
+              background: `url(${Config.cdnUrl}/icon-home.png) ${iconStyle}`
             }}
             />
             }
             selectedIcon={<div style={{
               width: `${this.state.iconSize}px`,
               height: `${this.state.iconSize}px`,
-              background: `url(${this.state.cdnUrl}/icon-home-actived.png) ${iconStyle}`
+              background: `url(${Config.cdnUrl}/icon-home-actived.png) ${iconStyle}`
             }}
             />
             }
@@ -61,7 +60,7 @@ class SiteNav extends Component {
               <div style={{
                 width: `${this.state.iconSize}px`,
                 height: `${this.state.iconSize}px`,
-                background: `url(${this.state.cdnUrl}/icon-you-edit.png) ${iconStyle}`
+                background: `url(${Config.cdnUrl}/icon-you-edit.png) ${iconStyle}`
               }}
               />
             }
@@ -69,7 +68,7 @@ class SiteNav extends Component {
               <div style={{
                 width: `${this.state.iconSize}px`,
                 height: `${this.state.iconSize}px`,
-                background: `url(${this.state.cdnUrl}/icon-you-edit-actived.png) ${iconStyle}`
+                background: `url(${Config.cdnUrl}/icon-you-edit-actived.png) ${iconStyle}`
               }}
               />
             }
@@ -86,7 +85,7 @@ class SiteNav extends Component {
               <div style={{
                 width: `${this.state.iconSize}px`,
                 height: `${this.state.iconSize}px`,
-                background: `url(${this.state.cdnUrl}/icon-search.png) ${iconStyle}`
+                background: `url(${Config.cdnUrl}/icon-search.png) ${iconStyle}`
               }}
               />
             }
@@ -94,7 +93,7 @@ class SiteNav extends Component {
               <div style={{
                 width: `${this.state.iconSize}px`,
                 height: `${this.state.iconSize}px`,
-                background: `url(${this.state.cdnUrl}/icon-search-actived.png) ${iconStyle}`
+                background: `url(${Config.cdnUrl}/icon-search-actived.png) ${iconStyle}`
               }}
               />
             }
@@ -111,7 +110,7 @@ class SiteNav extends Component {
               <div style={{
                 width: `${this.state.iconSize}px`,
                 height: `${this.state.iconSize}px`,
-                background: `url(${this.state.cdnUrl}/icon-user.png) ${iconStyle}`
+                background: `url(${Config.cdnUrl}/icon-user.png) ${iconStyle}`
               }}
               />
             }
@@ -119,7 +118,7 @@ class SiteNav extends Component {
               <div style={{
                 width: `${this.state.iconSize}px`,
                 height: `${this.state.iconSize}px`,
-                background: `url(${this.state.cdnUrl}/icon-user-actived.png) ${iconStyle}`
+                background: `url(${Config.cdnUrl}/icon-user-actived.png) ${iconStyle}`
               }}
               />
             }
