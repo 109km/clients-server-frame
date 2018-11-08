@@ -31,7 +31,9 @@ class DreamNew extends Component {
             />
           </List>
           <WhiteSpace size="lg" />
-          <Button type="primary" onClick={this.onSubmit}>下一步</Button>
+          <div className="button-area">
+            <Button type="primary" onClick={this.onSubmit}>下一步</Button>
+          </div>
         </form>
       </div>
     );
@@ -58,14 +60,13 @@ class DreamNew extends Component {
     if (res.data.code === STATUS_CODE['SUCCESS'].code) {
       Toast.success('项目创建成功！', 3, () => {
         this.props.history.push({
-          path: '/dream/goal',
-          search: '?dreamId=' + res.data.data.id
+          pathname: "/dream/goal"
         });
       });
     } else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
       Toast.fail(res.data.message, 3, () => {
         this.props.history.push({
-          path: '/user/signin',
+          pathname: "/login"
         });
       });
     }
@@ -73,10 +74,13 @@ class DreamNew extends Component {
       Toast.fail(res.data.message);
     }
   }
+  componentDidMount() {
+    
+  }
 }
 
 // BragItem.propTypes = {
 //   avatar: PropTypes.string.isRequired
 // }
 
-export default withRouter(DreamNew);
+export default DreamNew;

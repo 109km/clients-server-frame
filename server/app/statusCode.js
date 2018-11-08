@@ -39,6 +39,10 @@ module.exports = {
     code: 40100,
     message: '项目未找到'
   },
+  'DREAM_ALREADY_CREATED': {
+    code: 40200,
+    message: '项目已创建'
+  },
   'UNKNOWN_ERROR': {
     code: -1,
     message: '未知错误'

@@ -19,11 +19,19 @@ class DreamService extends Service {
     // };
     // // 校验参数
     // ctx.validate(createRule);
-    const dream = await ctx.model.Dream.create(dreamData, {
-      isNewRecord: true
+    let res;
+    const findResult = await this.findOne({
+      user_id: dreamData.user_id
     });
-    const res = STATUS_CODE['SUCCESS'];
-    res.data = dream;
+    if (findResult) {
+      res = STATUS_CODE['DREAM_ALREADY_CREATED'];
+    } else {
+      const dream = await ctx.model.Dream.create(dreamData, {
+        isNewRecord: true
+      });
+      res = STATUS_CODE['SUCCESS'];
+      res.data = dream;
+    }
     return res;
   }
   async updateGoals(goalsData) {

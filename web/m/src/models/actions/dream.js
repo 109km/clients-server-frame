@@ -20,24 +20,6 @@ export const getDreamDetailFail = (error) => ({
     error
   }
 })
-
-export const updateDreamDetailStarted = () => ({
-  type: 'UPDATE_DREAM_DETAIL_STARTED'
-})
-
-export const updateDreamDetailSuccess = (dream) => ({
-  type: 'UPDATE_DREAM_DETAIL_SUCCESS',
-  payload: { ...dream
-  }
-})
-
-export const updateDreamDetailFail = (error) => ({
-  type: 'UPDATE_DREAM_DETAIL_FAIL',
-  payload: {
-    error
-  }
-})
-
 /**
  * @param {Number} dreamId 
  */
@@ -60,6 +42,22 @@ export const getDreamDetail = ({
   };
 };
 
+export const updateDreamDetailStarted = () => ({
+  type: 'UPDATE_DREAM_DETAIL_STARTED'
+})
+
+export const updateDreamDetailSuccess = (dream) => ({
+  type: 'UPDATE_DREAM_DETAIL_SUCCESS',
+  payload: { ...dream
+  }
+})
+
+export const updateDreamDetailFail = (error) => ({
+  type: 'UPDATE_DREAM_DETAIL_FAIL',
+  payload: {
+    error
+  }
+})
 /**
  * @param {Number} dreamId 
  */
@@ -80,13 +78,50 @@ export const updateDreamDetail = (formData = null) => {
 };
 
 
+export const createNewDreamStarted = () => ({
+  type: 'CREATE_NEW_DREAM_STARTED'
+})
+
+export const createNewDreamSuccess = (dream) => ({
+  type: 'CREATE_NEW_DREAM_SUCCESS',
+  payload: { ...dream
+  }
+})
+
+export const createNewDreamFail = (error) => ({
+  type: 'CREATE_NEW_DREAM_FAIL',
+  payload: {
+    error
+  }
+})
+/**
+ * @param {Object} formData
+ * @param {String} formData.title
+ * @param {String} formData.content
+ */
+export const createNewDream = (formData = null) => {
+  return async (dispatch, getState) => {
+    dispatch(createNewDreamStarted());
+    let res = await post(Config.apiUrl + '/dream/create', {
+      data: formData
+    });
+    if (res.data.code === STATUS_CODE['SUCCESS'].code) {
+      dispatch(createNewDreamSuccess(res.data.data));
+    } else {
+      dispatch(createNewDreamFail(res.data));
+    }
+    return res.data;
+  };
+};
+
 // Action types
 export const ACTIONS_TYPES = {
-  GET_DREAM_DETAIL: 'GET_DREAM_DETAIL',
-  UPDATE_DREAM_DETAIL: 'UPDATE_DREAM_DETAIL',
   GET_DREAM_DETAIL_STARTED: 'GET_DREAM_DETAIL_STARTED',
   GET_DREAM_DETAIL_SUCCESS: 'GET_DREAM_DETAIL_SUCCESS',
   UPDATE_DREAM_DETAIL_STARTED: 'UPDATE_DREAM_DETAIL_STARTED',
   UPDATE_DREAM_DETAIL_SUCCESS: 'UPDATE_DREAM_DETAIL_SUCCESS',
   UPDATE_DREAM_DETAIL_FAIL: 'UPDATE_DREAM_DETAIL_FAIL',
+  CREATE_NEW_DREAM_STARTED: 'CREATE_NEW_DREAM_STARTED',
+  CREATE_NEW_DREAM_SUCCESS: 'CREATE_NEW_DREAM_SUCCESS',
+  CREATE_NEW_DREAM_FAIL: 'CREATE_NEW_DREAM_FAIL'
 }

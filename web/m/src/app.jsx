@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import Home from './containers/home';
+import DreamNew from './containers/dream/new';
 import DreamEdit from './containers/dream/edit';
 import DreamGoal from './containers/dream/goal';
 import DreamTier from './containers/dream/tier';
@@ -19,6 +20,7 @@ class App extends Component {
     return (
       <div className="layout">
         <Route path="/" exact component={Home} />
+        <Route path="/dream/new" component={DreamNew} />
         <Route path="/dream/edit" component={DreamEdit} />
         <Route path="/dream/goal" component={DreamGoal} />
         <Route path="/dream/tier" component={DreamTier} />
