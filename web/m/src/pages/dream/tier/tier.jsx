@@ -10,7 +10,7 @@ class DreamTier extends Component {
     tiersList: [{
       title: '',
       content: '',
-      price: 0
+      price: ""
     }],
     mode: 'new'
   }
@@ -32,7 +32,7 @@ class DreamTier extends Component {
     let tiers = this.state.tiersList;
     tiers[index][type] = value;
     this.setState({
-      tiers: tiers
+      tiersList: tiers
     });
   }
   onAdd = async () => {
@@ -47,7 +47,7 @@ class DreamTier extends Component {
   }
   onSubmit = async (e) => {
     let formData = {
-      tiers: this.state.tiersList
+      tiersList: this.state.tiersList
     };
     const res = await this.props.updateDreamDetail(formData);
     if (res.code === STATUS_CODE['SUCCESS'].code) {
