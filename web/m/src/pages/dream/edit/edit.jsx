@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace } from 'antd-mobile';
+import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, ImagePicker } from 'antd-mobile';
 import { post, Config } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
 import './edit.less';
-
+const Item = List.Item;
 class DreamEdit extends Component {
   state = {
     title: "",
-    content: ""
+    content: "",
+    files: [],
+    coverUrl: '',
+    mode: 'new'
   }
   render() {
     return (
@@ -26,9 +29,20 @@ class DreamEdit extends Component {
               value={this.state.content}
               onChange={this.onDescChange}
             />
+            <Item>
+              选择主页封面
+              <ImagePicker
+                files={this.state.files}
+                onChange={this.onCoverChange}
+                selectable={this.state.files.length < 1}
+              />
+            </Item>
           </List>
+          <img className="cover-img" src={this.state.coverUrl} alt="" />
           <WhiteSpace size="lg" />
-          <Button type="primary" onClick={this.onSubmit}>下一步</Button>
+          <div className="button-area">
+            <Button type="primary" onClick={this.onSubmit}>下一步</Button>
+          </div>
         </form>
       </div>
     );
@@ -43,10 +57,31 @@ class DreamEdit extends Component {
       content: value
     });
   }
+  onCoverChange = async (files) => {
+    this.setState({
+      files
+    });
+
+    if (files && files[0]) {
+      let uploadData = new FormData();
+      uploadData.append('file', this.state.files[0].file);
+      const res = await post(Config.apiUrl + '/upload/single', {
+        data: uploadData
+      });
+      if (res.data.code === STATUS_CODE['SUCCESS'].code) {
+        this.setState({
+          coverUrl: res.data.data.url
+        });
+      }
+
+    }
+
+  }
   onSubmit = async (e) => {
     let formData = {
       title: this.state.title,
-      content: this.state.content
+      content: this.state.content,
+      coverUrl: this.state.coverUrl
     };
     const res = await post(Config.apiUrl + '/dream/update', {
       data: formData
@@ -70,18 +105,22 @@ class DreamEdit extends Component {
   }
   async componentDidMount() {
     const res = await this.props.getDreamDetail();
-    let dream = res.dream;
-    if (dream.error) {
-      if (dream.error.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
-        Toast.fail(dream.error.message, 3, () => {
+    if (res.code !== STATUS_CODE['SUCCESS'].code) {
+      if (res.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
+        Toast.fail(res.message, 3, () => {
           this.props.history.push({
             pathname: '/login',
             search: `?r=${encodeURIComponent(this.props.location.pathname + this.props.location.search)}`
           });
         });
+      } else {
+        Toast.fail(res.message, 3);
       }
-    }else{
-      this.setState(dream);
+    } else {
+      this.setState(res.data);
+      this.setState({
+        mode: 'edit'
+      });
     }
   }
 }

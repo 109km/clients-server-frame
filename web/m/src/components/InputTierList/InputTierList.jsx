@@ -5,7 +5,7 @@ import InputTierItem from '../InputTierItem/InputTierItem';
 class InputTierList extends Component {
   render() {
     const items = this.props.items.map((item, index) =>
-      <InputTierItem onUpdate={this.onUpdate.bind(this)} key={index} index={index} title={item.title} content={item.content} />
+      <InputTierItem onUpdate={this.onUpdate.bind(this)} key={index} index={index} title={item.title} content={item.content} price={item.price} />
     );
     return (
       <div className="com-tier-list">

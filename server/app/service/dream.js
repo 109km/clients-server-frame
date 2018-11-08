@@ -23,7 +23,7 @@ class DreamService extends Service {
     const findResult = await this.findOne({
       user_id: dreamData.user_id
     });
-    if (findResult) {
+    if (findResult.code === STATUS_CODE['SUCCESS'].code) {
       res = STATUS_CODE['DREAM_ALREADY_CREATED'];
     } else {
       const dream = await ctx.model.Dream.create(dreamData, {

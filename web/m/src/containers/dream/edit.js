@@ -28,6 +28,9 @@ const mapDispatchToProps = dispatch => {
     },
     updateDreamDetail: (formData) => {
       return dispatch(actionDream.updateDreamDetail(formData));
+    },
+    createNewDream: (formData) => {
+      return dispatch(actionDream.createNewDream(formData));
     }
   }
 }

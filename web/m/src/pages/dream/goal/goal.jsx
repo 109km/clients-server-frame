@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
-import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, Icon } from 'antd-mobile';
-import { post, getQuery, Config } from '../../../utils/util';
+import { Button, Toast, WhiteSpace } from 'antd-mobile';
 import STATUS_CODE from '../../../utils/statusCode';
+import { EDIT_NEW } from '../../../utils/textConst';
 import InputGoalList from '../../../components/InputGoalList/InputGoalList';
 import './goal.less';
 
@@ -11,7 +10,8 @@ class DreamGoal extends Component {
     goalsList: [{
       title: "",
       content: ""
-    }]
+    }],
+    mode: 'new'
   }
   render() {
     return (
@@ -60,7 +60,7 @@ class DreamGoal extends Component {
     };
     const res = await this.props.updateDreamDetail(formData);
     if (res.code === STATUS_CODE['SUCCESS'].code) {
-      Toast.success('目标修改成功！', 3, () => {
+      Toast.success(`目标${EDIT_NEW[this.state.mode]}成功！`, 3, () => {
         this.props.history.push({
           pathname: "/dream/tier"
         });
@@ -77,13 +77,16 @@ class DreamGoal extends Component {
       Toast.fail(res.data.message);
     }
   }
-  async componentDidMount(){
+  async componentDidMount() {
     await this.props.getDreamDetail();
     const dream = this.props.dream;
     const user = this.props.user;
-    this.setState({
-      goalsList: JSON.parse(dream.goalsList)
-    });
+    if (dream.goalsList) {
+      this.setState({
+        goalsList: JSON.parse(dream.goalsList),
+        mode: 'edit'
+      });
+    }
   }
 }
 

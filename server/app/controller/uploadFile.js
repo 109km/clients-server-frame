@@ -26,10 +26,14 @@ class UploaderController extends Controller {
       await sendToWormhole(stream);
       throw err;
     }
+    console.log(process.env);
     //文件响应
     ctx.body = {
-      filename: filename,
-      url: target.replace('app/','/')
+      code: 0,
+      data: {
+        filename: filename,
+        url: target.replace('app/', `http://localhost:7001/`)
+      }
     };
   }
   async upload(ctx) {

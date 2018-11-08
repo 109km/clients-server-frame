@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
-import PropTypes from 'prop-types';
-import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, Icon } from 'antd-mobile';
-import { post, Config } from '../../../utils/util';
+import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, ImagePicker } from 'antd-mobile';
 import STATUS_CODE from '../../../utils/statusCode';
 import './new.less';
 
+
+const Item = List.Item;
 class DreamNew extends Component {
   state = {
     files: [],
@@ -29,8 +28,17 @@ class DreamNew extends Component {
               value={this.state.content}
               onChange={this.onDescChange}
             />
+            <Item>
+              选择主页封面
+              <ImagePicker
+                files={this.state.files}
+                onChange={this.onCoverChange}
+                selectable={this.state.files.length < 1}
+              />
+            </Item>
           </List>
           <WhiteSpace size="lg" />
+
           <div className="button-area">
             <Button type="primary" onClick={this.onSubmit}>下一步</Button>
           </div>
@@ -48,34 +56,38 @@ class DreamNew extends Component {
       content: value
     });
   }
+  onCoverChange = (files) => {
+    this.setState({
+      files
+    });
+  }
   onSubmit = async (e) => {
     let formData = {
       title: this.state.title,
       content: this.state.content
     };
 
-    const res = await post(Config.apiUrl + '/dream/create', {
-      data: formData
-    });
-    if (res.data.code === STATUS_CODE['SUCCESS'].code) {
+    const res = await this.props.createNewDream(formData);
+    console.log(res);
+    if (res.code === STATUS_CODE['SUCCESS'].code) {
       Toast.success('项目创建成功！', 3, () => {
         this.props.history.push({
           pathname: "/dream/goal"
         });
       });
-    } else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
-      Toast.fail(res.data.message, 3, () => {
+    } else if (res.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
+      Toast.fail(res.message, 3, () => {
         this.props.history.push({
           pathname: "/login"
         });
       });
     }
     else {
-      Toast.fail(res.data.message);
+      Toast.fail(res.message);
     }
   }
-  componentDidMount() {
-    
+  async componentDidMount() {
+
   }
 }
 

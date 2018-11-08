@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Toast, WhiteSpace } from 'antd-mobile';
-import { post, Config, getQuery } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
+import { EDIT_NEW } from '../../../utils/textConst';
 import InputTierList from '../../../components/InputTierList/InputTierList';
 import './tier.less';
 
@@ -9,8 +9,10 @@ class DreamTier extends Component {
   state = {
     tiersList: [{
       title: '',
-      content: ''
-    }]
+      content: '',
+      price: 0
+    }],
+    mode: 'new'
   }
   render() {
     return (
@@ -25,16 +27,7 @@ class DreamTier extends Component {
       </div>
     );
   }
-  onTitleChange = (value) => {
-    this.setState({
-      title: value
-    });
-  }
-  onDescChange = (value) => {
-    this.setState({
-      content: value
-    });
-  }
+
   onUpdate = (type, value, index) => {
     let tiers = this.state.tiersList;
     tiers[index][type] = value;
@@ -58,7 +51,7 @@ class DreamTier extends Component {
     };
     const res = await this.props.updateDreamDetail(formData);
     if (res.code === STATUS_CODE['SUCCESS'].code) {
-      Toast.success('回报添加成功！', 3, () => {
+      Toast.success(`回报${EDIT_NEW[this.state.mode]}成功！`, 3, () => {
         this.props.history.push({
           pathname: "/dream/detail"
         });
@@ -78,9 +71,12 @@ class DreamTier extends Component {
     await this.props.getDreamDetail();
     const dream = this.props.dream;
     const user = this.props.user;
-    this.setState({
-      tiersList: JSON.parse(dream.tiersList)
-    });
+    if (dream.tiersList) {
+      this.setState({
+        tiersList: JSON.parse(dream.tiersList),
+        mode: 'edit'
+      });
+    }
   }
 }
 export default DreamTier;

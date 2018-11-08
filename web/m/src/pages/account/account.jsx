@@ -137,17 +137,17 @@ class Account extends Component {
 
         this.setState({
           isResult: true,
-          result:{
-            title:'提交成功',
-            message:'个人信息已修改成功！'
+          result: {
+            title: '提交成功',
+            message: '个人信息已修改成功！'
           }
         });
-        setTimeout(()=>{
+        setTimeout(() => {
           this.props.history.push({
             pathname: '/my'
           });
-        },2000);
-        
+        }, 2000);
+
 
 
       } else {
