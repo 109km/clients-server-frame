@@ -121,24 +121,30 @@ class Account extends Component {
     this.setState({
       files,
     });
+    let avatarFormData = new FormData();
+    if (this.state.files.length) {
+      avatarFormData.append('file', this.state.files[0].file);
+      const avatarResponse = await post(Config.apiUrl + '/upload/single', {
+        data: avatarFormData
+      });
+      if (avatarResponse.data.code === STATUS_CODE['SUCCESS'].code) {
+        this.setState({
+          avatarUrl: avatarResponse.data.data.url
+        });
+      } else {
+        Toast.fail(avatarResponse.data.message);
+      }
+    }
   }
   onSubmit = () => {
     this.props.form.validateFields({ force: true }, async (error) => {
       if (!error) {
-        // Upload avatar file first
-        let avatarFormData = new FormData();
-        // avatarFormData.append('userId', this.props.user.id);
-        if (this.state.files.length) {
-          avatarFormData.append('file', this.state.files[0].file);
-          const avatarResponse = await post(Config.apiUrl + '/upload/single', {
-            data: avatarFormData
-          });
-        }
-        let updateData = this.props.form.getFieldsValue();
-        const updatedUser = await this.props.updateUserInfo(updateData);
-        console.log(updatedUser);
-        if (updatedUser){
 
+        let updateData = this.props.form.getFieldsValue();
+        updateData.avatarUrl = this.state.avatarUrl;
+        const updatedUser = await this.props.updateUserInfo(updateData);
+        if (updatedUser) {
+          
         }
         return;
         this.setState({

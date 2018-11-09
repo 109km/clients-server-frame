@@ -60,10 +60,10 @@ class UserController extends Controller {
     let user = await this.app.redis.get(key);
     user = JSON.parse(user);
     if (user) {
-      let res = STATUS_CODE['SUCCESS'];
-      res.data = user;
-      console.log(user);
-      ctx.body = res;
+      let findResult = await ctx.service.user.findOne({
+        id: user.id
+      });
+      ctx.body = findResult;
     } else {
       ctx.body = STATUS_CODE['USER_NOT_LOGIN'];
     }
@@ -94,6 +94,7 @@ class UserController extends Controller {
     if (user) {
       let updateData = {
         nickname: ctx.request.body['nickname'],
+        avatar_url: ctx.request.body['avatar_url'],
         password: ctx.request.body['new_password'],
       }
       const res = await ctx.service.user.updateOne(user.id, updateData);
