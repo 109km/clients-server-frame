@@ -87,13 +87,20 @@ class UserController extends Controller {
     ctx.body = res;
   }
 
-  async edit(ctx) {
-    const userData = {
-      username: ctx.request.body.username,
-      password: ctx.request.body.password,
-      're-password': ctx.request.body['re-password'],
+  async update(ctx) {
+    let key = ctx.headers['x-api-key'];
+    let user = await this.app.redis.get(key);
+    user = JSON.parse(user);
+    if (user) {
+      let updateData = {
+        nickname: ctx.request.body['nickname'],
+        password: ctx.request.body['new_password'],
+      }
+      const res = await ctx.service.user.updateOne(user.id, updateData);
+      ctx.body = res;
+    } else {
+      ctx.body = STATUS_CODE['USER_NOT_LOGIN'];
     }
-    
   }
 }
 

@@ -128,13 +128,19 @@ class Account extends Component {
         // Upload avatar file first
         let avatarFormData = new FormData();
         // avatarFormData.append('userId', this.props.user.id);
-        console.log(this.state.files);
+        if (this.state.files.length) {
+          avatarFormData.append('file', this.state.files[0].file);
+          const avatarResponse = await post(Config.apiUrl + '/upload/single', {
+            data: avatarFormData
+          });
+        }
+        let updateData = this.props.form.getFieldsValue();
+        const updatedUser = await this.props.updateUserInfo(updateData);
+        console.log(updatedUser);
+        if (updatedUser){
 
-        avatarFormData.append('file', this.state.files[0].file);
-        const avatarResponse = await post(Config.apiUrl + '/upload/single', {
-          data: avatarFormData
-        });
-
+        }
+        return;
         this.setState({
           isResult: true,
           result: {
@@ -147,8 +153,6 @@ class Account extends Component {
             pathname: '/my'
           });
         }, 2000);
-
-
 
       } else {
         Toast.fail('您有必选项未填写完毕。');

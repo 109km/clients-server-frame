@@ -23,7 +23,8 @@ module.exports = app => {
   app.post('/user/create', controller.user.create);
   // 用户详情
   app.post('/user/detail', controller.user.detail);
-
+  // 更新用户信息
+  app.post('/user/update', controller.user.update);
   // 登出
   app.get('/signout', controller.user.signout);
   // 上传

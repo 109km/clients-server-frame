@@ -17,6 +17,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    updateUserInfo: user => {
+      dispatch(actionUser.updateUserInfo(user));
+    },
     setUserInfo: user => {
       dispatch(actionUser.setUserInfo(user));
     },

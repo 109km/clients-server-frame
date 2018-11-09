@@ -42,7 +42,7 @@ class UserService extends Service {
     } = this;
     let res;
     let userData = Object.assign({}, data);
-    userData.password = ctx.helper.encrypt(userData.password);
+    // userData.password = ctx.helper.encrypt(userData.password);
     const user = await ctx.model.User.findOne({
       where: userData,
     });
@@ -53,28 +53,29 @@ class UserService extends Service {
         });
       }
       res = STATUS_CODE['SUCCESS'];
-      res.data = {
-        user
-      };
+      res.data = user;
     } else {
       res = STATUS_CODE['USER_NOT_EXIST'];
     }
     return res;
   }
 
-  async updateOne(id, data) {
+  async updateOne(id, userData) {
     const {
       ctx
     } = this;
-    let userData = Object.assign({}, data);
-    const user = await ctx.model.User.findOne({
-      where: {
-        id: id
-      },
+    let res;
+    let where = {
+      id: id
+    };
+    if (userData.password) {
+      userData.password = ctx.helper.encrypt(userData.password);
+    }
+    let updateResult = await ctx.model.User.update(userData, {
+      where: where
     });
-    console.log(userData);
-    if (user) {
-      user.update(userData);
+    if (updateResult[0] === 1) {
+      res = await this.findOne(where);
     } else {
       res = STATUS_CODE['USER_NOT_EXIST'];
     }
