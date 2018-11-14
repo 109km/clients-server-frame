@@ -21,7 +21,7 @@ export const createHeader = (headers) => {
  * @desc Convert an object to form string.
  * @param {Object} data An object
  */
-export const convertObjectToForm = (data) => {
+export const convertObjectToFormString = (data) => {
   let str = '';
   _.forIn(data, (value, key) => {
     str += `${key}=${value}&`
