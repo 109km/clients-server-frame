@@ -42,18 +42,20 @@ class UserService extends Service {
     } = this;
     let res;
     let userData = Object.assign({}, data);
-    // userData.password = ctx.helper.encrypt(userData.password);
-    const user = await ctx.model.User.findOne({
+    if (userData.password) {
+      userData.password = ctx.helper.encrypt(userData.password);
+    }
+    let user = await ctx.model.User.findOne({
       where: userData,
     });
     if (user) {
       if (isNewSignIn) {
-        user.update({
-          lastSignInAt: dayjs().format('YYYY-MM-D HH:mm:ss')
+        user = await user.update({
+          last_signin_at: dayjs().format('YYYY-MM-D HH:mm:ss')
         });
       }
       res = STATUS_CODE['SUCCESS'];
-      res.data = user;
+      res.data = user.dataValues;
     } else {
       res = STATUS_CODE['USER_NOT_EXIST'];
     }

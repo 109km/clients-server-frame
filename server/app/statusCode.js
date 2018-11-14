@@ -19,6 +19,10 @@ module.exports = {
     code: 10101,
     message: '您输入的密码不正确'
   },
+  'OLD_PASSWORD_DONT_MATCH': {
+    code: 10102,
+    message: '输入的旧密码错误'
+  },
   'USER_NOT_LOGIN': {
     code: 10102,
     message: '用户未登录'

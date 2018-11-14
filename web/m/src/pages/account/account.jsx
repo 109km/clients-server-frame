@@ -143,6 +143,7 @@ class Account extends Component {
         let updateData = this.props.form.getFieldsValue();
         updateData.avatarUrl = this.state.avatarUrl;
         const updatedUser = await this.props.updateUserInfo(updateData);
+        console.log(updatedUser);
         if (updatedUser) {
           
         }

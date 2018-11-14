@@ -1,6 +1,8 @@
 'use strict';
 const Controller = require('egg').Controller;
 const STATUS_CODE = require('../statusCode');
+
+const maxAge = 3600 * 24;
 class UserController extends Controller {
 
   // GET ， 展示页面
@@ -29,23 +31,23 @@ class UserController extends Controller {
   }
   // POST 用户登录
   async doSignin(ctx) {
-    let maxAge = 3600 * 24;
+
     const userData = {
       username: ctx.request.body.username,
       password: ctx.request.body.password
     }
     const res = await ctx.service.user.findOne(userData, true);
     const sessionId = ctx.helper.uuidv1();
-
+    let currentMaxAge = maxAge;
     if (res.code === 0) {
       ctx.session.user = res.data.user;
       ctx.session.sessionId = sessionId;
       // 记住我
       if (ctx.request.body.rememberMe) {
-        maxAge = maxAge * 30;
+        currentMaxAge = maxAge * 30;
       }
       // session记录到redis
-      await this.app.redis.set(sessionId, JSON.stringify(res.data.user), 'EX', maxAge);
+      await this.app.redis.set(sessionId, JSON.stringify(res.data), 'EX', currentMaxAge);
       res.data.sessionId = sessionId;
       ctx.body = JSON.stringify(res);
       // ctx.redirect('/');
@@ -92,13 +94,23 @@ class UserController extends Controller {
     let user = await this.app.redis.get(key);
     user = JSON.parse(user);
     if (user) {
-      let updateData = {
-        nickname: ctx.request.body['nickname'],
-        avatar_url: ctx.request.body['avatar_url'],
-        password: ctx.request.body['new_password'],
+      let findResult = await ctx.service.user.findOne({
+        id: user.id
+      });
+
+      // Check the old password matches or not.
+      if (findResult.data.password !== ctx.helper.encrypt(ctx.request.body['old_password'])) {
+        ctx.body = STATUS_CODE['OLD_PASSWORD_DONT_MATCH'];
+      } else {
+        let updateData = {
+          nickname: ctx.request.body['nickname'],
+          avatar_url: ctx.request.body['avatar_url'],
+          password: ctx.request.body['new_password'],
+        }
+        const res = await ctx.service.user.updateOne(user.id, updateData);
+        ctx.body = res;
       }
-      const res = await ctx.service.user.updateOne(user.id, updateData);
-      ctx.body = res;
+
     } else {
       ctx.body = STATUS_CODE['USER_NOT_LOGIN'];
     }
