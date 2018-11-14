@@ -32,7 +32,9 @@ class Login extends Component {
           </InputItem>
         </List>
         <WhiteSpace size="lg" />
-        <Button type="primary" onClick={this.onSubmit}>提交</Button>
+        <div className="button-area">
+          <Button type="primary" onClick={this.onSubmit}>提交</Button>
+        </div>
       </div>
     );
   }
