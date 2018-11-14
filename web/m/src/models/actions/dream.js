@@ -64,7 +64,6 @@ export const updateDreamDetailFail = (error) => ({
 export const updateDreamDetail = (formData = null) => {
   return async (dispatch, getState) => {
     dispatch(updateDreamDetailStarted());
-    console.log(formData);
     let res = await post(Config.apiUrl + '/dream/update', {
       data: formData
     });

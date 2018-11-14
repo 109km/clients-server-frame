@@ -108,8 +108,14 @@ class Account extends Component {
                 />
               </Item>
             </List>
-            <Button type="primary" onClick={this.onSubmit}>确认</Button>
-            <Button type="ghost" onClick={this.onReset}>取消</Button>
+            <div className="button-area">
+              <p>
+                <Button type="primary" onClick={this.onSubmit}>确认</Button>
+              </p>
+              <p>
+                <Button type="ghost" onClick={this.onReset}>取消</Button>
+              </p>
+            </div>
           </form>
         }
         {/* <SiteNav page="my" history={this.props.history} /> */}
@@ -136,30 +142,29 @@ class Account extends Component {
       }
     }
   }
-  onSubmit = () => {
+  onSubmit = async () => {
+
     this.props.form.validateFields({ force: true }, async (error) => {
       if (!error) {
-
         let updateData = this.props.form.getFieldsValue();
         updateData.avatarUrl = this.state.avatarUrl;
         const updatedUser = await this.props.updateUserInfo(updateData);
-        console.log(updatedUser);
-        if (updatedUser) {
-          
-        }
-        return;
-        this.setState({
-          isResult: true,
-          result: {
-            title: '提交成功',
-            message: '个人信息已修改成功！'
-          }
-        });
-        setTimeout(() => {
-          this.props.history.push({
-            pathname: '/my'
+        if (updatedUser.code === STATUS_CODE['SUCCESS'].code) {
+          this.setState({
+            isResult: true,
+            result: {
+              title: '提交成功',
+              message: '个人信息已修改成功！'
+            }
           });
-        }, 2000);
+          setTimeout(() => {
+            this.props.history.push({
+              pathname: '/my'
+            });
+          }, 2000);
+        } else {
+          Toast.fail(updatedUser.message);
+        }
 
       } else {
         Toast.fail('您有必选项未填写完毕。');
@@ -193,9 +198,18 @@ class Account extends Component {
   }
   async componentDidMount() {
     const userData = await post(Config.apiUrl + '/user/detail/');
-    const user = userData.data;
-    if (user.code === STATUS_CODE['SUCCESS'].code) {
-      this.props.setUserInfo(user.data);
+    const res = userData.data;
+    if (res.code === STATUS_CODE['SUCCESS'].code) {
+      this.props.setUserInfo(res.data);
+    } else if (res.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
+      Toast.fail(res.message, Config.toastDuration, () => {
+        this.props.history.push({
+          pathname: '/login',
+          search: `?r=${encodeURIComponent(this.props.location.pathname + this.props.location.search)}`
+        });
+      });
+    } else {
+      Toast.fail(res.message, Config.toastDuration);
     }
   }
 }

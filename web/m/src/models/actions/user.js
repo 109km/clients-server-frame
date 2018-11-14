@@ -41,6 +41,7 @@ export const updateUserInfo = (userData = null) => {
     let res = await post(Config.apiUrl + '/user/update', {
       data: userData
     });
+    console.log(res);
     if (res.data.code === STATUS_CODE['SUCCESS'].code) {
       dispatch(updateUserInfoSuccess(res.data.data));
     } else {

@@ -83,38 +83,37 @@ class DreamEdit extends Component {
       content: this.state.content,
       coverUrl: this.state.coverUrl
     };
-    const res = await post(Config.apiUrl + '/dream/update', {
-      data: formData
-    });
-    if (res.data.code === STATUS_CODE['SUCCESS'].code) {
+    const res = await this.props.updateDreamDetail(formData);
+    if (res.code === STATUS_CODE['SUCCESS'].code) {
       Toast.success('项目修改成功！', 3, () => {
         this.props.history.push({
           pathname: "/dream/goal"
         });
       });
-    } else if (res.data.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
-      Toast.fail(res.data.message, 3, () => {
+    } else if (res.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
+      Toast.fail(res.message, 3, () => {
         this.props.history.push({
           pathname: "/login",
         });
       });
     }
     else {
-      Toast.fail(res.data.message);
+      Toast.fail(res.message);
     }
   }
   async componentDidMount() {
     const res = await this.props.getDreamDetail();
+    console.log(res);
     if (res.code !== STATUS_CODE['SUCCESS'].code) {
       if (res.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
-        Toast.fail(res.message, 3, () => {
+        Toast.fail(res.message, Config.toastDuration, () => {
           this.props.history.push({
             pathname: '/login',
             search: `?r=${encodeURIComponent(this.props.location.pathname + this.props.location.search)}`
           });
         });
       } else {
-        Toast.fail(res.message, 3);
+        Toast.fail(res.message, Config.toastDuration);
       }
     } else {
       this.setState(res.data);
