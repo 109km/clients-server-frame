@@ -137,6 +137,7 @@ class DreamService extends Service {
       where: where
     });
     let res;
+    console.log(updateResult);
     if (updateResult[0] === 1) {
       res = await this.findOne(where);
     } else {
