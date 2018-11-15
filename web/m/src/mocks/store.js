@@ -13,6 +13,10 @@ const store = {
     }]
   },
   user: {
-    
+    id: 1,
+    username: 'hello123',
+    nickname: '无敌破坏王',
+    avatarUrl: '',
+    lastSignInAt: '2018-09-25T10:47:27.000Z'
   }
 }

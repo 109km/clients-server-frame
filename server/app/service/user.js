@@ -55,6 +55,7 @@ class UserService extends Service {
         });
       }
       res = STATUS_CODE['SUCCESS'];
+      delete user.dataValues['password'];
       res.data = user.dataValues;
     } else {
       res = STATUS_CODE['USER_NOT_EXIST'];
