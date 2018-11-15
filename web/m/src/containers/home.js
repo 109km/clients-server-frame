@@ -7,7 +7,8 @@ import {
 } from "react-router-dom";
 
 import {
-  actionUser
+  actionUser,
+  actionHome
 } from '../models/actions';
 
 import Page from '../pages/home/home';
@@ -20,10 +21,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setUserInfo: user => {
-      dispatch(actionUser.setUserInfo(user));
+      return dispatch(actionUser.setUserInfo(user));
     },
     setUserLogout: () => {
-      dispatch(actionUser.setUserLogout());
+      return dispatch(actionUser.setUserLogout());
+    },
+    getHomeFeeds: (start, end) => {
+      return dispatch(actionHome.getHomeFeeds(start, end))
     }
   }
 }

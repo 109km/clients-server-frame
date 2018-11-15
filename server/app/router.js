@@ -13,6 +13,8 @@ module.exports = app => {
   app.get('/api/currentUser', controller.api.currentUser);
   app.get('/api/tags', controller.api.tags);
 
+  // 首页feeds列表
+  app.post('/home/feeds', controller.home.feeds);
   // 注册
   app.get('/signup', controller.user.signup);
   app.post('/user/signup', controller.user.doSignup);

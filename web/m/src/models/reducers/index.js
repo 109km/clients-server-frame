@@ -3,10 +3,12 @@ import {
 } from 'redux';
 import user from './user';
 import dream from './dream';
+import home from './home';
 
 const rootReducer = combineReducers({
   user,
-  dream
+  dream,
+  home
 })
 
 export default rootReducer;

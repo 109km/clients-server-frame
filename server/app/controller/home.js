@@ -9,6 +9,11 @@ class HomeController extends Controller {
     }
     await ctx.render('index', ctx.session);
   }
+  async feeds(ctx) {
+    console.log(ctx.request.body);
+    let res = await ctx.service.dream.findAndCountAll(ctx.request.body);
+    ctx.body = res;
+  }
 }
 
 module.exports = HomeController;

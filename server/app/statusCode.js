@@ -47,6 +47,10 @@ module.exports = {
     code: 40200,
     message: '项目已创建'
   },
+  'FEEDS_NOT_FOUND':{
+    code : 50100,
+    message: 'feeds内容为空'
+  },
   'UNKNOWN_ERROR': {
     code: -1,
     message: '未知错误'

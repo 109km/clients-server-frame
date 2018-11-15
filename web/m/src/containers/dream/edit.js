@@ -19,7 +19,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setUserInfo: user => {
-      dispatch(actionUser.setUserInfo(user));
+      return dispatch(actionUser.setUserInfo(user));
     },
     getDreamDetail: (dreamId = null) => {
       return dispatch(actionDream.getDreamDetail({

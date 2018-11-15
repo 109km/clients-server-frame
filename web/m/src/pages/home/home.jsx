@@ -16,7 +16,7 @@ class Home extends Component {
   render() {
     return (
       <div className="page page-home">
-        <TopNav user={this.props.user}/>
+        <TopNav user={this.props.user} />
         <DreamList items={this.state.items} />
         <SiteNav page="home" history={this.props.history} />
       </div>
@@ -28,10 +28,10 @@ class Home extends Component {
     if (user.code === STATUS_CODE['SUCCESS'].code) {
       this.props.setUserInfo(user.data);
     }
-    
-    const dreams = await post(Config.apiUrl + '/dream/list/');
+
+    const dreams = await this.props.getHomeFeeds(0, 5);
     this.setState({
-      items: dreams.data.data.rows
+      items: dreams.data.feeds
     });
   }
 }

@@ -46,7 +46,7 @@ If you try to fulfill your own dream, you're a hero.
 ### My
 - [ ] Settings
   - [x] Avatar
-  - [ ] Nickname
+  - [x] Nickname
   - [x] Password
   - [ ] Email / Phone number
   - [ ] About me

@@ -145,10 +145,11 @@ class DreamService extends Service {
     return res;
   }
 
-  async findAndCountAll(params = {}) {
+  async findAndCountAll(params) {
     const {
       ctx
     } = this;
+    console.log(params);
     const dreams = await ctx.model.Dream.findAndCountAll({
       include: [{
         model: ctx.model.User
@@ -161,13 +162,18 @@ class DreamService extends Service {
       dreams.rows.map((dream) => {
         dream.dataValues.nickname = dream.user.nickname;
         dream.dataValues.avatar_url = dream.user.avatar_url;
+        dream.dataValues.dream_id = dream.id;
+        delete dream.dataValues.id;
         delete dream.dataValues.user
         return dream;
       });
+      let feeds = dreams.rows;
+      dreams.feeds = feeds;
+      delete dreams['rows'];
       res = STATUS_CODE['SUCCESS'];
       res.data = dreams;
     } else {
-      res = STATUS_CODE['POST_NOT_FOUND'];
+      res = STATUS_CODE['FEEDS_NOT_FOUND'];
     }
     return res;
   }
