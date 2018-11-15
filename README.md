@@ -41,7 +41,7 @@ If you try to fulfill your own dream, you're a hero.
 - [x] Home
 - [ ] Explore
 - [ ] My
-- [ ] Dream - detail
+- [x] Dream - detail
 
 ### My
 - [ ] Settings
