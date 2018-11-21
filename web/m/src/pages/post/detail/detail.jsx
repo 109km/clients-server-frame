@@ -17,7 +17,7 @@ class PostDetail extends Component {
   }
   render() {
     return (
-      <div className="page page-detail">
+      <div className="page page-post-detail">
         <div className="title bold">
           {this.state.title}
         </div>

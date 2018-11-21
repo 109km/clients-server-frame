@@ -31,7 +31,7 @@ class PostNew extends Component {
       'link', 'image'
     ]
     return (
-      <div className="page page-new">
+      <div className="page page-post-new">
         {/* <form method="POST">
           <List>
             
@@ -88,7 +88,7 @@ class PostNew extends Component {
     let formData = new FormData();
     formData.append('title', this.state.title);
     formData.append('content', this.state.content);
-    formData.append('dreamId', dreamId);
+    dreamId && formData.append('dreamId', dreamId);
     // this.state.files.forEach(file => {
     //   formData.append('pics[]', file.file);
     // });
@@ -97,11 +97,16 @@ class PostNew extends Component {
     });
     const result = res.data;
     if (result.code === 0) {
-      Toast.success('文章创建成功！');
-    } else if (result.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
-      Toast.fail(result.message, 3, () => {
+      Toast.success('文章创建成功！', Config.toastDuration, () => {
         this.props.history.push({
-          pathname: '/login',
+          pathname: "/post/detail?postId=" + result.data.id,
+        });
+      });
+
+    } else if (result.code === STATUS_CODE['USER_NOT_LOGIN'].code) {
+      Toast.fail(result.message, Config.toastDuration, () => {
+        this.props.history.push({
+          pathname: "/login",
         });
       });
     }

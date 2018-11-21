@@ -10,13 +10,21 @@ class PostController extends Controller {
       ctx.body = STATUS_CODE['USER_NOT_LOGIN'];
       return;
     }
+    let dreamId;
     const uploadData = await ctx.service.upload.multiple();
-
+    if (!uploadData.data.fields.dreamId) {
+      const dreamData = await ctx.service.dream.findOne({
+        user_id: user.id
+      });
+      dreamId = dreamData.data.dataValues.id;
+    }else{
+      dreamId = uploadData.data.fields.dreamId;
+    }
     const params = {};
     params.user_id = user.id;
     params.content = uploadData.data.fields.content;
     params.title = uploadData.data.fields.title;
-    params.dream_id = uploadData.data.fields.dreamId;
+    params.dream_id = dreamId;
     uploadData.data.files && uploadData.data.files.length && (params.pics = uploadData.data.files);
     const res = await ctx.service.post.create(params);
     ctx.body = res;
