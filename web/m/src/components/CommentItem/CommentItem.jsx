@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { WingBlank } from 'antd-mobile';
 import './CommentItem.less';
 
 class CommentItem extends Component {
   render() {
     return (
-      <WingBlank className="com-comment-item">
+      <div className="com-comment-item">
         <div className="info">
           <img className="avatar" src={this.props.avatar} alt={this.props.nickname} />
           <span className="nickname bold">
@@ -19,7 +18,7 @@ class CommentItem extends Component {
           {this.props.content}
         </div>
 
-      </WingBlank>
+      </div>
     );
   }
 }

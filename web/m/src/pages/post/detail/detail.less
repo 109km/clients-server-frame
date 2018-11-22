@@ -1,15 +1,45 @@
+@import "../../../variables.less";
+
 .page-post-detail {
-  background: #fff;
+  background: @color-white;
 
   .title {
-    height: 30px;
-    line-height: 30px;
+    height: 40px;
+    line-height: 40px;
     text-indent: 20px;
-    font-size: 16px;
+    font-size: 20px;
   }
 
   .content {
     padding: 0 20px;
+  }
+
+  .author {
+    display: flex;
+    text-align: center;
+    line-height: 40px;
+    margin-left: 20px;
+
+    .avatar {
+      height: 28px;
+      width: 28px;
+      margin-right: 6px;
+      margin-top: 6px;
+    }
+
+    .date {
+      margin-left: 5px;
+      color: @color-light-grey;
+      font-size: @font-size-small;
+    }
+    .nickname a{
+      color: @link-color;
+    }
+  }
+
+  .comment-list{
+    margin:30px 15px 0 15px;
+    border-top: 1px solid @textarea-border-color;
   }
 
   .com-input-comment {
@@ -27,9 +57,9 @@
       }
 
       .textarea-input-comment {
-        border: 1px solid #ddd;
+        border: 1px solid @textarea-border-color;
         margin-left: 10px;
-        font-size: 12px;
+        font-size: @font-size-small;
         width: 280px;
       }
     }

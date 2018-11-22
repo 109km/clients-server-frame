@@ -1,3 +1,5 @@
+@import "./variables.less";
+
 body {
   margin: 0;
   padding: 0;
@@ -15,7 +17,7 @@ body {
 
 .page {
   height: 100%;
-  background: #fff;
+  background: @color-white;
 }
 
 .container {
@@ -39,10 +41,11 @@ blockquote {
 .btn-link {
   background-color: @brand-primary;
   display: inline-block;
-  color: #fff;
-  padding:6px 15px;
+  color: @color-white;
+  padding: 6px 15px;
   border-radius: 5px;
 }
-.button-area{
-  margin:0 20px;
+
+.button-area {
+  margin: 0 20px;
 }

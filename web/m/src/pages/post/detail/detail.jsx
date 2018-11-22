@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
-import { ImagePicker, List, TextareaItem, Button, Toast, WhiteSpace, WingBlank } from 'antd-mobile';
+import { TextareaItem, Button, Toast, WhiteSpace } from 'antd-mobile';
+import { Link } from 'react-router-dom';
 import { post, Config, getQuery } from '../../../utils/util';
 import STATUS_CODE from '../../../utils/statusCode';
 import CommentList from '../../../components/CommentList/CommentList';
@@ -12,7 +12,7 @@ class PostDetail extends Component {
   state = {
     title: "",
     content: "",
-    user: null,
+    user: {},
     comments: []
   }
   render() {
@@ -21,11 +21,24 @@ class PostDetail extends Component {
         <div className="title bold">
           {this.state.title}
         </div>
+        <div className="author">
+          <img className="avatar" src={this.state.user.avatarUrl} />
+          <div className="nickname">
+            <Link to={"/dream/detail?dreamId=" + this.state.dreamId}>
+              {this.state.user.nickname}
+            </Link>
+          </div>
+          <div className="date">
+            {this.state.createdAt}
+          </div>
+        </div>
         <div className="content">
           {ReactHtmlParser(this.state.content)}
         </div>
-        <CommentList items={this.state.comments} />
-        {this.state.user &&
+        <div className="comment-list">
+          <CommentList items={this.state.comments} />
+        </div>
+        {this.state.user && this.state.user.nickname &&
           <div className="com-input-comment">
             <div className="container-input-comment">
               <img src={this.state.user.avatarUrl} alt="" />
@@ -56,8 +69,11 @@ class PostDetail extends Component {
     const postDetail = res.data;
     console.log(postDetail);
     if (postDetail.code === STATUS_CODE['SUCCESS'].code) {
+      postDetail.data.createdAt = postDetail.data.createdAt.split('T')[0];
       this.setState(postDetail.data);
     }
+
+    console.log(this.state);
   }
   onCommentChange = (value) => {
     this.setState({
@@ -76,7 +92,6 @@ class PostDetail extends Component {
     const result = response.data;
 
     if (result.code === 0) {
-      console.log(result);
       let comments = this.state.comments;
       comments.push({
         avatarUrl: this.state.user.avatarUrl,
