@@ -17,7 +17,6 @@ class CommentItem extends Component {
         <div className="content">
           {this.props.content}
         </div>
-
       </div>
     );
   }

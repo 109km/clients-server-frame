@@ -26,9 +26,9 @@ class DreamController extends Controller {
       ctx.body = STATUS_CODE['USER_NOT_LOGIN'];
       return;
     }
-    let params = {
-      user_id: user.id
-    };
+    let params = {};
+
+    user && user.id && (params.user_id = user.id);
 
     ctx.request.body['dream_id'] && (params['dream_id'] = ctx.request.body['dream_id']);
     ctx.request.body['user_id'] && (params['user_id'] = ctx.request.body['user_id']);
@@ -48,7 +48,7 @@ class DreamController extends Controller {
       ctx.body = STATUS_CODE['USER_NOT_LOGIN'];
       return;
     }
-    
+
     let res = await ctx.service.dream.updateOne({
       user_id: user.id
     });

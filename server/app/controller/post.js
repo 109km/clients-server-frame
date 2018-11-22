@@ -36,13 +36,12 @@ class PostController extends Controller {
     let body = ctx.request.body;
     // body = ctx.helper.toSnakeCase(body);
     const res = await ctx.service.post.findOne(body);
-    console.log(res);
-    if (user) {
-      res.data.dataValues.user = {
-        nickname: user.nickname,
-        avatar_url: user.avatar_url
-      };
-    }
+    // if (user) {
+    //   res.data.dataValues.user = {
+    //     nickname: user.nickname,
+    //     avatar_url: user.avatar_url
+    //   };
+    // }
     ctx.body = res;
   }
 }

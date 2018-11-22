@@ -37,8 +37,9 @@ class PostService extends Service {
       },
       include: [{
         model: ctx.model.Comment
-      },{
-        model: ctx.model.User
+      }, {
+        model: ctx.model.User,
+        attributes: ['avatar_url', 'nickname']
       }]
     });
 
