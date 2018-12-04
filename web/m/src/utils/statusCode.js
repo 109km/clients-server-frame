@@ -19,6 +19,10 @@ const STATUS_CODE = {
     code: 10101,
     message: '您输入的密码不正确'
   },
+  'OLD_PASSWORD_DONT_MATCH': {
+    code: 10102,
+    message: '输入的旧密码错误'
+  },
   'USER_NOT_LOGIN': {
     code: 10102,
     message: '用户未登录'
@@ -38,6 +42,14 @@ const STATUS_CODE = {
   'DREAM_NOT_FOUND': {
     code: 40100,
     message: '项目未找到'
+  },
+  'DREAM_ALREADY_CREATED': {
+    code: 40200,
+    message: '项目已创建'
+  },
+  'FEEDS_NOT_FOUND': {
+    code: 50100,
+    message: 'feeds内容为空'
   },
   'UNKNOWN_ERROR': {
     code: -1,

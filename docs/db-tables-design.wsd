@@ -2,34 +2,46 @@
 class User{
   Int id
   String username
+  String password
   String nickname
   String avatar_url
+  Date last_signin_at
 }
 class Dream{
-  String title
-  String description
-  Array postList
-  Array targetList
-  Array tierList
-}
-class Post{
+  Int id
+  Int user_id
   String title
   String content
-  Boolean isMemberOnly
+  Array posts_list
+  Array goals_list
+  Array backers_list
+  Array tiers_list
+  String cover_url
+}
+class Post{
+  Int id
+  Int dream_id
+  Int user_id
+  String title
+  String content
+  Boolean is_member_only
   Array pics
 }
 class Tier{
+  Int id
   String title
   String description
   String reward
   Number price
 }
 class Comment{
-  String user_id
-  String title
+  Int id
+  Int post_id
+  Int user_id
+  String nickname
   String content
 }
-User "1" -- "many" Dream
+User "1" -- "1" Dream
 Dream "1" -- "many" Tier
 Dream "1" -- "many" Post
 Post "many" -- "many" Comment

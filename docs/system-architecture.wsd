@@ -1,36 +1,36 @@
 @startuml
 :Web;
 split
-:Client;
+  :Client;
   split
-  :React;
+    :React;
     split
-    :Redux;
-    detach
+      :Redux;
+      detach
     split again
-    :React-router;
-    detach
+      :React-router;
+      detach
     split again
-    :Antd-mobile;
-    detach
+      :Antd-mobile;
+      detach
     end split
   split again
-  :Less;
-  detach
+    :Less;
+    detach
   split again
-  :History;
-  detach
+    :History;
+    detach
   end split
 split again
-:Server;
+  :Server;
   split
-  :eggjs;
-  :sequelize;
-  :mysql;
-  detach
+    :eggjs;
+    :sequelize;
+    :mysql;
+    detach
   split again
-  :nginx;
-  detach
+    :nginx;
+    detach
   end split
 end split
 @enduml
