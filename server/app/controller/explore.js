@@ -8,9 +8,7 @@ class ExploreController extends Controller {
     ctx.body = res;
   }
   async search(ctx) {
-    let res = await ctx.service.dream.findWithFilter({
-      keyword: '2'
-    });
+    let res = await ctx.service.dream.findWithFilter(ctx.request.body);
     ctx.body = res;
   }
 }

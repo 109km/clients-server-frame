@@ -10,12 +10,13 @@ import STATUS_CODE from '../../utils/statusCode';
 
 class Explore extends Component {
   state = {
-    items: []
+    items: [],
+    fullItems: []
   }
   render() {
     return (
       <div className="page page-explore">
-        <SearchBar placeholder="搜索" maxLength={32} />
+        <SearchBar placeholder="搜索" maxLength={32} onChange={this.onSearchChange} />
         <DreamList items={this.state.items} />
         <SiteNav page="explore" history={this.props.history} />
       </div>
@@ -27,12 +28,16 @@ class Explore extends Component {
     if (user.code === STATUS_CODE['SUCCESS'].code) {
       this.props.setUserInfo(user.data);
     }
-
-    const dreams = await this.props.getExploreFeeds(0, 5);
-    const searchResults = await this.props.searchDreams('2');
-    
+    const dreams = await this.props.getExploreFeeds(0, 10);
     this.setState({
-      items: dreams.data.feeds
+      items: dreams.data.feeds,
+      fullItems: dreams.data.feeds
+    });
+  }
+  onSearchChange = async (value) => {
+    const searchResults = await this.props.searchDreams(value);
+    this.setState({
+      items: searchResults.data.feeds
     });
   }
 }
