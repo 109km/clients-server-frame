@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { InputItem, List, TextareaItem, Button, Toast, WhiteSpace, ImagePicker } from 'antd-mobile';
 import STATUS_CODE from '../../../utils/statusCode';
+import { post, getQuery, Config } from '../../../utils/util';
 import './new.less';
 
 
@@ -9,7 +10,8 @@ class DreamNew extends Component {
   state = {
     files: [],
     title: "",
-    content: ""
+    content: "",
+    coverUrl: ""
   }
   render() {
     return (
@@ -56,15 +58,30 @@ class DreamNew extends Component {
       content: value
     });
   }
-  onCoverChange = (files) => {
+  onCoverChange = async (files) => {
     this.setState({
       files
     });
+    let uploadFormData = new FormData();
+    if (this.state.files.length) {
+      uploadFormData.append('file', this.state.files[0].file);
+      const uploadResponse = await post(Config.apiUrl + '/upload/single', {
+        data: uploadFormData
+      });
+      if (uploadResponse.data.code === STATUS_CODE['SUCCESS'].code) {
+        this.setState({
+          coverUrl: uploadResponse.data.data.url
+        });
+      } else {
+        Toast.fail(uploadResponse.data.message);
+      }
+    }
   }
   onSubmit = async (e) => {
     let formData = {
       title: this.state.title,
-      content: this.state.content
+      content: this.state.content,
+      coverUrl: this.state.coverUrl
     };
 
     const res = await this.props.createNewDream(formData);

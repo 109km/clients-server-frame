@@ -13,7 +13,8 @@ class DreamController extends Controller {
     const res = await ctx.service.dream.create({
       user_id: user.id,
       content: ctx.request.body.content,
-      title: ctx.request.body.title
+      title: ctx.request.body.title,
+      cover_url: ctx.request.body.cover_url
     });
     ctx.body = res;
   }
