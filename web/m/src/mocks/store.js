@@ -62,5 +62,12 @@ const store = {
       dreamId: 1,
       userId: 3
     }
+  },
+  explore: {
+    recommendList: [
+      {
+        
+      }
+    ]
   }
 }

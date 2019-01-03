@@ -6,7 +6,8 @@ import {
   withRouter
 } from "react-router-dom";
 import {
-  actionUser
+  actionUser,
+  actionExplore
 } from '../models/actions';
 
 import Page from '../pages/explore/explore';
@@ -18,7 +19,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setUserInfo: user => {
-      dispatch(actionUser.setUserInfo(user));
+      return dispatch(actionUser.setUserInfo(user));
+    },
+    getExploreFeeds: (start, end) => {
+      return dispatch(actionExplore.getExploreFeeds(start, end));
     }
   }
 }

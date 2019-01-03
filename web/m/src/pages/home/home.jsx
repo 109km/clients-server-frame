@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { Button, NavBar, Icon } from 'antd-mobile';
 // import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { post, getQuery, Config } from '../../utils/util';
 import STATUS_CODE from '../../utils/statusCode';
 import './home.less';
@@ -15,16 +15,6 @@ class Home extends Component {
   }
 
   render() {
-
-    const Button = styled.button`
-      background: transparent;
-      border-radius: 3px;
-      border: 2px solid palevioletred;
-      color: palevioletred;
-      margin: 0 1em;
-      padding: 0.25em 1em;
-    `
-
     return (
       <div className="page page-home">
         <TopNav user={this.props.user} />

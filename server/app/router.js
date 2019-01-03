@@ -52,5 +52,8 @@ module.exports = app => {
   app.post('/follower/find', controller.follower.find);
   app.post('/follower/remove', controller.follower.remove);
 
+  // 探索
+  app.post('/explore/feeds', controller.explore.feeds);
+
   app.resources('users', '/api/users', controller.user);
 };
