@@ -28,7 +28,7 @@ class UploaderController extends Controller {
     }
     console.log(process.env);
 
-    let replaceUrl = process.env === 'development' ? 'http://localhost:7001/' : 'http://shulanbaobei.com/'
+    let replaceUrl = process.env === 'development' ? 'http://localhost:7001/' : 'http://shulanbaobei.com:7001/'
     //文件响应
     ctx.body = {
       code: 0,
