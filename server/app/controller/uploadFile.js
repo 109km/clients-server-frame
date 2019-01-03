@@ -27,12 +27,14 @@ class UploaderController extends Controller {
       throw err;
     }
     console.log(process.env);
+
+    let replaceUrl = process.env === 'development' ? 'http://localhost:7001/' : 'http://shulanbaobei.com/'
     //文件响应
     ctx.body = {
       code: 0,
       data: {
         filename: filename,
-        url: target.replace('app/', `http://localhost:7001/`)
+        url: target.replace('app/', replaceUrl)
       }
     };
   }
