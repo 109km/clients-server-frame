@@ -96,7 +96,8 @@ class UserController extends Controller {
     if (user) {
       let findResult = await ctx.service.user.findOne({
         id: user.id
-      });
+      }, false, true);
+      console.log(findResult.data);
 
       // Check the old password matches or not.
       if (findResult.data.password !== ctx.helper.encrypt(ctx.request.body['old_password'])) {

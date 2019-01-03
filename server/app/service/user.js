@@ -36,7 +36,7 @@ class UserService extends Service {
     }
 
   }
-  async findOne(data, isNewSignIn = false) {
+  async findOne(data, isNewSignIn = false, withPassword = false) {
     const {
       ctx
     } = this;
@@ -55,7 +55,9 @@ class UserService extends Service {
         });
       }
       res = STATUS_CODE['SUCCESS'];
-      delete user.dataValues['password'];
+      if (!withPassword) {
+        delete user.dataValues['password'];
+      }
       res.data = user.dataValues;
     } else {
       res = STATUS_CODE['USER_NOT_EXIST'];
