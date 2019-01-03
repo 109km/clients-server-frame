@@ -6,7 +6,7 @@
  * 2xxxx - 文章相关
  */
 
-const STATUS_CODE = {
+module.exports = {
   'SUCCESS': {
     code: 0,
     message: '成功'
@@ -51,6 +51,10 @@ const STATUS_CODE = {
     code: 50100,
     message: 'feeds内容为空'
   },
+  'SEARCH_RESULTS_NOT_FOUND': {
+    code: 60100,
+    message: '搜索结果为空'
+  },
   'UNKNOWN_ERROR': {
     code: -1,
     message: '未知错误'
@@ -60,5 +64,3 @@ const STATUS_CODE = {
     message: '参数丢失'
   },
 }
-
-export default STATUS_CODE;

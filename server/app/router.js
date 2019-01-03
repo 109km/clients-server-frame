@@ -54,6 +54,7 @@ module.exports = app => {
 
   // 探索
   app.post('/explore/feeds', controller.explore.feeds);
+  app.post('/explore/search', controller.explore.search);
 
   app.resources('users', '/api/users', controller.user);
 };

@@ -1,5 +1,8 @@
 const Service = require('egg').Service;
 const STATUS_CODE = require('../statusCode');
+
+const Op = require('sequelize').Op;
+
 class DreamService extends Service {
   async create(dreamData) {
     const {
@@ -146,11 +149,16 @@ class DreamService extends Service {
     return res;
   }
 
+  /**
+   * 
+   * @param {Object} params 
+   * @param {Number} params.start The start index
+   * @param {Number} params.limit Count number
+   */
   async findAndCountAll(params) {
     const {
       ctx
     } = this;
-    console.log(params);
     const dreams = await ctx.model.Dream.findAndCountAll({
       include: [{
         model: ctx.model.User
@@ -175,6 +183,42 @@ class DreamService extends Service {
       res.data = dreams;
     } else {
       res = STATUS_CODE['FEEDS_NOT_FOUND'];
+    }
+    return res;
+  }
+
+  async findWithFilter(params) {
+    const {
+      ctx
+    } = this;
+
+    const dreams = await ctx.model.Dream.findAndCountAll({
+      where: {
+        title: {
+          [Op.like]: `%${params.keyword}%`
+        }
+      },
+      include: [{
+        model: ctx.model.User
+      }]
+    });
+    let res;
+    if (dreams) {
+      dreams.rows.map((dream) => {
+        dream.dataValues.nickname = dream.user.nickname;
+        dream.dataValues.avatar_url = dream.user.avatar_url;
+        dream.dataValues.dream_id = dream.id;
+        delete dream.dataValues.id;
+        delete dream.dataValues.user
+        return dream;
+      });
+      let feeds = dreams.rows;
+      dreams.feeds = feeds;
+      delete dreams['rows'];
+      res = STATUS_CODE['SUCCESS'];
+      res.data = dreams;
+    } else {
+      res = STATUS_CODE['SEARCH_RESULTS_NOT_FOUND'];
     }
     return res;
   }

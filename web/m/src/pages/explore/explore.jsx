@@ -29,6 +29,8 @@ class Explore extends Component {
     }
 
     const dreams = await this.props.getExploreFeeds(0, 5);
+    const searchResults = await this.props.searchDreams('2');
+    
     this.setState({
       items: dreams.data.feeds
     });

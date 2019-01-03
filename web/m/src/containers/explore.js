@@ -21,8 +21,11 @@ const mapDispatchToProps = dispatch => {
     setUserInfo: user => {
       return dispatch(actionUser.setUserInfo(user));
     },
-    getExploreFeeds: (start, end) => {
-      return dispatch(actionExplore.getExploreFeeds(start, end));
+    getExploreFeeds: (start, limit) => {
+      return dispatch(actionExplore.getExploreFeeds(start, limit));
+    },
+    searchDreams: (keyword) => {
+      return dispatch(actionExplore.searchDreams(keyword));
     }
   }
 }
