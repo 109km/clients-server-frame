@@ -116,13 +116,11 @@ class DreamService extends Service {
     });
     let res;
     if (dream) {
-      console.log(dream.posts[0]);
       if (dream.posts && dream.posts.length) {
         dream.posts.map((item, index) => {
           item.dataValues.date = dayjs(item.dataValues.updated_at).format('MM-DD HH:mm');
         });
       }
-
       res = STATUS_CODE['SUCCESS'];
       res.data = dream;
     } else {
