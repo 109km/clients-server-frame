@@ -26,6 +26,8 @@ If you try to fulfill your own dream, you're a hero.
 ## H5
 
 ### Date format convert
+- [x] Dream detail's date format convert.
+
 
 ### Data case
 - [x] Response data is in snakecase, it needs to be in camelcase.

@@ -64,10 +64,62 @@ const store = {
     }
   },
   explore: {
-    recommendList: [
+    recommendList: [{
+        userId: 19,
+        avatarUrl: '',
+        nickname: 'Super husky',
+        dreamId: 20,
+        title: 'Make something new',
+        content: 'This is a project which will build a house',
+        createdAt: '2018-09-25T10:47:27.000Z',
+        updatedAt: '2018-09-25T10:47:27.000Z'
+      },
       {
-        
+        userId: 19,
+        avatarUrl: '',
+        nickname: 'Super husky',
+        dreamId: 20,
+        title: 'Make something new',
+        content: 'This is a project which will build a house',
+        createdAt: '2018-09-25T10:47:27.000Z',
+        updatedAt: '2018-09-25T10:47:27.000Z'
+      }
+    ],
+    fullRecommendList: [{
+        userId: 19,
+        avatarUrl: '',
+        nickname: 'Super husky',
+        dreamId: 20,
+        title: 'Make something new',
+        content: 'This is a project which will build a house',
+        createdAt: '2018-09-25T10:47:27.000Z',
+        updatedAt: '2018-09-25T10:47:27.000Z'
+      },
+      {
+        userId: 19,
+        avatarUrl: '',
+        nickname: 'Super husky',
+        dreamId: 20,
+        title: 'Make something new',
+        content: 'This is a project which will build a house',
+        createdAt: '2018-09-25T10:47:27.000Z',
+        updatedAt: '2018-09-25T10:47:27.000Z'
       }
     ]
+  },
+  backers: {
+    backers: [{
+      userId: 20,
+      avatarUrl: 'http://xxx.xxx.com/avatar.jpg',
+      supportedTiers: [{
+        tierId: 1,
+        title: '支持100元',
+        supportedAt: '2018-09-25T10:47:27.000Z'
+      }, {
+        tierId: 2,
+        title: '支持200元',
+        supportedAt: '2018-09-25T10:47:27.000Z'
+      }]
+    }]
   }
 }

@@ -10,14 +10,14 @@ import STATUS_CODE from '../../utils/statusCode';
 
 class Explore extends Component {
   state = {
-    items: [],
-    fullItems: []
+    recommendList: [],
+    fullRecommendList: []
   }
   render() {
     return (
       <div className="page page-explore">
         <SearchBar placeholder="搜索" maxLength={32} onChange={this.onSearchChange} />
-        <DreamList items={this.state.items} />
+        <DreamList items={this.state.recommendList} />
         <SiteNav page="explore" history={this.props.history} />
       </div>
     );
@@ -30,14 +30,14 @@ class Explore extends Component {
     }
     const dreams = await this.props.getExploreFeeds(0, 10);
     this.setState({
-      items: dreams.data.feeds,
-      fullItems: dreams.data.feeds
+      recommendList: dreams.data.feeds,
+      fullRecommendList: dreams.data.feeds
     });
   }
   onSearchChange = async (value) => {
     const searchResults = await this.props.searchDreams(value);
     this.setState({
-      items: searchResults.data.feeds
+      recommendList: searchResults.data.feeds
     });
   }
 }
