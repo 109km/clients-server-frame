@@ -10,12 +10,12 @@ class PostList extends Component {
     );
 
     const emptyTips = () => {
-      
+      <div className="com-empty-tips">暂无文章</div>
     }
 
     return (
       <div className="com-post-list">
-        {items.length > 0 ? items : <div className="com-empty-tips">暂无文章</div>}
+        {items.length > 0 ? items : emptyTips}
       </div>
     );
       }
