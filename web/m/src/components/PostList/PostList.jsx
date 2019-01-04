@@ -4,21 +4,21 @@ import PostItem from '../PostItem/PostItem';
 
 class PostList extends Component {
   render() {
-    
-    const items = this.props.items.map((item,index) =>
+
+    const items = this.props.items.map((item, index) =>
       <PostItem key={index} item={item} avatar={this.props.avatar} nickname={this.props.nickname} />
     );
 
+    const emptyTips = () => {
+      
+    }
+
     return (
       <div className="com-post-list">
-        {items}
+        {items.length > 0 ? items : <div className="com-empty-tips">暂无文章</div>}
       </div>
     );
-  }
-  async componentDidMount() {
-    // const res = await fetch(Config.apiUrl + '/user/login/');
-    // console.log(res);
-  }
-}
-
-export default PostList;
+      }
+    }
+    
+    export default PostList;

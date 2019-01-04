@@ -33,7 +33,7 @@ class DreamDetail extends Component {
     return (
       <div className="page page-dream-detail">
         {this.state.userHasOwnDream ?
-          <div>
+          <div className="dream-content">
             <div className="user-info">
               <div className="cover" style={backgroundCover}></div>
               {this.state.isSelf ? <Link className="btn-edit" to="/post/new">写文章</Link> : ''}
@@ -71,9 +71,9 @@ class DreamDetail extends Component {
                 </div>
               }
             </div>
-          </div> : 
+          </div> :
           <div className="no-dream-container">
-              <Link to="/dream/new" className="btn-link">立即创造梦想 +</Link>
+            <Link to="/dream/new" className="btn-link">立即创造梦想 +</Link>
           </div>}
         <SiteNav page="dream" history={this.props.history} />
       </div>

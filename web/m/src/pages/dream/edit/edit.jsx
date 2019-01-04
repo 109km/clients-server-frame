@@ -38,8 +38,9 @@ class DreamEdit extends Component {
               />
             </Item>
           </List>
-          <img className="cover-img" src={this.state.coverUrl} alt="" />
-          <WhiteSpace size="lg" />
+          <div className="current-cover-container">
+            <img className="cover-img" src={this.state.coverUrl} alt="" />
+          </div>
           <div className="button-area">
             <Button type="primary" onClick={this.onSubmit}>下一步</Button>
           </div>
